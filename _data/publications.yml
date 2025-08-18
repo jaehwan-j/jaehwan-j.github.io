@@ -1,22 +1,47 @@
 main:
+  - title: "FaceShield: Defending Facial Image against Deepfake Threats"
+    authors: "<b>Jaehwan Jeong</b>, Sumin In, Sieun Kim, Hannie Shin, Jongheon Jeong, Sang Ho Yoon, Jaewook Chung, Sangpil Kim"
+    conference_short: "ICCV"
+    conference: "International Conference on Computer Vision (ICCV), 2025"
+    pdf: "https://arxiv.org/pdf/2412.09921"
+    image: "/assets/img/ICCV25.png"
+    bibtex: |
+      @article{jeong2024faceshield,
+        title={FaceShield: Defending Facial Image against Deepfake Threats},
+        author={Jeong, Jaehwan and In, Sumin and Kim, Sieun and Shin, Hannie and Jeong, Jongheon and Yoon, Sang Ho and Chung, Jaewook and Kim, Sangpil},
+        journal={arXiv preprint arXiv:2412.09921},
+        year={2024}
+      }
 
-  - title: Continual Learning for Abdominal Multi-Organ and Tumor Segmentation
-    authors: Yixiao Zhang, Xinyi Li, Huimiao Chen, Alan Yuille, <strong>Yaoyao Liu*</strong>, Zongwei Zhou* (*Corresponding authors)
-    conference_short: MICCAI
-    conference: International Conference on Medical Image Computing and Computer-Assisted Intervention <strong>(MICCAI)</strong>, 2023.
-    pdf: https://arxiv.org/pdf/2306.00988.pdf
-    code: https://github.com/MrGiovanni/ContinualLearning
-    bibtex: https://bib.yliu.me/MICCAI23.txt
-    image: ./assets/img/teaser_example_2.png
-    notes: Early Accept
+  - title: "Semantically complex audio to video generation with audio source separation"
+    authors: "Sieun Kim, <b>Jaehwan Jeong</b>, Sumin In, Seung Hyun Lee, Seungryong Kim, Saerom Kim, Wooyeol Baek, Sang Ho Yoon, Eugenio Culurciello, Sangpil Kim"
+    conference_short: "EAAI"
+    conference: "Engineering Applications of Artificial Intelligence, 2025"
+    pdf: "https://doi.org/10.1016/j.engappai.2025.110457"
+    image: "/assets/img/EAAI25.png"
+    bibtex: |
+      @article{kim2025semantically,
+        title={Semantically complex audio to video generation with audio source separation},
+        author={Kim, Sieun and Jeong, Jaehwan and In, Sumin and Lee, Seung Hyun and Kim, Seungryong and Kim, Saerom and Baek, Wooyeol and Yoon, Sang Ho and Culurciello, Eugenio and Kim, Sangpil},
+        journal={Engineering Applications of Artificial Intelligence},
+        volume={149},
+        pages={110457},
+        year={2025},
+        publisher={Elsevier}
+      }
 
-  - title: "Mnemonics Training: Multi-Class Incremental Learning without Forgetting"
-    authors: <strong>Yaoyao Liu</strong>, Yuting Su, An-An Liu, Bernt Schiele, Qianru Sun
-    conference_short: CVPR
-    conference: IEEE/CVF Conference on Computer Vision and Pattern Recognition <strong>(CVPR)</strong>, 2020.
-    pdf: https://arxiv.org/pdf/2002.10211.pdf
-    code: https://github.com/yaoyao-liu/class-incremental-learning/tree/main/mnemonics-training
-    page: https://class-il.mpi-inf.mpg.de/mnemonics/
-    bibtex: https://class-il.mpi-inf.mpg.de/mnemonics/
-    notes: Oral Presentation
-    image: ./assets/img/teaser_example.png
+  - title: "Mevg: Multi-event video generation with text-to-video models"
+    authors: "Gyeongrok Oh, <b>Jaehwan Jeong</b>, Sieun Kim, Wonmin Byeon, Jinkyu Kim, Sungwoong Kim, Sangpil Kim"
+    conference_short: "ECCV"
+    conference: "European Conference on Computer Vision (ECCV), 2024"
+    pdf: "https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/06012.pdf"
+    image: "/assets/img/ECCV24.png"
+    bibtex: |
+      @inproceedings{oh2024mevg,
+        title={Mevg: Multi-event video generation with text-to-video models},
+        author={Oh, Gyeongrok and Jeong, Jaehwan and Kim, Sieun and Byeon, Wonmin and Kim, Jinkyu and Kim, Sungwoong and Kim, Sangpil},
+        booktitle={European Conference on Computer Vision},
+        pages={401--418},
+        year={2024},
+        organization={Springer}
+      }
