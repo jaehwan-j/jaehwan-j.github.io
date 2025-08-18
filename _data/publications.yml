@@ -4,6 +4,7 @@ main:
     conference_short: "ICCV"
     conference: "International Conference on Computer Vision (ICCV), 2025"
     pdf: "https://arxiv.org/pdf/2412.09921"
+    code: "https://github.com/kuai-lab/iccv25_faceshield"
     image: "/assets/img/ICCV25.png"
     bibtex: |
       @article{jeong2024faceshield,
@@ -18,6 +19,7 @@ main:
     conference_short: "EAAI"
     conference: "Engineering Applications of Artificial Intelligence, 2025"
     pdf: "https://doi.org/10.1016/j.engappai.2025.110457"
+    code: "https://github.com/kuai-lab/eaai25_complex_A2V"
     image: "/assets/img/EAAI25.png"
     bibtex: |
       @article{kim2025semantically,
@@ -35,6 +37,7 @@ main:
     conference_short: "ECCV"
     conference: "European Conference on Computer Vision (ECCV), 2024"
     pdf: "https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/06012.pdf"
+    code: "https://github.com/kuai-lab/eccv24_MEVG"
     image: "/assets/img/ECCV24.png"
     bibtex: |
       @inproceedings{oh2024mevg,
