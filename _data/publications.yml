@@ -32,7 +32,7 @@ main:
         publisher={Elsevier}
       }
 
-  - title: "Mevg: Multi-event video generation with text-to-video models"
+  - title: "MEVG: Multi-event video generation with text-to-video models"
     authors: "Gyeongrok Oh, <b>Jaehwan Jeong</b>, Sieun Kim, Wonmin Byeon, Jinkyu Kim, Sungwoong Kim, Sangpil Kim"
     conference_short: "ECCV"
     conference: "European Conference on Computer Vision (ECCV), 2024"
