@@ -8,9 +8,13 @@ layout: homepage
 
 ## Research Interests
 
-- **3D Vision & Autonomous Driving:** 3D Reconstruction (SLAM, Segmentation, Skeleton-based), Visual Perception, Robust Mapping, Motion Planning   
-- **Generative AI:** Diffusion-based Methods, AI Safety  
-- **Robotics Systems:** Field Robotics, Model Predictive Control, Robot Operating Systems, Communication Protocols
+% - **3D Vision & Autonomous Driving:** 3D Reconstruction (SLAM, Segmentation, Skeleton-based), Visual Perception, Robust Mapping, Motion Planning   
+% - **Generative AI:** Diffusion-based Methods, AI Safety  
+% - **Robotics Systems:** Field Robotics, Model Predictive Control, Robot Operating Systems, Communication Protocols
+- 3D reconstruction, Robot operating system, Autonomous driving
+- AI safety, Generative model, Multi-modal learning
+- Machine learning, Deep learning, Computer vision
+
 
 
 ## News
