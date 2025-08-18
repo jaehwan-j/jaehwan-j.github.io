@@ -4,7 +4,7 @@ layout: homepage
 
 ## About Me
 
-**Jaehwan Jeong** is a Ph.D. student at **Korea University**, advised by [Prof. Sangpil Kim](https://kuaicv.com). He previously conducted research on diffusion-based generative models and AI safety for deepfake protection. Currently, he is a Visiting Graduate Researcher at the **University of California, Los Angeles (UCLA)**, advised by [Prof. M. Khalid Jawed](https://structures.computer). He leads the Smart Farm Project, driving end-to-end development from mechanical machining and system integration to software, AI, and field operations. His research focuses on practical, field-centric robotics leveraging **3D reconstruction**, with particular emphasis on **UGV autonomy**, **robotic arm manipulation** for object handling, and **robust perception** under real-world conditions.
+**Jaehwan Jeong** is a Ph.D. student at **Korea University**, advised by [Prof. Sangpil Kim](https://kuaicv.com). He previously conducted research on diffusion-based generative models and AI safety for deepfake protection. Currently, he is a Visiting Graduate Researcher at the **University of California, Los Angeles (UCLA)**, advised by [Prof. M. Khalid Jawed](https://structures.computer). He leads the Smart Farm Project, driving end-to-end development from mechanical machining and system integration to software, AI, and field operations. His research focuses on practical, field-centric robotics leveraging **3D Reconstruction**, with particular emphasis on **UGV Autonomy**, **Robotic Arm Manipulation** for object handling, and **Robust Perception** under real-world conditions.
 
 ## Research Interests
 
