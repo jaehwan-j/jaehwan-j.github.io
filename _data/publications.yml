@@ -5,7 +5,7 @@ main:
     conference: "Under review, 2025"
     pdf: ""
     code: "https://github.com/StructuresComp/agri-chrono"
-    image: "/assets/img/AgriChrono.png"
+    image: "/assets/img/AgriChrono.gif"
 
   - title: "FaceShield: Defending Facial Image against Deepfake Threats"
     authors: "<b>Jaehwan Jeong</b>, Sumin In, Sieun Kim, Hannie Shin, Jongheon Jeong, Sang Ho Yoon, Jaewook Chung, Sangpil Kim"
