@@ -1,4 +1,12 @@
 main:
+  - title: "AgriChrono: A Multi-modal Dataset Capturing Crop Growth and Lighting Variability with a Field Robot"
+    authors: "<b>Jaehwan Jeong</b>, Tuan-Anh Vu, Mohammad Jony, Shahab Ahmad, Md. Mukhlesur Rahman, Sangpil Kim, M. Khalid Jawed"
+    conference_short: "Pre-print"
+    conference: "Under review, 2025"
+    pdf: ""
+    code: "https://github.com/StructuresComp/agri-chrono"
+    image: "/assets/img/AgriChrono.png"
+
   - title: "FaceShield: Defending Facial Image against Deepfake Threats"
     authors: "<b>Jaehwan Jeong</b>, Sumin In, Sieun Kim, Hannie Shin, Jongheon Jeong, Sang Ho Yoon, Jaewook Chung, Sangpil Kim"
     conference_short: "ICCV"
