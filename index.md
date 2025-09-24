@@ -13,9 +13,9 @@ layout: homepage
 - **Generative AI:** Diffusion-based Methods, AI Safety  
 - **Robotics Systems:** Field Robotics, Model Predictive Control, Robot Operating Systems, Communication Protocols
 -->
-- 3D reconstruction, Robot operating system, Autonomous driving
+- Reinforcement Learning, Imitation Learning, Vision-Language Action, Diffusion Policy
+- Robotic Manipulation, Autonomous Navigation, Sensor Fusing, Sim-Real
 - AI safety, Generative model, Multi-modal learning
-- Machine learning, Deep learning, Computer vision
 
 
 
