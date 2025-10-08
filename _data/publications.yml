@@ -5,7 +5,7 @@ main:
     conference: "Under review, 2025"
     pdf: "https://arxiv.org/pdf/2510.06146"
     code: ""
-    image: ""
+    image: "/assets/img/Tomato.png"
 
   - title: "AgriChrono: A Multi-modal Dataset Capturing Crop Growth and Lighting Variability with a Field Robot"
     authors: "<b>Jaehwan Jeong</b>, Tuan-Anh Vu, Mohammad Jony, Shahab Ahmad, Md. Mukhlesur Rahman, Sangpil Kim, M. Khalid Jawed"
