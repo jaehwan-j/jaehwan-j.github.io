@@ -16,18 +16,19 @@ I am also a Ph.D. student at **<span style="color:#A41E34">Korea University</spa
 - **Generative AI:** Diffusion-based Methods, AI Safety  
 - **Robotics Systems:** Field Robotics, Model Predictive Control, Robot Operating Systems, Communication Protocols
 -->
-- Reinforcement Learning, Imitation Learning, Vision-Language Action, Diffusion Policy
-- Robotic Manipulation, Autonomous Navigation, Sensor Fusing, Sim-Real
-- AI safety, Generative model, Multi-modal learning
+- Embodied AI, Robotic Learning, Autonomous Systems
+- Multi-modal learning, Generative model, AI safety
 
 
 
 ## News
 
 - **[Jun. 2025]** One paper about adversarial attack has been accepted to ICCV 2025!
-- **[Mar. 2025]** He embarked on his role as Visiting Graduate Researcher at UCLA!
+- **[Mar. 2025]** Started my role as a Visiting Graduate Researcher at UCLA!
 - **[Feb. 2025]** One paper about audio-to-video generation is accepted to EAAI 2025!
 - **[Jul. 2024]** One paper about text-to-video generation is accepted to ECCV 2024!
+- **[Mar. 2024]** Joined the Computer-Vision Lab at Korea University as a Ph.D. student!
+- **[Jul. 2023]** Joined the Computer-Vision Lab at Korea University as a Research Intern!
 
 {% include_relative _includes/publications.md %}
 
