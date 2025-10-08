@@ -1,4 +1,12 @@
 main:
+  - title: "Vision-Guided Targeted Grasping and Vibration for Robotic Pollination in Controlled Environments"
+    authors: "<b>Jaehwan Jeong</b><sup>*</sup>, Tuan-Anh Vu<sup>*</sup>, Radha Lahoti, Jiawen Wang, Vivek Alumootil, Sangpil Kim, M. Khalid Jawed"
+    conference_short: "Pre-print"
+    conference: "Under review, 2025"
+    pdf: "https://arxiv.org/pdf/2510.06146"
+    code: ""
+    image: ""
+
   - title: "AgriChrono: A Multi-modal Dataset Capturing Crop Growth and Lighting Variability with a Field Robot"
     authors: "<b>Jaehwan Jeong</b>, Tuan-Anh Vu, Mohammad Jony, Shahab Ahmad, Md. Mukhlesur Rahman, Sangpil Kim, M. Khalid Jawed"
     conference_short: "Pre-print"
