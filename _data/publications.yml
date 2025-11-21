@@ -13,6 +13,7 @@ main:
     conference: "Under review, 2025"
     pdf: "https://arxiv.org/pdf/2508.18694"
     code: "https://github.com/StructuresComp/agri-chrono"
+    Project: "https://jaehwan-j.github.io/agrichrono"
     image: "/assets/img/AgriChrono.gif"
 
   - title: "FaceShield: Defending Facial Image against Deepfake Threats"
