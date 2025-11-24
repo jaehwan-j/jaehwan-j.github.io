@@ -11,7 +11,7 @@ main:
     authors: "<b>Jaehwan Jeong</b>, Tuan-Anh Vu, Mohammad Jony, Shahab Ahmad, Md. Mukhlesur Rahman, Sangpil Kim, M. Khalid Jawed"
     conference_short: "Pre-print"
     conference: "Under review, 2025"
-    pdf: "https://arxiv.org/pdf/2508.18694"
+    pdf: "https://arxiv.org/pdf/2508.18694v2"
     code: "https://github.com/StructuresComp/agri-chrono"
     page: "https://jaehwan-j.github.io/agrichrono"
     image: "/assets/img/AgriChrono.gif"
