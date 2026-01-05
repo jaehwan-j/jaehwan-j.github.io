@@ -16,8 +16,8 @@ I am also a Ph.D. student at **<span style="color:#A41E34">Korea University</spa
 - **Generative AI:** Diffusion-based Methods, AI Safety  
 - **Robotics Systems:** Field Robotics, Model Predictive Control, Robot Operating Systems, Communication Protocols
 -->
-- Embodied AI, Robotic Learning, Autonomous Systems
-- Multi-modal learning, Generative model, AI safety
+- Embodied AI, Robotic Learning, Autonomous Systems, Sim-to-Real
+- Vision-Language Model, Multi-modal learning, Generative model, AI safety
 
 
 
