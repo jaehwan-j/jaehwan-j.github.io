@@ -4,11 +4,11 @@ layout: homepage
 
 ## About Me
 
-I'm currently a Visiting Graduate Researcher at the **<span style="color:#2774AE">University of California, Los Angeles</span> (UCLA)**, advised by [Prof. M. Khalid Jawed](https://structures.computer). 
-At UCLA, I leads the Smart Farm Project, driving end-to-end development from mechanical machining and sensor integration to software, AI, and field operations. 
-My research focuses on **Field-centric Robotics** leveraging <u>AI</u> to enable reactive autonomy in **UGVs** and **Robotic Arms**, integrating <u>Robust Perception</u> and <u>Vision-Language Action (VLA)</u> to allow them to interpret and respond to real-world conditions.
+I am a Ph.D. student at **<span style="color:#A41E34">Korea University</span>**, advised by [Prof. Sangpil Kim](https://kuaicv.com). My research explores the internal structures of AI models to solve challenges across diverse domains, spanning autonomous systems for vehicles and robotics, multimodal generative models, and AI safety. 
 
-I am also a Ph.D. student at **<span style="color:#A41E34">Korea University</span>**, advised by [Prof. Sangpil Kim](https://kuaicv.com), where I previously researched Diffusion-based **Generative models** and **AI Safety** for deepfake protection.
+Previously, I served as a Visiting Graduate Researcher at **<span style="color:#2774AE">University of California, Los Angeles</span> (UCLA)**, advised by [Prof. M. Khalid Jawed](https://structures.computer). In this role, I led a Smart Farm project team, driving the end-to-end deployment of robotics—specifically UGVs and manipulators—from mechanical machining and sensor integration to software, AI, and field operations.
+
+
 
 ## Research Interests
 <!--
