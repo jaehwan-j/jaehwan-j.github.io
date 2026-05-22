@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriChrono — Jaehwan Jeong</title>
+  <link rel="icon" type="image/png" href="../../assets/img/CV_Lab.png" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+  <link rel="stylesheet" href="../project.css" />
+  <style>
+    /* --- Affiliation badges --- */
+    .proj-affiliations {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin: 10px 0 14px;
+    }
+    .aff-badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 13px;
+      border-radius: 20px;
+    }
+    .aff-badge.ku   { background: rgba(164,30,52,0.10); color: #A41E34; }
+    .aff-badge.ucla { background: rgba(39,116,174,0.10); color: #2774AE; }
+    .aff-badge.ndsu { background: rgba(0,105,60,0.10);  color: #00693C; }
+    .aff-note { font-size: 12px; color: var(--ink-light); }
+
+    /* --- Figure blocks --- */
+    .fig-block {
+      margin: 28px 0;
+    }
+    .fig-block img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+      display: block;
+    }
+    .fig-caption {
+      margin-top: 10px;
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      line-height: 1.65;
+    }
+    .fig-num {
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .fig-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 28px 0;
+    }
+    .fig-grid-2 .fig-block {
+      margin: 0;
+    }
+    .fig-subsection {
+      margin-top: 36px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .proj-section .fig-subsection:first-of-type {
+      border-top: none;
+      margin-top: 16px;
+      padding-top: 0;
+    }
+    .fig-subsection h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .fig-subsection-note {
+      font-size: 13.5px;
+      color: var(--ink-light);
+      margin-bottom: 0;
+      line-height: 1.6;
+    }
+
+    /* --- Result tables --- */
+    .result-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin: 12px 0 4px;
+    }
+    .result-table th {
+      background: var(--crimson-pale);
+      color: var(--ink);
+      font-weight: 600;
+      padding: 9px 14px;
+      text-align: left;
+      border-bottom: 2px solid var(--border);
+      font-size: 13.5px;
+    }
+    .result-table td {
+      padding: 8px 14px;
+      border-bottom: 1px solid #f0f0f0;
+      color: var(--ink-soft);
+    }
+    .result-table tr:last-child td { border-bottom: none; }
+    .result-table .row-ours td {
+      background: rgba(164,30,52,0.04);
+      color: var(--ink-soft);
+    }
+    .result-table .best { font-weight: 700; color: var(--ink); }
+    .sub-heading {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 20px 0 8px;
+    }
+    .sub-note {
+      font-size: 13.5px;
+      color: var(--ink-light);
+      margin-bottom: 10px;
+    }
+
+    /* --- Table utilities --- */
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 8px 0 20px; }
+    .result-table.compact { font-size: 12px; }
+    .result-table.compact th { padding: 6px 8px; font-size: 11.5px; }
+    .result-table.compact td { padding: 5px 8px; }
+    .result-table td.u { text-decoration: underline; text-underline-offset: 3px; }
+    .row-gray td { color: #bbb !important; font-weight: 400; }
+    .row-diff td { font-weight: 700; background: rgba(164,30,52,0.04); }
+
+    /* --- Acknowledgement --- */
+    .ack-section p {
+      font-size: 13.5px;
+      color: var(--ink-light);
+      line-height: 1.76;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 540px) {
+      .fig-grid-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="proj-nav">
+    <a href="../../index.html" class="back-link">← Jaehwan Jeong</a>
+    <span class="proj-nav-title">AgriChrono</span>
+  </nav>
+
+  <main class="proj-main">
+    <div class="proj-container">
+
+      <!-- ── HEADER ─────────────────────────────────────────────── -->
+      <header class="proj-header fade-in">
+        <span class="proj-tag">Robotics · Dataset · 3D Benchmark</span>
+        <h1>AgriChrono: A Multi-modal Dataset Capturing Crop Growth and Lighting Variability with a Field Robot</h1>
+
+        <p class="proj-authors">
+          <strong>Jaehwan Jeong</strong><sup>1,2</sup>,&thinsp;
+          Tuan-Anh Vu<sup>2</sup>,&thinsp;
+          Mohammad Jony<sup>3</sup>,&thinsp;
+          Shahab Ahmad<sup>3</sup>,<br />
+          Md. Mukhlesur Rahman<sup>3</sup>,&thinsp;
+          Sangpil Kim<sup>1†</sup>,&thinsp;
+          M. Khalid Jawed<sup>2†</sup>
+        </p>
+
+        <div class="proj-affiliations">
+          <span class="aff-badge ku"><sup>1</sup>&nbsp;Korea University</span>
+          <span class="aff-badge ucla"><sup>2</sup>&nbsp;UCLA</span>
+          <span class="aff-badge ndsu"><sup>3</sup>&nbsp;NDSU</span>
+          <span class="aff-note">&thinsp;†&nbsp;Co-corresponding authors</span>
+        </div>
+
+        <p class="proj-venue">Under review, 2026</p>
+
+        <div class="proj-links">
+          <a href="https://arxiv.org/pdf/2508.18694v2" class="proj-btn" target="_blank" rel="noopener">arXiv</a>
+          <a href="https://github.com/StructuresComp/agri-chrono" class="proj-btn proj-btn-outline" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://jaehwan-j.github.io/agrichrono" class="proj-btn proj-btn-outline" target="_blank" rel="noopener">Benchmark Page</a>
+        </div>
+      </header>
+
+      <!-- ── TL;DR ──────────────────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>TL;DR</h2>
+        <p>
+          We introduce <strong>AgriChrono</strong>, a large-scale multi-modal agricultural dataset collected by a field robot
+          deployed in a real greenhouse over <strong>3 weeks</strong>.
+          The robot was <strong>tele-operated remotely</strong> from UCLA to NDSU's greenhouse facilities — approximately <strong>1,500 miles</strong> —
+          via a custom-built WebUI, enabling consistent data collection without on-site personnel.
+          The system captures <strong>4 time points per day</strong> to document lighting variability,
+          leveraging <strong>dual ZED stereo cameras and a Livox LiDAR</strong> with precise multi-sensor time synchronization.
+          The resulting dataset provides <strong>synchronized RGB, depth, and LiDAR modalities</strong> tracking both daily illumination changes and
+          longitudinal crop growth — along with a challenging <strong>3D reconstruction benchmark</strong> for agricultural AI research.
+        </p>
+      </section>
+
+      <!-- ── PROJECT DESIGN ─────────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>Project Design</h2>
+
+        <!-- Fig.1 -->
+        <div class="fig-subsection">
+          <h3>1. Field &amp; Remote Operation</h3>
+          <p class="fig-subsection-note">
+            The collection site and tele-operation setup enabling ~1,500-mile remote data collection from UCLA to NDSU.
+          </p>
+        </div>
+
+        <div class="fig-block fade-in">
+          <img src="Fig.1.png" alt="AgriChrono field site and remote WebUI" />
+          <p class="fig-caption">
+            <span class="fig-num">Fig. 1.</span>
+            Overview of the data collection environment and remote operation pipeline.
+            The greenhouse facility at NDSU (left) hosts rows of tomato and pepper crops spanning multiple growing stages.
+            A custom <strong>WebUI</strong> (right) provides real-time camera feeds, robot state visualization,
+            and teleoperation controls, enabling the entire 3-week collection campaign to be conducted
+            <strong>remotely from UCLA</strong> — approximately <strong>1,500 miles</strong> away — without requiring on-site operators.
+          </p>
+        </div>
+
+        <!-- Fig.2 -->
+        <div class="fig-subsection">
+          <h3>2. Robot Hardware Design</h3>
+          <p class="fig-subsection-note">
+            Sensor suite and hardware configuration of the field robot platform.
+          </p>
+        </div>
+
+        <div class="fig-block fade-in delay-1">
+          <img src="Fig.2.png" alt="AgriChrono robot hardware configuration" />
+          <p class="fig-caption">
+            <span class="fig-num">Fig. 2.</span>
+            Hardware configuration of the field robot.
+            The platform mounts <strong>two ZED stereo cameras</strong> (forward- and downward-facing) for wide-baseline RGB-D capture,
+            and a <strong>Livox LiDAR</strong> for high-fidelity point cloud acquisition.
+            An <strong>Obsbot PTZ camera</strong> provides an independent top-down monitoring view,
+            supporting reliable remote supervision during the tele-operation sessions.
+            Additional sensors include an IMU and wheel encoders for odometry.
+          </p>
+        </div>
+
+        <!-- Fig.3 -->
+        <div class="fig-subsection">
+          <h3>3. Data Collection Protocol</h3>
+          <p class="fig-subsection-note">
+            Longitudinal capture schedule: 4 sessions per day over 3 weeks, with multi-sensor time synchronization.
+          </p>
+        </div>
+
+        <div class="fig-block fade-in">
+          <img src="Fig.3.png" alt="AgriChrono data modalities and collection schedule" />
+          <p class="fig-caption">
+            <span class="fig-num">Fig. 3.</span>
+            Data collection schedule and modality overview.
+            The robot traversed the greenhouse <strong>4 times per day</strong> at fixed intervals (morning, noon, afternoon, evening),
+            capturing the full range of <strong>natural lighting variability</strong> under greenhouse conditions.
+            Over <strong>3 weeks</strong>, this yields a dense temporal record of <strong>crop growth dynamics</strong>
+            — from seedling to flowering stage.
+            All sensors are hardware time-synchronized to sub-millisecond accuracy,
+            ensuring consistent <strong>multi-modal alignment</strong> across RGB, depth, and LiDAR streams.
+          </p>
+        </div>
+
+        <!-- Fig.4 -->
+        <div class="fig-subsection">
+          <h3>4. 3D Reconstruction Benchmark</h3>
+          <p class="fig-subsection-note">
+            AgriChrono's multi-view coverage enables a rigorous benchmark for 3D reconstruction in agricultural scenes.
+          </p>
+        </div>
+
+        <div class="fig-block fade-in delay-1">
+          <img src="Fig.4.png" alt="AgriChrono 3D reconstruction benchmark" />
+          <p class="fig-caption">
+            <span class="fig-num">Fig. 4.</span>
+            The synchronized multi-view data from AgriChrono supports a comprehensive <strong>3D reconstruction benchmark</strong>.
+            Dense point clouds derived from the Livox LiDAR serve as ground truth geometry,
+            while the ZED stereo pairs provide photometric reference for novel view synthesis evaluation.
+            The dataset captures unique challenges absent in standard benchmarks:
+            <strong>fine leaf geometry</strong>, <strong>specular reflections</strong> under greenhouse lighting,
+            and <strong>temporal deformation</strong> as plants grow across sessions.
+          </p>
+        </div>
+
+      </section>
+
+      <!-- ── BENCHMARK ─────────────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>Benchmark</h2>
+
+        <p class="sub-heading">3D Reconstruction — Novel View Synthesis</p>
+        <p class="sub-note">Evaluation on AgriChrono held-out test views. Bold = best, underline = second best per column.</p>
+        <div class="table-scroll">
+          <table class="result-table compact">
+            <thead>
+              <tr>
+                <th rowspan="2" style="min-width:130px;">Method</th>
+                <th colspan="3" style="text-align:center;">Morning</th>
+                <th colspan="3" style="text-align:center;">Noon</th>
+                <th colspan="3" style="text-align:center;">Afternoon</th>
+                <th colspan="3" style="text-align:center;">Evening</th>
+              </tr>
+              <tr>
+                <th>PSNR ↑</th><th>SSIM ↑</th><th>LPIPS ↓</th>
+                <th>PSNR ↑</th><th>SSIM ↑</th><th>LPIPS ↓</th>
+                <th>PSNR ↑</th><th>SSIM ↑</th><th>LPIPS ↓</th>
+                <th>PSNR ↑</th><th>SSIM ↑</th><th>LPIPS ↓</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>NeRF</td>
+                <td>–</td><td>–</td><td>–</td>
+                <td>–</td><td>–</td><td>–</td>
+                <td>–</td><td>–</td><td>–</td>
+                <td>–</td><td>–</td><td>–</td>
+              </tr>
+              <tr>
+                <td>Instant-NGP</td>
+                <td>–</td><td>–</td><td>–</td>
+                <td>–</td><td>–</td><td>–</td>
+                <td>–</td><td>–</td><td>–</td>
+                <td>–</td><td>–</td><td>–</td>
+              </tr>
+              <tr>
+                <td>Mip-NeRF 360</td>
+                <td>–</td><td>–</td><td>–</td>
+                <td>–</td><td>–</td><td>–</td>
+                <td>–</td><td>–</td><td>–</td>
+                <td>–</td><td>–</td><td>–</td>
+              </tr>
+              <tr>
+                <td>3D Gaussian Splatting</td>
+                <td>–</td><td>–</td><td>–</td>
+                <td>–</td><td>–</td><td>–</td>
+                <td>–</td><td>–</td><td>–</td>
+                <td>–</td><td>–</td><td>–</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="fig-block fade-in delay-1">
+          <img src="Fig.5.png" alt="AgriChrono qualitative reconstruction results" />
+          <p class="fig-caption">
+            <span class="fig-num">Fig. 5.</span>
+            Qualitative comparison of 3D reconstruction results on AgriChrono scenes.
+            Each row shows the input reference view, followed by novel view synthesis outputs from evaluated methods.
+            The dataset's fine leaf structures and lighting variation expose clear differences in geometric fidelity
+            and appearance modeling across approaches.
+          </p>
+        </div>
+
+        <p style="font-size:13.5px; color:var(--ink-soft); line-height:1.65; margin-top:12px;">
+          For the full benchmark leaderboard, dataset download, and evaluation toolkit, visit the
+          <a href="https://jaehwan-j.github.io/agrichrono" target="_blank" rel="noopener" style="color:var(--crimson);">Benchmark Page</a>.
+        </p>
+
+      </section>
+
+      <!-- ── ACKNOWLEDGEMENT ────────────────────────────────────── -->
+      <section class="proj-section ack-section fade-in">
+        <h2>Acknowledgement</h2>
+        <p>
+          This work was supported by the USDA National Institute of Food &amp; Agriculture (Grant No.&nbsp;2024-67021-42528),
+          the Korea Creative Content Agency (KOCCA) under Grant RS-2024-00345025,
+          and the Institute of Information &amp; Communications Technology Planning &amp; Evaluation (IITP)
+          funded by the Korean government (MSIT) under Grant No.&nbsp;RS-2019-II190079.
+        </p>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="proj-footer">
+    <a href="../../index.html">← Back to Homepage</a>
+    <span>&copy; <span id="year"></span> Jaehwan Jeong</span>
+  </footer>
+
+  <script src="../project.js"></script>
+</body>
+</html>
