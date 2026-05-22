@@ -44,11 +44,7 @@
       color: var(--ink-soft);
       line-height: 1.65;
     }
-    .fig-num {
-      font-weight: 700;
-      color: var(--ink);
-    }
-    .fig-grid-2 {
+.fig-grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
@@ -134,6 +130,32 @@
       color: var(--ink-light);
       line-height: 1.76;
     }
+    .ack-ndsu {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(0,105,60,0.07);
+      border: 1px solid rgba(0,105,60,0.22);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+    }
+    .ack-ndsu-badge {
+      flex-shrink: 0;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: #fff;
+      background: #00693C;
+      padding: 5px 14px;
+      border-radius: 6px;
+    }
+    .ack-ndsu-note {
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      line-height: 1.6;
+      margin: 0 !important;
+    }
 
     /* --- Responsive --- */
     @media (max-width: 540px) {
@@ -172,28 +194,73 @@
           <span class="aff-note">&thinsp;†&nbsp;Co-corresponding authors</span>
         </div>
 
-        <p class="proj-venue">Under review, 2026</p>
+        <p class="proj-venue">Project period: 2025.04.–2025.07.</p>
 
         <div class="proj-links">
           <a href="https://arxiv.org/pdf/2508.18694v2" class="proj-btn" target="_blank" rel="noopener">arXiv</a>
           <a href="https://github.com/StructuresComp/agri-chrono" class="proj-btn proj-btn-outline" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://jaehwan-j.github.io/agrichrono" class="proj-btn proj-btn-outline" target="_blank" rel="noopener">Benchmark Page</a>
+          <a href="https://jaehwan-j.github.io/agrichrono" class="proj-btn proj-btn-outline" target="_blank" rel="noopener">Benchmark</a>
         </div>
       </header>
+
+      <!-- ── TEAM PHOTO ───────────────────────────────────────────── -->
+      <div class="fig-block fade-in" style="margin: 0 0 32px;">
+        <img src="Team.JPEG" alt="AgriChrono project team" style="border-radius: 12px;" />
+        <p class="fig-caption" style="text-align: center; color: #aaa; font-size: 13px; margin-top: 8px;">
+          Project Collaboration NDSU (left) and UCLA (right)
+        </p>
+      </div>
 
       <!-- ── TL;DR ──────────────────────────────────────────────── -->
       <section class="proj-section fade-in">
         <h2>TL;DR</h2>
         <p>
-          We introduce <strong>AgriChrono</strong>, a large-scale multi-modal agricultural dataset collected by a field robot
-          deployed in a real greenhouse over <strong>3 weeks</strong>.
-          The robot was <strong>tele-operated remotely</strong> from UCLA to NDSU's greenhouse facilities — approximately <strong>1,500 miles</strong> —
-          via a custom-built WebUI, enabling consistent data collection without on-site personnel.
-          The system captures <strong>4 time points per day</strong> to document lighting variability,
-          leveraging <strong>dual ZED stereo cameras and a Livox LiDAR</strong> with precise multi-sensor time synchronization.
-          The resulting dataset provides <strong>synchronized RGB, depth, and LiDAR modalities</strong> tracking both daily illumination changes and
-          longitudinal crop growth — along with a challenging <strong>3D reconstruction benchmark</strong> for agricultural AI research.
+          We propose <strong>AgriChrono</strong>, a comprehensive framework purpose-built for <strong>"in-the-wild" scene-level 3D reconstruction</strong>,
+          featuring <strong>three core contributions</strong>: a custom robotic platform, an <strong>18 TB multi-modal dataset</strong>, and a <strong>stress-test benchmark</strong>.
+          First, we deploy a modular robotic platform equipped with a highly accurate, time-synchronized sensor suite
+          (<strong>LiDAR-RGB-Depth-IMU</strong>) to continuously log the high-fidelity <strong>6-DoF poses</strong> and structural data required for reliable 3D reconstruction.
+          Second, utilizing this platform, we release a massive dataset that rigorously captures
+          <strong>continuous morphological crop growth</strong> and <strong>severe daily illumination shifts</strong> over a month.
+          Finally, we establish a <strong>7-scenario 3D reconstruction benchmark</strong> to evaluate
+          <strong>16 state-of-the-art NeRF and 3DGS methods</strong>.
+          While validating our platform's data-gathering efficacy, this benchmark explicitly exposes critical robustness issues in existing baselines,
+          demonstrating their failure to maintain consistent performance under
+          <strong>wind-induced crop motion</strong> and <strong>lighting variations</strong>.
+          Ultimately, AgriChrono provides a crucial stress-test to catalyze the development of
+          <strong>robust, next-generation in-the-wild 3D reconstruction models</strong>.
         </p>
+      </section>
+
+      <!-- ── KEY CONTRIBUTIONS ────────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>Key Contributions</h2>
+        <ul class="proj-bullets">
+          <li class="fade-in">
+            <strong>Modular Robotic Acquisition Platform</strong> — We develop a custom, remote-operable field robot
+            equipped with a precise, time-synchronized multi-modal sensor suite
+            (<u>RGB, Depth, LiDAR, IMU, and Pose</u>).
+            This platform serves as a foundational tool, validating that
+            <u>high-fidelity 3D reconstruction is achievable</u> in challenging,
+            "in-the-wild" agricultural environments.
+          </li>
+          <li class="fade-in delay-1">
+            <strong>Large-Scale In-the-Wild Dataset</strong> — We release the comprehensive
+            <u>18 TB AgriChrono dataset</u>, uniquely capturing
+            <u>continuous morphological crop growth</u> and
+            <u>systematic daily illumination changes</u>.
+            Collected daily over a one-month period, this dataset documents complex,
+            scene-level structural changes to significantly accelerate
+            real-world precision agriculture research.
+          </li>
+          <li class="fade-in delay-2">
+            <strong>3D Reconstruction Stress-Test Benchmark</strong> — We introduce a rigorous benchmark
+            featuring <u>7 distinct scenarios</u> to evaluate
+            <u>16 state-of-the-art NeRF and 3DGS methods</u>.
+            This benchmark illustrates the significant challenges of non-rigid, dynamic scenes,
+            explicitly exposing the fundamental robustness limitations of existing baselines
+            against <u>wind-induced motion</u> and <u>lighting shifts</u>.
+          </li>
+        </ul>
       </section>
 
       <!-- ── PROJECT DESIGN ─────────────────────────────────────── -->
@@ -211,7 +278,6 @@
         <div class="fig-block fade-in">
           <img src="Fig.1.png" alt="AgriChrono field site and remote WebUI" />
           <p class="fig-caption">
-            <span class="fig-num">Fig. 1.</span>
             Overview of the data collection environment and remote operation pipeline.
             The greenhouse facility at NDSU (left) hosts rows of tomato and pepper crops spanning multiple growing stages.
             A custom <strong>WebUI</strong> (right) provides real-time camera feeds, robot state visualization,
@@ -228,17 +294,25 @@
           </p>
         </div>
 
-        <div class="fig-block fade-in delay-1">
-          <img src="Fig.2.png" alt="AgriChrono robot hardware configuration" />
-          <p class="fig-caption">
-            <span class="fig-num">Fig. 2.</span>
-            Hardware configuration of the field robot.
-            The platform mounts <strong>two ZED stereo cameras</strong> (forward- and downward-facing) for wide-baseline RGB-D capture,
-            and a <strong>Livox LiDAR</strong> for high-fidelity point cloud acquisition.
-            An <strong>Obsbot PTZ camera</strong> provides an independent top-down monitoring view,
-            supporting reliable remote supervision during the tele-operation sessions.
-            Additional sensors include an IMU and wheel encoders for odometry.
-          </p>
+        <div class="fade-in delay-1" style="display:flex; flex-direction:column; gap:16px; margin:28px 0;">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px; align-items:center;">
+            <img src="Fig.2.png" alt="AgriChrono robot hardware configuration" style="width:100%; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,0.10); display:block;" />
+            <p class="fig-caption" style="margin:0;">
+              Hardware configuration of the field robot.
+              The platform mounts <strong>two ZED stereo cameras</strong> (forward- and downward-facing) for wide-baseline RGB-D capture,
+              and a <strong>Livox LiDAR</strong> for high-fidelity point cloud acquisition.
+              An <strong>Obsbot PTZ camera</strong> provides an independent top-down monitoring view,
+              supporting reliable remote supervision during the tele-operation sessions.
+              Additional sensors include an IMU and wheel encoders for odometry.
+            </p>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px; align-items:center;">
+            <img src="remote.JPEG" alt="Remote operation setup" style="width:100%; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,0.10); display:block;" />
+            <p class="fig-caption" style="margin:0;">
+              Remote tele-operation setup at UCLA. The operator controls the field robot deployed at NDSU's greenhouse facilities
+              approximately <strong>1,500 miles</strong> away via a custom-built WebUI, enabling consistent data collection without on-site personnel.
+            </p>
+          </div>
         </div>
 
         <!-- Fig.3 -->
@@ -252,7 +326,6 @@
         <div class="fig-block fade-in">
           <img src="Fig.3.png" alt="AgriChrono data modalities and collection schedule" />
           <p class="fig-caption">
-            <span class="fig-num">Fig. 3.</span>
             Data collection schedule and modality overview.
             The robot traversed the greenhouse <strong>4 times per day</strong> at fixed intervals (morning, noon, afternoon, evening),
             capturing the full range of <strong>natural lighting variability</strong> under greenhouse conditions.
@@ -274,7 +347,6 @@
         <div class="fig-block fade-in delay-1">
           <img src="Fig.4.png" alt="AgriChrono 3D reconstruction benchmark" />
           <p class="fig-caption">
-            <span class="fig-num">Fig. 4.</span>
             The synchronized multi-view data from AgriChrono supports a comprehensive <strong>3D reconstruction benchmark</strong>.
             Dense point clouds derived from the Livox LiDAR serve as ground truth geometry,
             while the ZED stereo pairs provide photometric reference for novel view synthesis evaluation.
@@ -345,7 +417,6 @@
         <div class="fig-block fade-in delay-1">
           <img src="Fig.5.png" alt="AgriChrono qualitative reconstruction results" />
           <p class="fig-caption">
-            <span class="fig-num">Fig. 5.</span>
             Qualitative comparison of 3D reconstruction results on AgriChrono scenes.
             Each row shows the input reference view, followed by novel view synthesis outputs from evaluated methods.
             The dataset's fine leaf structures and lighting variation expose clear differences in geometric fidelity
@@ -363,8 +434,13 @@
       <!-- ── ACKNOWLEDGEMENT ────────────────────────────────────── -->
       <section class="proj-section ack-section fade-in">
         <h2>Acknowledgement</h2>
+        <div class="ack-ndsu">
+          <span class="ack-ndsu-badge">NDSU</span>
+          <p class="ack-ndsu-note">Experimental farm facilities, on-site data collection support, and agricultural domain expertise provided by <strong>North Dakota State University (NDSU)</strong>.</p>
+        </div>
         <p>
-          This work was supported by the USDA National Institute of Food &amp; Agriculture (Grant No.&nbsp;2024-67021-42528),
+          This work was supported in part by the U.S. Department of Agriculture
+          (Grant No.&nbsp;2024-67021-42528 and 2022-67022-37021),
           the Korea Creative Content Agency (KOCCA) under Grant RS-2024-00345025,
           and the Institute of Information &amp; Communications Technology Planning &amp; Evaluation (IITP)
           funded by the Korean government (MSIT) under Grant No.&nbsp;RS-2019-II190079.
