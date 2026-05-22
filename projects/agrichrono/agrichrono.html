@@ -118,7 +118,7 @@
     /* --- Table utilities --- */
     .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 8px 0 20px; }
     .result-table.compact { font-size: 12px; }
-    .result-table.compact th { padding: 6px 8px; font-size: 11.5px; }
+    .result-table.compact th { padding: 6px 8px; font-size: 11.5px; white-space: nowrap; }
     .result-table.compact td { padding: 5px 8px; }
     .result-table td.u { text-decoration: underline; text-underline-offset: 3px; }
     .row-gray td { color: #bbb !important; font-weight: 400; }
@@ -268,7 +268,7 @@
           <span class="aff-note">&thinsp;†&nbsp;Co-corresponding authors</span>
         </div>
 
-        <p class="proj-venue">Project period: 2025.04.–2025.07.</p>
+        <p class="proj-venue">Under review, 2026</p>
 
         <div class="proj-links">
           <a href="https://arxiv.org/pdf/2508.18694v2" class="proj-btn" target="_blank" rel="noopener">arXiv</a>
@@ -402,11 +402,11 @@
             </p>
           </div>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px; align-items:center;">
-            <img src="remote.JPEG" alt="Remote operation setup" style="width:100%; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,0.10); display:block;" />
             <p class="fig-caption" style="margin:0;">
               Remote tele-operation setup at UCLA. The operator controls the field robot deployed at NDSU's greenhouse facilities
               approximately <strong>1,500 miles</strong> away via a custom-built WebUI, enabling consistent data collection without on-site personnel.
             </p>
+            <img src="remote.JPEG" alt="Remote operation setup" style="width:100%; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,0.10); display:block;" />
           </div>
         </div>
 
@@ -457,53 +457,200 @@
       <section class="proj-section fade-in">
         <h2>Benchmark</h2>
 
-        <p class="sub-heading">3D Reconstruction — Novel View Synthesis</p>
-        <p class="sub-note">Evaluation on AgriChrono held-out test views. Bold = best, underline = second best per column.</p>
+        <p class="sub-heading">Novel View Synthesis Benchmark — Site 1<sub>CCW</sub></p>
+        <p class="sub-note">
+          Evaluates <strong>Lighting Variance</strong> (Day 19, four time-of-day conditions) and <strong>Growth Span</strong> (6 AM, three growth stages).
+          12 Gaussian Splatting-based and 4 NeRF-based methods. <strong>Bold</strong> = best, <u>underline</u> = second best per column.
+        </p>
         <div class="table-scroll">
           <table class="result-table compact">
             <thead>
               <tr>
-                <th rowspan="2" style="min-width:130px;">Method</th>
-                <th colspan="3" style="text-align:center;">Morning</th>
-                <th colspan="3" style="text-align:center;">Noon</th>
-                <th colspan="3" style="text-align:center;">Afternoon</th>
-                <th colspan="3" style="text-align:center;">Evening</th>
+                <th rowspan="3" style="min-width:130px;">Method</th>
+                <th colspan="8" style="text-align:center; border-bottom:1px solid #e0e0e0;">Lighting Variance (Day 19)</th>
+                <th colspan="6" style="text-align:center; border-bottom:1px solid #e0e0e0;">Growth Span (6 AM)</th>
               </tr>
               <tr>
-                <th>PSNR ↑</th><th>SSIM ↑</th><th>LPIPS ↓</th>
-                <th>PSNR ↑</th><th>SSIM ↑</th><th>LPIPS ↓</th>
-                <th>PSNR ↑</th><th>SSIM ↑</th><th>LPIPS ↓</th>
-                <th>PSNR ↑</th><th>SSIM ↑</th><th>LPIPS ↓</th>
+                <th colspan="2" style="text-align:center;">06:00 AM</th>
+                <th colspan="2" style="text-align:center;">11:00 AM</th>
+                <th colspan="2" style="text-align:center;">04:00 PM</th>
+                <th colspan="2" style="text-align:center;">09:00 PM</th>
+                <th colspan="2" style="text-align:center;">Day 6</th>
+                <th colspan="2" style="text-align:center;">Day 13</th>
+                <th colspan="2" style="text-align:center;">Day 20</th>
+              </tr>
+              <tr>
+                <th>PSNR ↑</th><th>SSIM ↑</th>
+                <th>PSNR ↑</th><th>SSIM ↑</th>
+                <th>PSNR ↑</th><th>SSIM ↑</th>
+                <th>PSNR ↑</th><th>SSIM ↑</th>
+                <th>PSNR ↑</th><th>SSIM ↑</th>
+                <th>PSNR ↑</th><th>SSIM ↑</th>
+                <th>PSNR ↑</th><th>SSIM ↑</th>
               </tr>
             </thead>
             <tbody>
+              <!-- Gaussian Splatting methods -->
               <tr>
-                <td>NeRF</td>
-                <td>–</td><td>–</td><td>–</td>
-                <td>–</td><td>–</td><td>–</td>
-                <td>–</td><td>–</td><td>–</td>
-                <td>–</td><td>–</td><td>–</td>
+                <td>3DGUT</td>
+                <td>26.433</td><td>0.6915</td>
+                <td>22.860</td><td>0.5488</td>
+                <td>24.147</td><td>0.5906</td>
+                <td>27.813</td><td>0.7134</td>
+                <td>23.706</td><td>0.5130</td>
+                <td>24.856</td><td>0.5597</td>
+                <td>25.858</td><td>0.6477</td>
               </tr>
               <tr>
-                <td>Instant-NGP</td>
-                <td>–</td><td>–</td><td>–</td>
-                <td>–</td><td>–</td><td>–</td>
-                <td>–</td><td>–</td><td>–</td>
-                <td>–</td><td>–</td><td>–</td>
+                <td>Octree-GS</td>
+                <td class="u">28.451</td><td class="best">0.8009</td>
+                <td>24.402</td><td>0.7044</td>
+                <td class="u">25.593</td><td class="u">0.7269</td>
+                <td class="u">29.716</td><td class="best">0.8092</td>
+                <td class="best">26.211</td><td class="best">0.7098</td>
+                <td class="u">27.669</td><td class="u">0.7545</td>
+                <td class="u">27.677</td><td class="u">0.7771</td>
               </tr>
               <tr>
-                <td>Mip-NeRF 360</td>
-                <td>–</td><td>–</td><td>–</td>
-                <td>–</td><td>–</td><td>–</td>
-                <td>–</td><td>–</td><td>–</td>
-                <td>–</td><td>–</td><td>–</td>
+                <td>gsplat</td>
+                <td>27.242</td><td>0.7637</td>
+                <td>23.740</td><td>0.6630</td>
+                <td>25.012</td><td>0.6882</td>
+                <td>28.714</td><td>0.7827</td>
+                <td>25.431</td><td>0.6348</td>
+                <td>26.730</td><td>0.6977</td>
+                <td>26.922</td><td>0.7355</td>
               </tr>
               <tr>
-                <td>3D Gaussian Splatting</td>
-                <td>–</td><td>–</td><td>–</td>
-                <td>–</td><td>–</td><td>–</td>
-                <td>–</td><td>–</td><td>–</td>
-                <td>–</td><td>–</td><td>–</td>
+                <td>3D-MCMC</td>
+                <td>27.053</td><td>0.7194</td>
+                <td>23.385</td><td>0.5886</td>
+                <td>24.667</td><td>0.6281</td>
+                <td>28.180</td><td>0.7370</td>
+                <td>24.556</td><td>0.5566</td>
+                <td>26.134</td><td>0.6349</td>
+                <td>26.357</td><td>0.6795</td>
+              </tr>
+              <tr>
+                <td>WildGaussians</td>
+                <td>7.298</td><td>0.4037</td>
+                <td>11.498</td><td>0.3847</td>
+                <td>11.022</td><td>0.4061</td>
+                <td>8.158</td><td>0.4506</td>
+                <td>23.057</td><td>0.5129</td>
+                <td>24.422</td><td>0.5812</td>
+                <td>11.655</td><td>0.5140</td>
+              </tr>
+              <tr>
+                <td>GS-W</td>
+                <td>20.338</td><td>0.6593</td>
+                <td>17.946</td><td>0.5033</td>
+                <td>20.337</td><td>0.5588</td>
+                <td>22.819</td><td>0.7015</td>
+                <td>23.474</td><td>0.5186</td>
+                <td>23.616</td><td>0.5885</td>
+                <td>19.967</td><td>0.5889</td>
+              </tr>
+              <tr>
+                <td>H3DGS</td>
+                <td>27.990</td><td>0.7939</td>
+                <td class="u">24.412</td><td class="u">0.7076</td>
+                <td>25.488</td><td>0.7204</td>
+                <td>29.330</td><td>0.8042</td>
+                <td>25.473</td><td class="u">0.6680</td>
+                <td>27.260</td><td>0.7390</td>
+                <td>27.350</td><td>0.7685</td>
+              </tr>
+              <tr>
+                <td>3DGRT</td>
+                <td>26.702</td><td>0.7653</td>
+                <td>23.599</td><td>0.6616</td>
+                <td>24.733</td><td>0.6896</td>
+                <td>28.463</td><td>0.7828</td>
+                <td>25.317</td><td>0.6351</td>
+                <td>26.424</td><td>0.6986</td>
+                <td>26.301</td><td>0.7373</td>
+              </tr>
+              <tr>
+                <td>Taming3DGS</td>
+                <td>27.908</td><td>0.7756</td>
+                <td>24.342</td><td>0.6854</td>
+                <td>25.453</td><td>0.7012</td>
+                <td>29.179</td><td>0.7896</td>
+                <td>25.780</td><td>0.6533</td>
+                <td>27.241</td><td>0.7187</td>
+                <td class="u">27.534</td><td>0.7495</td>
+              </tr>
+              <tr>
+                <td>Scaffold-GS</td>
+                <td>25.542</td><td>0.7403</td>
+                <td>21.193</td><td>0.6280</td>
+                <td>24.661</td><td>0.6739</td>
+                <td>27.770</td><td>0.7743</td>
+                <td>24.816</td><td>0.6427</td>
+                <td>25.286</td><td>0.6887</td>
+                <td>24.612</td><td>0.7032</td>
+              </tr>
+              <tr>
+                <td>PGSR</td>
+                <td>26.697</td><td>0.7429</td>
+                <td>23.673</td><td>0.6415</td>
+                <td>24.634</td><td>0.6610</td>
+                <td>28.277</td><td>0.7585</td>
+                <td>24.148</td><td>0.5459</td>
+                <td>25.236</td><td>0.6271</td>
+                <td>26.607</td><td>0.7122</td>
+              </tr>
+              <tr>
+                <td>3DGS</td>
+                <td>27.107</td><td>0.7717</td>
+                <td>23.950</td><td>0.6742</td>
+                <td>24.970</td><td>0.6932</td>
+                <td>28.788</td><td>0.7884</td>
+                <td>25.449</td><td>0.6449</td>
+                <td>26.891</td><td>0.7097</td>
+                <td>26.987</td><td>0.7420</td>
+              </tr>
+              <!-- NeRF methods -->
+              <tr style="border-top:2px solid #e0e0e0;">
+                <td>Zip-NeRF</td>
+                <td class="best">29.582</td><td class="u">0.7953</td>
+                <td class="best">25.923</td><td class="best">0.7562</td>
+                <td class="best">27.466</td><td class="best">0.7663</td>
+                <td class="best">30.675</td><td class="u">0.8065</td>
+                <td class="u">25.943</td><td>0.6097</td>
+                <td class="best">28.844</td><td class="best">0.7742</td>
+                <td class="best">29.418</td><td class="best">0.8105</td>
+              </tr>
+              <tr>
+                <td>Tetra-NeRF</td>
+                <td>28.225</td><td>0.7333</td>
+                <td>24.057</td><td>0.6068</td>
+                <td>25.564</td><td>0.6458</td>
+                <td>29.337</td><td>0.7558</td>
+                <td>25.324</td><td>0.5976</td>
+                <td>27.096</td><td>0.6581</td>
+                <td>27.388</td><td>0.7020</td>
+              </tr>
+              <tr>
+                <td>NerfStudio</td>
+                <td>23.703</td><td>0.6389</td>
+                <td>20.275</td><td>0.4353</td>
+                <td>21.573</td><td>0.5007</td>
+                <td>24.739</td><td>0.6555</td>
+                <td>22.133</td><td>0.4449</td>
+                <td>18.809</td><td>0.4454</td>
+                <td>23.194</td><td>0.5809</td>
+              </tr>
+              <tr>
+                <td>SeaThru-NeRF</td>
+                <td>25.371</td><td>0.6274</td>
+                <td>21.421</td><td>0.4415</td>
+                <td>22.885</td><td>0.4975</td>
+                <td>26.456</td><td>0.6527</td>
+                <td>22.691</td><td>0.4429</td>
+                <td>21.488</td><td>0.4601</td>
+                <td>24.084</td><td>0.5681</td>
               </tr>
             </tbody>
           </table>
