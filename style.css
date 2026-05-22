@@ -650,6 +650,36 @@ ul { list-style: none; padding: 0; }
   color: #fff !important;
 }
 
+.btn-project {
+  background: linear-gradient(180deg, #edfaf3 0%, #c6eedd 100%);
+  color: #166534;
+  border-color: #86efac;
+}
+.btn-project:hover {
+  background: linear-gradient(180deg, #16a34a 0%, #15803d 100%);
+  color: #fff !important;
+}
+
+.btn-benchmark {
+  background: linear-gradient(180deg, #f3f0ff 0%, #ddd6fe 100%);
+  color: #5b21b6;
+  border-color: #c4b5fd;
+}
+.btn-benchmark:hover {
+  background: linear-gradient(180deg, #7c3aed 0%, #6d28d9 100%);
+  color: #fff !important;
+}
+
+.btn-poster {
+  background: linear-gradient(180deg, #fff7ed 0%, #fed7aa 100%);
+  color: #9a3412;
+  border-color: #fdba74;
+}
+.btn-poster:hover {
+  background: linear-gradient(180deg, #ea580c 0%, #c2410c 100%);
+  color: #fff !important;
+}
+
 
 /* ── SERVICES ────────────────────────────────────── */
 .service-list {
