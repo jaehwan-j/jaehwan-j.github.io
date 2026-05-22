@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MEVG — Jaehwan Jeong</title>
+  <link rel="icon" type="image/png" href="../assets/img/CV_Lab.png" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+  <link rel="stylesheet" href="project.css" />
+</head>
+<body>
+  <nav class="proj-nav">
+    <a href="../index.html" class="back-link">← Jaehwan Jeong</a>
+    <span class="proj-nav-title">MEVG</span>
+  </nav>
+
+  <main class="proj-main">
+    <div class="proj-container">
+
+      <header class="proj-header fade-in">
+        <span class="proj-tag">Generative Model · Video · Text-to-Video</span>
+        <h1>MEVG: Multi-Event Video Generation with Text-to-Video Models</h1>
+        <p class="proj-authors">
+          Gyeongrok Oh, <strong>Jaehwan Jeong</strong>, Sieun Kim, Wonmin Byeon,
+          Jinkyu Kim, Sungwoong Kim, Sangpil Kim
+        </p>
+        <p class="proj-venue">European Conference on Computer Vision <strong>(ECCV)</strong>, 2024</p>
+        <div class="proj-links">
+          <a href="../assets/paper/MEVG.pdf" class="proj-btn" target="_blank" rel="noopener">ECCV Paper</a>
+          <a href="https://arxiv.org/pdf/2312.04086" class="proj-btn proj-btn-outline" target="_blank" rel="noopener">arXiv</a>
+          <a href="https://github.com/kuai-lab/eccv24_MEVG" class="proj-btn proj-btn-outline" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </header>
+
+      <div class="proj-teaser fade-in delay-1">
+        <img src="../assets/img/ECCV24.png" alt="MEVG teaser" />
+      </div>
+
+      <section class="proj-section fade-in">
+        <h2>Abstract</h2>
+        <p>
+          Text-to-video generation models typically condition on a single text prompt, limiting their ability to
+          synthesize videos that involve multiple distinct events unfolding over time. MEVG addresses this by
+          enabling multi-event video generation: given a sequence of text descriptions, the model produces a
+          temporally coherent video in which each segment faithfully reflects its corresponding event. We propose
+          a framework that coordinates multiple text-conditioned generation stages while maintaining visual
+          continuity across event boundaries, resulting in smooth, semantically rich video narratives.
+        </p>
+      </section>
+
+      <section class="proj-section fade-in delay-1">
+        <h2>Key Contributions</h2>
+        <ul class="proj-bullets">
+          <li class="fade-in">Multi-event video generation framework conditioned on a sequence of text prompts.</li>
+          <li class="fade-in delay-1">Temporal coordination across generation stages to ensure visual continuity between events.</li>
+          <li class="fade-in delay-2">Semantically faithful synthesis for each event segment without cross-contamination.</li>
+          <li class="fade-in delay-3">Evaluation on multi-event benchmarks showing improved temporal coherence and semantic alignment.</li>
+        </ul>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="proj-footer">
+    <a href="../index.html">← Back to Homepage</a>
+    <span>&copy; <span id="year"></span> Jaehwan Jeong</span>
+  </footer>
+
+  <script src="project.js"></script>
+</body>
+</html>

@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HiVLA — Jaehwan Jeong</title>
+  <link rel="icon" type="image/png" href="../../assets/img/CV_Lab.png" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+  <link rel="stylesheet" href="../project.css" />
+  <style>
+    /* --- Affiliation badges --- */
+    .proj-affiliations {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin: 10px 0 14px;
+    }
+    .aff-badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 13px;
+      border-radius: 20px;
+    }
+    .aff-badge.ku    { background: rgba(164,30,52,0.10); color: #A41E34; }
+    .aff-badge.ucla  { background: rgba(39,116,174,0.10); color: #2774AE; }
+    .aff-badge.nvidia{ background: rgba(118,185,0,0.12);  color: #4a7700; }
+    .aff-note { font-size: 12px; color: var(--ink-light); }
+
+    /* --- Demo video --- */
+    .proj-video-wrap {
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 44px;
+      box-shadow: 0 8px 32px rgba(164,30,52,0.12);
+      background: #111;
+    }
+    .proj-video-wrap video {
+      width: 100%;
+      display: block;
+      max-height: 480px;
+    }
+    .proj-video-caption {
+      padding: 9px 14px;
+      font-size: 13px;
+      color: var(--ink-light);
+      text-align: center;
+      background: var(--crimson-pale);
+    }
+
+    /* --- Figure blocks --- */
+    .fig-block {
+      margin: 28px 0;
+    }
+    .fig-block img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+      display: block;
+    }
+    .fig-caption {
+      margin-top: 10px;
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      line-height: 1.65;
+    }
+    .fig-num {
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .fig-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 28px 0;
+    }
+    .fig-grid-2 .fig-block {
+      margin: 0;
+    }
+    .fig-subsection {
+      margin-top: 36px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .proj-section .fig-subsection:first-of-type {
+      border-top: none;
+      margin-top: 16px;
+      padding-top: 0;
+    }
+    .fig-subsection h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .fig-subsection-note {
+      font-size: 13.5px;
+      color: var(--ink-light);
+      margin-bottom: 0;
+      line-height: 1.6;
+    }
+
+    /* --- Result tables --- */
+    .result-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin: 12px 0 4px;
+    }
+    .result-table th {
+      background: var(--crimson-pale);
+      color: var(--ink);
+      font-weight: 600;
+      padding: 9px 14px;
+      text-align: left;
+      border-bottom: 2px solid var(--border);
+      font-size: 13.5px;
+    }
+    .result-table td {
+      padding: 8px 14px;
+      border-bottom: 1px solid #f0f0f0;
+      color: var(--ink-soft);
+    }
+    .result-table tr:last-child td { border-bottom: none; }
+    .result-table .row-ours td {
+      background: rgba(164,30,52,0.04);
+      color: var(--ink-soft);
+    }
+    .result-table .best { font-weight: 700; color: var(--ink); }
+    .sub-heading {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 20px 0 8px;
+    }
+    .sub-note {
+      font-size: 13.5px;
+      color: var(--ink-light);
+      margin-bottom: 10px;
+    }
+
+    /* --- Hardware grid --- */
+    .hw-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin: 12px 0;
+    }
+    .hw-item {
+      background: #fafafa;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 13.5px;
+      color: var(--ink-soft);
+    }
+    .hw-item strong {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--ink-light);
+      margin-bottom: 2px;
+    }
+
+    /* --- Table utilities --- */
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 8px 0 20px; }
+    .result-table.compact { font-size: 12px; }
+    .result-table.compact th { padding: 6px 8px; font-size: 11.5px; }
+    .result-table.compact td { padding: 5px 8px; }
+    .result-table td.u { text-decoration: underline; text-underline-offset: 3px; }
+    .row-gray td { color: #bbb !important; font-weight: 400; }
+    .row-diff td { font-weight: 700; background: rgba(164,30,52,0.04); }
+
+    /* --- Acknowledgement --- */
+    .ack-section p {
+      font-size: 13.5px;
+      color: var(--ink-light);
+      line-height: 1.76;
+    }
+    .ack-nvidia {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(118,185,0,0.08);
+      border: 1px solid rgba(118,185,0,0.25);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+    }
+    .ack-nvidia-badge {
+      flex-shrink: 0;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: #fff;
+      background: #76b900;
+      padding: 5px 14px;
+      border-radius: 6px;
+    }
+    .ack-nvidia-note {
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      line-height: 1.6;
+      margin: 0 !important;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 540px) {
+      .fig-grid-2 { grid-template-columns: 1fr; }
+      .hw-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="proj-nav">
+    <a href="../../index.html" class="back-link">← Jaehwan Jeong</a>
+    <span class="proj-nav-title">HiVLA</span>
+  </nav>
+
+  <main class="proj-main">
+    <div class="proj-container">
+
+      <!-- ── HEADER ─────────────────────────────────────────────── -->
+      <header class="proj-header fade-in">
+        <span class="proj-tag">VLA · RL · Robotics</span>
+        <h1>Your Vision-Language-Action Model Already Has Attention Heads For Path Deviation Detection</h1>
+
+        <p class="proj-authors">
+          <strong>Jaehwan Jeong</strong><sup>1,2</sup>,&thinsp;
+          Evelyn Zhu<sup>2</sup>,&thinsp;
+          Jinying Lin<sup>2</sup>,&thinsp;
+          Emmanuel Jaimes<sup>2</sup>,&thinsp;
+          Tuan-Anh Vu<sup>2</sup>,<br />
+          Jungseock Joo<sup>2,3</sup>,&thinsp;
+          Sangpil Kim<sup>1†</sup>,&thinsp;
+          M. Khalid Jawed<sup>2†</sup>
+        </p>
+
+        <div class="proj-affiliations">
+          <span class="aff-badge ku"><sup>1</sup>&nbsp;Korea University</span>
+          <span class="aff-badge ucla"><sup>2</sup>&nbsp;UCLA</span>
+          <span class="aff-badge nvidia"><sup>3</sup>&nbsp;NVIDIA</span>
+          <span class="aff-note">&thinsp;†&nbsp;Co-corresponding authors</span>
+        </div>
+
+        <p class="proj-venue">Under review, 2026</p>
+
+        <div class="proj-links">
+          <a href="https://arxiv.org/pdf/2603.13782" class="proj-btn" target="_blank" rel="noopener">arXiv</a>
+        </div>
+      </header>
+
+      <!-- ── TL;DR ──────────────────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>TL;DR</h2>
+        <p>
+          We propose an <strong>end-to-end robotic navigation framework</strong> that pairs a high-level <strong>VLA model</strong> with a continuous low-level <strong>RL policy</strong>.
+          During normal operation, the RL policy constantly ensures <strong>reactive, collision-free obstacle avoidance</strong>,
+          while highly accurate <strong>LiDAR-RGB-IMU sensor fusion (LiVO)</strong> continuously logs safe waypoints.
+          Simultaneously, by monitoring specialized <strong>internal attention heads</strong>,
+          the system detects <strong>VLA hallucinations and path deviations</strong> in real-time with <strong>zero computational overhead</strong>.
+          When a deviation occurs, the system seamlessly leverages the active RL policy to execute a <strong>direct safe recovery</strong>,
+          autonomously navigating back to the last correct path for highly reliable real-world deployment.
+          The entire pipeline is built on <strong>ROS 2</strong>, enabling modular integration and real-time operation on physical hardware.
+        </p>
+      </section>
+
+      <!-- ── DEMO VIDEO ─────────────────────────────────────────── -->
+      <div class="proj-video-wrap fade-in delay-1">
+        <video controls preload="metadata">
+          <source src="Demo_vla_rl_rollback_1.mp4#t=0.001" type="video/mp4" />
+          Your browser does not support HTML5 video.
+        </video>
+        <div class="proj-video-caption">
+          Demo: HiVLA deployed on AgileX Scout 2.0 with NVIDIA Jetson AGX Orin in real-world navigation.
+        </div>
+      </div>
+
+      <!-- ── KEY CONTRIBUTIONS ──────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>Key Contributions</h2>
+        <ul class="proj-bullets">
+          <li class="fade-in">
+            <strong>Discovery of Navigation Heads</strong> — We identify a sparse subset of attention heads
+            (H<sub>nav</sub>) in frozen VLA models that inherently capture the spatiotemporal alignment between
+            visual observations and linguistic intent, exhibiting <u>a strong correlation with the agent's navigation state</u>.
+          </li>
+          <li class="fade-in delay-1">
+            <strong>Training-Free Anomaly Detection</strong> — We propose a real-time detection framework that
+            monitors H<sub>nav</sub> dynamics with <u>zero computational overhead</u> and no trainable parameters,
+            achieving a <u>65.1% path deviation detection rate (recall)</u> and a <u>76.4% F1 score</u>
+            in R2R unseen environments, thereby effectively mitigating the model hallucination issue.
+          </li>
+          <li class="fade-in delay-2">
+            <strong>VLA–RL Integrated Pipeline</strong> — We couple the high-level anomaly signal with a continuous
+            low-level <u>RL policy</u>, ensuring robust <u>collision-free obstacle avoidance</u> during normal operation and enabling autonomous,
+            direct safe recovery upon detecting a path deviation.
+          </li>
+          <li class="fade-in delay-3">
+            <strong>Real-World Deployment</strong> — The entire end-to-end framework is deployed zero-shot onto a
+            physical robot, demonstrating <u>practical robustness and reliable embodied navigation</u> in real-world conditions.
+          </li>
+        </ul>
+      </section>
+
+      <!-- ── PROJECT DESIGN ─────────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>Project Design</h2>
+
+        <!-- Overview Architecture -->
+        <div class="fig-block fade-in">
+          <img src="Fig.2.png" alt="HiVLA system overview" />
+          <p class="fig-caption">HiVLA runs two parallel loops: the high-level NaVILA model (~0.3 Hz) interprets egocentric observations and language instructions to plan navigation waypoints, while the low-level RL policy (~10 Hz) handles reactive obstacle avoidance in real time. Localization is provided by Fast-LIVO2, which tightly fuses LiDAR, RGB, and IMU data, and the full pipeline is orchestrated over ROS 2.</p>
+        </div>
+
+        <!-- High-Level -->
+        <div class="fig-subsection">
+          <h3>1. High-Level &mdash; Path State Monitoring &amp; Anomaly Detection</h3>
+          <p class="fig-subsection-note">Training-free anomaly detection via Navigation Heads, running at ~0.3 Hz with zero computational overhead.</p>
+        </div>
+
+        <div class="fig-block fade-in delay-1">
+          <img src="Fig.3.png" alt="Four-stage anomaly detection pipeline" />
+          <p class="fig-caption">The anomaly detection pipeline operates in four stages. Expert demonstrations are first segmented into navigation phases (<em>Phase Labeling</em>), then each attention head is scored by how well its activations correlate with those phase transitions (<em>Head Selection</em>). At inference, the top-K heads are monitored for residual spikes (<em>Anomaly Detection</em>), and any flagged deviation immediately hands control to the RL recovery policy (<em>Action Policy</em>).</p>
+        </div>
+
+        <div class="fig-block fade-in">
+          <img src="Fig.4.png" alt="Navigation head spatiotemporal alignment" />
+          <p class="fig-caption">The three discovered Navigation Heads track the robot's navigation phase faithfully while on the correct path, then produce a sharp, detectable divergence the moment a deviation begins, often before the trajectory is visibly off-course.</p>
+        </div>
+
+        <div class="fig-grid-2 fade-in delay-1">
+          <div class="fig-block">
+            <img src="Fig.4_1.png" alt="Head selection grid search" />
+            <p class="fig-caption">Layer–head diagnostic score grid across NaVILA's 32 × 32 attention space, used to identify which heads carry the strongest navigation-state signal.</p>
+          </div>
+          <div class="fig-block">
+            <img src="Fig.4_2.png" alt="K ablation results" />
+            <p class="fig-caption">Ablation over K (number of selected heads). K = 3 yields the best balance between precision and recall; see the paper for the full sweep.</p>
+          </div>
+        </div>
+
+        <!-- Low-Level -->
+        <div class="fig-subsection">
+          <h3>2. Low-Level &mdash; Local Obstacle Avoidance</h3>
+          <p class="fig-subsection-note">A lightweight actor-critic RL policy trained in Isaac Lab and deployed zero-shot on physical hardware at ~10 Hz.</p>
+        </div>
+
+        <div class="fig-block fade-in">
+          <img src="Fig.5.png" alt="RL actor-critic architecture" />
+          <p class="fig-caption">The actor-critic network combines a CNN branch that encodes the local costmap for spatial obstacle awareness with an MLP branch that encodes the goal vector. Together they produce continuous velocity commands (v<sub>x</sub>, ω<sub>z</sub>) that cover both routine obstacle avoidance and emergency deviation recovery.</p>
+        </div>
+
+        <div class="fig-grid-2 fade-in delay-1">
+          <div class="fig-block">
+            <img src="Fig.6.png" alt="Isaac Lab RL training setup" style="height:400px;object-fit:contain;background:#fafafa;" />
+            <p class="fig-caption">Training is conducted in Isaac Lab using PPO. Obstacle layouts and goal positions are randomized each episode, pushing the policy to generalize beyond the specific configurations it was trained on.</p>
+          </div>
+          <div class="fig-block">
+            <img src="Fig.7.png" alt="Simulation environment at 1:1 robot scale" style="height:400px;object-fit:contain;background:#fafafa;" />
+            <p class="fig-caption">The simulated environment is built at 1:1 scale to match the physical AgileX Scout 2.0, minimizing the sim-to-real gap and enabling zero-shot transfer to the real robot.</p>
+          </div>
+        </div>
+
+        <!-- Real-World -->
+        <div class="fig-subsection">
+          <h3>3. Real-World &mdash; ROS 2 Deployment</h3>
+          <p class="fig-subsection-note">Hardware platform, ROS 2 architecture, sensor calibration, and end-to-end validation on the physical robot.</p>
+        </div>
+
+        <div class="fig-block fade-in delay-1">
+          <img src="Fig.8.png" alt="Real robot platform and Control Center WebUI" />
+          <p class="fig-caption">The system is deployed on an AgileX Scout 2.0 powered by an NVIDIA Jetson AGX Orin (64 GB). A custom Control Center WebUI provides live visualization of navigation states, anomaly signals, and logged safe waypoints throughout field experiments.</p>
+        </div>
+
+        <div class="fig-block fade-in">
+          <img src="Fig.9.png" alt="ROS 2 system architecture diagram" />
+          <p class="fig-caption">All components communicate over ROS 2 as modular nodes: VLA inference, Navigation Head monitoring, RL policy execution, Fast-LIVO2 localization, and sensor data streams each run independently at configurable rates, making the pipeline easy to extend or swap out.</p>
+        </div>
+
+        <div class="fig-block fade-in delay-1">
+          <img src="Fig.10.png" alt="ZED 2i and RS-LiDAR-32 sensor calibration" />
+          <p class="fig-caption">Extrinsic calibration between the ZED 2i stereo camera and RS-LiDAR-32 ensures precise spatial alignment — a prerequisite for the tight LiDAR-RGB-IMU fusion that Fast-LIVO2 relies on for low-drift localization.</p>
+        </div>
+
+        <div class="fig-block fade-in">
+          <img src="Fig.11.png" alt="Fast-LIVO2 vs ZED VIO trajectory comparison" style="width:75%;margin:0 auto;" />
+          <p class="fig-caption">Compared to ZED VIO (vision-only odometry), Fast-LIVO2 achieves substantially lower trajectory and yaw drift, providing the reliable pose estimates needed to accurately log safe waypoints for the recovery module.</p>
+        </div>
+
+        <div class="fig-block fade-in delay-1">
+          <img src="Fig.12.png" alt="Real-world obstacle avoidance and trajectory recovery" />
+          <p class="fig-caption">End-to-end real-world validation. On the left, the RL policy avoids both static and dynamic obstacles in a cluttered corridor. On the right, after the Navigation Heads flag a path deviation, HiVLA executes an autonomous recovery back to the last logged safe waypoint — completing the task without any human intervention.</p>
+        </div>
+
+      </section>
+
+      <!-- ── EXPERIMENTS ────────────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>Experiments</h2>
+
+        <!-- Anomaly Detection: NaVILA -->
+        <p class="sub-heading">Anomaly Detection — NaVILA Backbone</p>
+        <p class="sub-note">Training-free anomaly detection on R2R Val-Seen and Val-Unseen. All baselines require near-zero inference overhead; hyperparameters derived solely from the train split. Bold = best per column.</p>
+        <div class="table-scroll">
+          <table class="result-table compact">
+            <thead>
+              <tr>
+                <th rowspan="3" style="min-width:110px;">Method</th>
+                <th colspan="6" style="text-align:center;">R2R Val-Seen</th>
+                <th colspan="6" style="text-align:center;">R2R Val-Unseen</th>
+              </tr>
+              <tr>
+                <th colspan="3" style="text-align:center;">All Episodes</th>
+                <th colspan="3" style="text-align:center;">N→A Step-level</th>
+                <th colspan="3" style="text-align:center;">All Episodes</th>
+                <th colspan="3" style="text-align:center;">N→A Step-level</th>
+              </tr>
+              <tr>
+                <th>EDR ↑</th><th>FER ↓</th><th>Gap ↑</th>
+                <th>Prec. ↑</th><th>Rec. ↑</th><th>F1 ↑</th>
+                <th>EDR ↑</th><th>FER ↓</th><th>Gap ↑</th>
+                <th>Prec. ↑</th><th>Rec. ↑</th><th>F1 ↑</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Stagnation</td>
+                <td class="u">24.5%</td><td class="u">4.8%</td><td class="u">19.7%</td>
+                <td class="u">99.7%</td><td class="u">31.3%</td><td class="u">47.7%</td>
+                <td class="u">29.6%</td><td class="u">5.9%</td><td class="u">23.7%</td>
+                <td class="u">95.6%</td><td class="u">38.7%</td><td class="u">55.1%</td>
+              </tr>
+              <tr>
+                <td>Act. Failure</td>
+                <td>0.3%</td><td>6.0%</td><td>−5.7%</td>
+                <td>70.6%</td><td>2.8%</td><td>5.5%</td>
+                <td>1.5%</td><td>6.3%</td><td>−4.8%</td>
+                <td>77.9%</td><td>5.6%</td><td>10.4%</td>
+              </tr>
+              <tr>
+                <td>Uncertainty</td>
+                <td>1.5%</td><td class="best">0.0%</td><td>1.5%</td>
+                <td class="best">100.0%</td><td>0.8%</td><td>1.6%</td>
+                <td>1.7%</td><td class="best">0.0%</td><td>1.7%</td>
+                <td class="best">100.0%</td><td>2.1%</td><td>4.1%</td>
+              </tr>
+              <tr class="row-ours">
+                <td><strong>Ours</strong></td>
+                <td class="best">44.6%</td><td>11.7%</td><td class="best">32.9%</td>
+                <td>91.3%</td><td class="best">68.6%</td><td class="best">78.3%</td>
+                <td class="best">41.9%</td><td>9.6%</td><td class="best">32.2%</td>
+                <td>92.5%</td><td class="best">65.1%</td><td class="best">76.4%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Anomaly Detection: NaVID -->
+        <p class="sub-heading">Anomaly Detection — NaVID Backbone</p>
+        <p class="sub-note">Architecture generalizability: the same pipeline applied to NaVID, with heads and hyperparameters optimized on the R2R train split only.</p>
+        <div class="table-scroll">
+          <table class="result-table compact">
+            <thead>
+              <tr>
+                <th rowspan="3" style="min-width:110px;">Method</th>
+                <th colspan="6" style="text-align:center;">R2R Val-Seen</th>
+                <th colspan="6" style="text-align:center;">R2R Val-Unseen</th>
+              </tr>
+              <tr>
+                <th colspan="3" style="text-align:center;">All Episodes</th>
+                <th colspan="3" style="text-align:center;">N→A Step-level</th>
+                <th colspan="3" style="text-align:center;">All Episodes</th>
+                <th colspan="3" style="text-align:center;">N→A Step-level</th>
+              </tr>
+              <tr>
+                <th>EDR ↑</th><th>FER ↓</th><th>Gap ↑</th>
+                <th>Prec. ↑</th><th>Rec. ↑</th><th>F1 ↑</th>
+                <th>EDR ↑</th><th>FER ↓</th><th>Gap ↑</th>
+                <th>Prec. ↑</th><th>Rec. ↑</th><th>F1 ↑</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Stagnation</td>
+                <td>22.4%</td><td class="best">6.3%</td><td class="u">16.1%</td>
+                <td class="u">91.7%</td><td class="u">30.6%</td><td class="u">45.9%</td>
+                <td>18.1%</td><td class="best">7.0%</td><td class="u">11.1%</td>
+                <td class="u">95.6%</td><td class="u">23.9%</td><td class="u">38.2%</td>
+              </tr>
+              <tr>
+                <td>Act. Failure</td>
+                <td>3.1%</td><td class="u">6.8%</td><td>−3.7%</td>
+                <td>80.6%</td><td>3.3%</td><td>6.3%</td>
+                <td>2.6%</td><td class="u">8.8%</td><td>−6.2%</td>
+                <td>70.5%</td><td>3.7%</td><td>7.1%</td>
+              </tr>
+              <tr>
+                <td>Uncertainty</td>
+                <td class="best">37.0%</td><td>31.1%</td><td>5.9%</td>
+                <td class="best">100.0%</td><td>17.3%</td><td>29.5%</td>
+                <td class="best">28.9%</td><td>27.1%</td><td>1.8%</td>
+                <td class="best">96.1%</td><td>18.5%</td><td>31.0%</td>
+              </tr>
+              <tr class="row-ours">
+                <td><strong>Ours</strong></td>
+                <td class="u">32.3%</td><td>8.1%</td><td class="best">24.2%</td>
+                <td>79.7%</td><td class="best">57.3%</td><td class="best">66.7%</td>
+                <td class="u">27.9%</td><td>12.1%</td><td class="best">15.8%</td>
+                <td>77.8%</td><td class="best">53.2%</td><td class="best">63.2%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- RL Obstacle Avoidance -->
+        <p class="sub-heading">RL Obstacle Avoidance — Navigation Performance by Distance</p>
+        <p class="sub-note">SR: Success Rate ↑, CR: Collision Rate ↓, TR: Timeout Rate ↓. Bold = best, underline = second best per column.</p>
+        <div class="table-scroll">
+          <table class="result-table compact">
+            <thead>
+              <tr>
+                <th rowspan="2" style="min-width:80px;">Method</th>
+                <th colspan="3" style="text-align:center;">5 m</th>
+                <th colspan="3" style="text-align:center;">10 m</th>
+                <th colspan="3" style="text-align:center;">15 m</th>
+                <th colspan="3" style="text-align:center;">20 m</th>
+              </tr>
+              <tr>
+                <th>SR ↑</th><th>CR ↓</th><th>TR ↓</th>
+                <th>SR ↑</th><th>CR ↓</th><th>TR ↓</th>
+                <th>SR ↑</th><th>CR ↓</th><th>TR ↓</th>
+                <th>SR ↑</th><th>CR ↓</th><th>TR ↓</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>APF</td>
+                <td>60.6%</td><td class="best">5.9%</td><td>33.6%</td>
+                <td>48.4%</td><td class="u">10.0%</td><td>41.6%</td>
+                <td class="u">41.4%</td><td class="u">10.0%</td><td>48.6%</td>
+                <td class="u">39.3%</td><td class="u">8.8%</td><td>51.9%</td>
+              </tr>
+              <tr>
+                <td>DWA</td>
+                <td>17.6%</td><td>75.8%</td><td class="u">6.6%</td>
+                <td>16.2%</td><td>82.8%</td><td class="best">1.0%</td>
+                <td>21.1%</td><td>78.1%</td><td class="best">0.8%</td>
+                <td>16.2%</td><td>81.8%</td><td class="best">2.0%</td>
+              </tr>
+              <tr>
+                <td>MPPI</td>
+                <td>3.7%</td><td>90.0%</td><td class="best">6.3%</td>
+                <td>2.7%</td><td>91.6%</td><td class="u">5.7%</td>
+                <td>1.6%</td><td>91.6%</td><td>6.8%</td>
+                <td>2.0%</td><td>91.4%</td><td class="u">6.6%</td>
+              </tr>
+              <tr>
+                <td>TEB</td>
+                <td class="u">65.6%</td><td>24.0%</td><td>10.4%</td>
+                <td class="u">51.0%</td><td>40.6%</td><td>8.4%</td>
+                <td>41.0%</td><td>50.4%</td><td>8.6%</td>
+                <td>31.1%</td><td>59.4%</td><td>9.6%</td>
+              </tr>
+              <tr class="row-ours">
+                <td><strong>Ours</strong></td>
+                <td class="best">83.8%</td><td class="u">6.4%</td><td>9.8%</td>
+                <td class="best">88.1%</td><td class="best">4.1%</td><td>7.8%</td>
+                <td class="best">90.0%</td><td class="best">5.1%</td><td class="u">4.9%</td>
+                <td class="best">86.7%</td><td class="best">5.5%</td><td>7.8%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Computational Efficiency: VLA -->
+        <p class="sub-heading">Computational Efficiency — VLA Module</p>
+        <p class="sub-note">Overhead of integrating the path deviation detection module. Evaluated on a single NVIDIA RTX 6000 Ada GPU. No additional VRAM is required.</p>
+        <table class="result-table">
+          <thead>
+            <tr>
+              <th>Configuration</th>
+              <th>Total Time</th>
+              <th>Alloc. VRAM</th>
+              <th>Peak VRAM</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>NaVILA (Baseline)</td>
+              <td>583.5 ms</td><td>17,145.6 MB</td><td>18,730.3 MB</td>
+            </tr>
+            <tr>
+              <td>NaVILA + Ours</td>
+              <td>603.3 ms</td><td>17,145.6 MB</td><td>18,730.3 MB</td>
+            </tr>
+            <tr class="row-diff">
+              <td><strong>Difference</strong></td>
+              <td><strong>+19.8 ms</strong></td>
+              <td><strong>0.0 MB</strong></td>
+              <td><strong>0.0 MB</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Computational Efficiency: RL -->
+        <p class="sub-heading">Computational Efficiency — RL Policy</p>
+        <p class="sub-note">Lightweight CNN + MLP (4.89 M parameters). Evaluated on a single NVIDIA RTX 6000 Ada GPU.</p>
+        <table class="result-table">
+          <thead>
+            <tr>
+              <th>Configuration</th>
+              <th>Total Time</th>
+              <th>Alloc. VRAM</th>
+              <th>Peak VRAM</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row-ours">
+              <td><strong>Ours (RL Policy)</strong></td>
+              <td class="best">0.2 ms</td>
+              <td>26.9 MB</td>
+              <td>27.9 MB</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- End-to-End Jetson -->
+        <p class="sub-heading">End-to-End Inference — Jetson AGX Orin</p>
+        <p class="sub-note">VLA inference time over 100 runs. Compared to standalone NaVILA, the full HiVLA pipeline adds only ~0.55 s, which includes localization and path deviation monitoring.</p>
+        <table class="result-table">
+          <thead>
+            <tr>
+              <th>Configuration</th>
+              <th>Mean (s)</th>
+              <th>Median (s)</th>
+              <th>Min / Max (s)</th>
+              <th>Stdev (s)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>NaVILA</td>
+              <td>3.488</td><td>3.489</td><td>3.461 / 3.509</td><td>0.008</td>
+            </tr>
+            <tr class="row-gray">
+              <td>NaVILA + RL</td>
+              <td>3.488</td><td>3.489</td><td>3.461 / 3.509</td><td>0.008</td>
+            </tr>
+            <tr>
+              <td>NaVILA + ZED VIO + RL</td>
+              <td>4.584</td><td>4.588</td><td>4.525 / 4.645</td><td>0.025</td>
+            </tr>
+            <tr>
+              <td>NaVILA + Fast-LIVO2 + RL</td>
+              <td>3.971</td><td>3.968</td><td>3.918 / 4.046</td><td>0.024</td>
+            </tr>
+            <tr class="row-ours">
+              <td><strong>Ours</strong></td>
+              <td>4.022</td><td>4.020</td><td>3.910 / 4.120</td><td>0.041</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- State Estimation Accuracy -->
+        <p class="sub-heading">State Estimation — Accuracy Comparison</p>
+        <p class="sub-note">Fast-LIVO2 vs. ZED VIO over 10 indoor and 10 outdoor runs. Drift measured relative to a fixed AprilTag. Bold = lower (better) error per metric.</p>
+        <div class="table-scroll">
+          <table class="result-table compact">
+            <thead>
+              <tr>
+                <th rowspan="2">Env.</th>
+                <th rowspan="2">Method</th>
+                <th colspan="2" style="text-align:center;">GT Pose Error (m)</th>
+                <th colspan="2" style="text-align:center;">GT Yaw Error (°)</th>
+                <th colspan="2" style="text-align:center;">Static Drift (cm)</th>
+              </tr>
+              <tr>
+                <th>Median</th><th>Mean</th>
+                <th>Median</th><th>Mean</th>
+                <th>Median</th><th>Mean</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td rowspan="2"><strong>Indoor</strong></td>
+                <td>Fast-LIVO2</td>
+                <td class="best">0.082</td><td class="best">0.331</td>
+                <td class="best">0.640</td><td class="best">4.463</td>
+                <td>0.080</td><td>0.080</td>
+              </tr>
+              <tr>
+                <td>ZED VIO</td>
+                <td>0.276</td><td>0.413</td>
+                <td>1.345</td><td>5.850</td>
+                <td class="best">0.025</td><td class="best">0.053</td>
+              </tr>
+              <tr>
+                <td rowspan="2"><strong>Outdoor</strong></td>
+                <td>Fast-LIVO2</td>
+                <td class="best">0.375</td><td class="best">0.731</td>
+                <td class="best">6.690</td><td class="best">13.469</td>
+                <td class="best">0.065</td><td>0.166</td>
+              </tr>
+              <tr>
+                <td>ZED VIO</td>
+                <td>0.839</td><td>4.589</td>
+                <td>8.560</td><td>22.314</td>
+                <td>0.070</td><td class="best">0.124</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- State Estimation Resource -->
+        <p class="sub-heading">State Estimation — Resource Overhead (Jetson AGX Orin)</p>
+        <table class="result-table">
+          <thead>
+            <tr>
+              <th>Odometry</th>
+              <th>CPU Usage (%)</th>
+              <th>GPU Usage (%)</th>
+              <th>Memory (MB)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ZED VIO</td>
+              <td>+19.4</td><td>+42.6</td><td>+577.3</td>
+            </tr>
+            <tr>
+              <td>Fast-LIVO2</td>
+              <td>+26.0</td><td>+13.3</td><td>+367.3</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Deployment Hardware -->
+        <p class="sub-heading">Deployment Hardware</p>
+        <div class="hw-grid">
+          <div class="hw-item"><strong>Robot Platform</strong>AgileX Scout 2.0</div>
+          <div class="hw-item"><strong>Edge Compute</strong>NVIDIA Jetson AGX Orin 64GB</div>
+          <div class="hw-item"><strong>Camera</strong>ZED 2i Stereo Camera</div>
+          <div class="hw-item"><strong>LiDAR</strong>RS-LiDAR-32</div>
+        </div>
+      </section>
+
+      <!-- ── DEMO VIDEOS ───────────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>Demo Videos</h2>
+
+        <!-- RL subsection -->
+        <div class="fig-subsection">
+          <h3>1. RL — Local Obstacle Avoidance</h3>
+          <p class="fig-subsection-note">The low-level RL policy running standalone: dynamic obstacles (left) and static obstacles in an orchard-like environment (right).</p>
+        </div>
+
+        <div class="fig-block fade-in">
+          <video controls preload="metadata" style="width:100%;border-radius:10px;display:block;">
+            <source src="Demo_rl_standalone_dynamic.mp4#t=0.001" type="video/mp4" />
+          </video>
+          <p class="fig-caption">Dynamic obstacle avoidance — the RL policy reactively steers around moving obstacles in real time.</p>
+        </div>
+
+        <div class="fig-block fade-in">
+          <video controls preload="metadata" style="width:100%;border-radius:10px;display:block;">
+            <source src="Demo_rl_standalone_orchard.mp4#t=0.001" type="video/mp4" />
+          </video>
+          <p class="fig-caption">Static obstacle avoidance — navigating through a densely cluttered orchard-like environment.</p>
+        </div>
+
+        <!-- VLA+RL subsection -->
+        <div class="fig-subsection">
+          <h3>2. VLA + RL — Full Pipeline</h3>
+          <p class="fig-subsection-note">End-to-end HiVLA: VLA-guided navigation with RL obstacle avoidance and autonomous path recovery.</p>
+        </div>
+
+        <div class="fig-block fade-in">
+          <video controls preload="metadata" style="width:100%;border-radius:10px;display:block;">
+            <source src="Demo_vla_rl_2.mp4#t=0.001" type="video/mp4" />
+          </video>
+          <p class="fig-caption">VLA-guided navigation with continuous RL obstacle avoidance in a real-world corridor.</p>
+        </div>
+
+        <div class="fig-block fade-in">
+          <video controls preload="metadata" style="width:100%;border-radius:10px;display:block;">
+            <source src="Demo_vla_rl_rollback_2.mp4#t=0.001" type="video/mp4" />
+          </video>
+          <p class="fig-caption">Path deviation detected via Navigation Heads — the RL policy autonomously recovers to the last safe waypoint.</p>
+        </div>
+
+      </section>
+
+      <!-- ── CONCLUSION ─────────────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>Conclusion</h2>
+        <p>
+          We present a robust framework for VLA-based robot navigation that successfully monitors the navigation state
+          and detects path deviations by strictly utilizing model-intrinsic signals. Extensive evaluations across
+          diverse VLA architectures and datasets demonstrate that our approach effectively addresses the VLA
+          hallucination issue at near-zero additional computational cost. Going beyond anomaly detection, we seamlessly
+          integrated this high-level signal with a continuous low-level RL policy to actively prevent obstacle
+          collisions during movement. Ultimately, this end-to-end framework was deployed onto a physical robot
+          without any environment-specific re-identification, confirming its safe and reliable operation in
+          real-world environments.
+        </p>
+      </section>
+
+      <!-- ── ACKNOWLEDGEMENT ────────────────────────────────────── -->
+      <section class="proj-section ack-section fade-in">
+        <h2>Acknowledgement</h2>
+        <div class="ack-nvidia">
+          <span class="ack-nvidia-badge">NVIDIA</span>
+          <p class="ack-nvidia-note">Hardware support and research collaboration provided by the <strong>NVIDIA Academic Hardware Grant Program</strong>.</p>
+        </div>
+        <p>
+          This work was also supported by the USDA National Institute of Food &amp; Agriculture (Grant No.&nbsp;2024-67021-42528),
+          the Korea Creative Content Agency (KOCCA) under Grant RS-2024-00345025,
+          and the Institute of Information &amp; Communications Technology Planning &amp; Evaluation (IITP)
+          funded by the Korean government (MSIT) under Grant No.&nbsp;RS-2019-II190079.
+        </p>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="proj-footer">
+    <a href="../../index.html">← Back to Homepage</a>
+    <span>&copy; <span id="year"></span> Jaehwan Jeong</span>
+  </footer>
+
+  <script src="../project.js"></script>
+</body>
+</html>
