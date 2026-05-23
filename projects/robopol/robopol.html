@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robotic Pollination — Jaehwan (Jay) Jeong</title>
+  <link rel="icon" type="image/png" href="../../assets/img/CV_Lab.png" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+  <link rel="stylesheet" href="../project.css" />
+  <style>
+    /* --- Affiliation badges --- */
+    .proj-affiliations {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin: 10px 0 14px;
+    }
+    .aff-badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 13px;
+      border-radius: 20px;
+    }
+    .aff-badge.ku   { background: rgba(164,30,52,0.10); color: #A41E34; }
+    .aff-badge.ucla { background: rgba(39,116,174,0.10); color: #2774AE; }
+    .aff-note { font-size: 12px; color: var(--ink-light); }
+
+    /* --- Figure blocks --- */
+    .fig-block {
+      margin: 28px 0;
+    }
+    .fig-block img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+      display: block;
+    }
+    .fig-caption {
+      margin-top: 10px;
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      line-height: 1.65;
+    }
+    .fig-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 28px 0;
+    }
+    .fig-grid-2 .fig-block {
+      margin: 0;
+    }
+    .fig-subsection {
+      margin-top: 36px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .proj-section .fig-subsection:first-of-type {
+      border-top: none;
+      margin-top: 16px;
+      padding-top: 0;
+    }
+    .fig-subsection h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .fig-subsection-note {
+      font-size: 13.5px;
+      color: var(--ink-light);
+      margin-bottom: 0;
+      line-height: 1.6;
+    }
+
+    /* --- Acknowledgement --- */
+    .ack-section p {
+      font-size: 13.5px;
+      color: var(--ink-light);
+      line-height: 1.76;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 540px) {
+      .fig-grid-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="proj-nav">
+    <a href="../../index.html" class="back-link">← Jaehwan (Jay) Jeong</a>
+    <span class="proj-nav-title">Robotic Pollination</span>
+  </nav>
+
+  <main class="proj-main">
+    <div class="proj-container">
+
+      <!-- ── HEADER ─────────────────────────────────────────────── -->
+      <header class="proj-header fade-in">
+        <span class="proj-tag">Robotics · Simulation · Precision Agriculture</span>
+        <h1>Vision-Guided Targeted Grasping and Vibration for Robotic Pollination in Controlled Environments</h1>
+
+        <p class="proj-authors">
+          <strong>Jaehwan Jeong</strong><sup>1,2,∗</sup>,&thinsp;
+          Tuan-Anh Vu<sup>2,∗</sup>,&thinsp;
+          Radha Lahoti<sup>2</sup>,&thinsp;
+          Jiawen Wang<sup>2</sup>,&thinsp;
+          Vivek Alumootil<sup>3</sup>,<br />
+          Sangpil Kim<sup>1,†</sup>,&thinsp;
+          M. Khalid Jawed<sup>2,†</sup>
+          <br /><span style="font-size:12px; color:#aaa;">∗ Equal contribution &nbsp;·&nbsp; † Co-corresponding authors</span>
+        </p>
+
+        <div class="proj-affiliations">
+          <span class="aff-badge ku"><sup>1</sup>&nbsp;Korea University</span>
+          <span class="aff-badge ucla"><sup>2</sup>&nbsp;UCLA (MAE)</span>
+          <span class="aff-badge ucla"><sup>3</sup>&nbsp;UCLA (CS)</span>
+        </div>
+
+        <p class="proj-venue">Under review, 2026</p>
+
+        <div class="proj-links">
+          <a href="https://arxiv.org/pdf/2510.06146" class="proj-btn" target="_blank" rel="noopener">arXiv</a>
+        </div>
+      </header>
+
+      <!-- ── TEASER ──────────────────────────────────────────────── -->
+      <div class="proj-teaser fade-in delay-1">
+        <img src="../../assets/img/Tomato.gif" alt="Robotic pollination demo" />
+      </div>
+
+      <!-- ── TL;DR ──────────────────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>TL;DR</h2>
+        <p>
+          We present the <strong>first robotic system</strong> to jointly integrate
+          <strong>vision-guided grasping</strong> and <strong>physics-based vibration modeling</strong>
+          for automated precision pollination in controlled environments.
+          From RGB-D images, we reconstruct a <strong>3D plant skeleton</strong> and plan
+          <strong>obstacle-free 7-DoF grasp poses</strong> along the main stem.
+          A <strong>Discrete Elastic Rod (DER)</strong> model then simulates flower dynamics
+          to optimize vibration parameters before physical execution.
+          End-to-end experiments across <strong>40 trials on 10 morphologically diverse plants</strong>
+          demonstrate a <strong>92.5% main-stem grasping success rate</strong>,
+          validating a practical path toward scalable automated crop pollination.
+        </p>
+      </section>
+
+      <!-- ── KEY CONTRIBUTIONS ──────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>Key Contributions</h2>
+        <ul class="proj-bullets">
+          <li class="fade-in">
+            <strong>First robotic pollination system</strong> jointly integrating vision-based grasp planning
+            and physics-based vibration modeling, validated by a
+            <u>92.5% main-stem grasping success rate</u> across 40 real-world trials.
+          </li>
+          <li class="fade-in delay-1">
+            <strong>Novel 3D plant skeletonization technique</strong> enabling
+            <u>7-DoF obstacle-free grasp pose selection</u> for safe and generalizable
+            robotic manipulation of soft, flexible plant stems.
+          </li>
+          <li class="fade-in delay-2">
+            <strong>Physics-based Discrete Elastic Rod (DER) model</strong>
+            experimentally validated to predict how flower dynamics vary with actuation parameters,
+            enabling a <u>Sim-to-Real optimization framework</u> for identifying optimal pollination strategies.
+          </li>
+        </ul>
+      </section>
+
+      <!-- ── PROJECT DESIGN ─────────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>Project Design</h2>
+
+        <!-- Fig.1 -->
+        <div class="fig-subsection">
+          <h3>1. Overview Pipeline</h3>
+        </div>
+
+        <div class="fig-block fade-in">
+          <img src="Fig.1.png" alt="Robotic pollination system overview" />
+          <p class="fig-caption">End-to-end overview of the robotic pollination pipeline. RGB-D images and 7-DoF end-effector poses are fused via hand-eye calibration into a 3D point cloud, which is processed through skeletonization to extract the plant structure and identify the optimal grasp point. Discrete Elastic Rod simulations guide vibration parameter selection, after which the robot executes the full grasp-and-shake sequence.</p>
+        </div>
+
+        <p class="fig-subsection-note" style="margin-top:0; margin-bottom:28px;">
+          The pipeline operates in two sequential stages.
+          In the <strong>vision-based stage</strong>, the manipulator captures approximately 30 RGB-D images from
+          pre-defined viewpoints. Each frame is semantically masked using <strong>Grounding DINO</strong> and
+          <strong>SAM2</strong> to isolate plant pixels, back-projected into a partial point cloud,
+          and fused into a globally consistent 3D model via ICP alignment.
+          A topological <strong>3D thinning algorithm</strong> then extracts a one-voxel-thick skeleton,
+          from which the main stem is identified and an optimal grasp point is selected
+          using a collision-aware approach vector.
+          In the <strong>simulation stage</strong>, the extracted skeleton feeds into a
+          Discrete Elastic Rod model to predict how flower amplitude varies with grasp location
+          and vibration parameters, enabling offline optimization before physical execution.
+          (See <a href="https://arxiv.org/pdf/2510.06146" target="_blank" rel="noopener" style="color:var(--crimson);">arXiv</a>.)
+        </p>
+
+        <!-- Fig.2 -->
+        <div class="fig-subsection">
+          <h3>2. Elastic Rod Simulation</h3>
+        </div>
+
+        <div class="fig-block fade-in delay-1">
+          <img src="Fig.2.png" alt="PyDiSMech simulation workflow" />
+          <p class="fig-caption">Simulation workflow using PyDiSMech. The plant is modeled as a network of elastic rods discretized from the extracted skeleton. A moving boundary condition at the grasp point mimics vibration actuation, and the Discrete Elastic Rod method computes the resulting flower dynamics.</p>
+        </div>
+
+        <p class="fig-subsection-note" style="margin-top:0; margin-bottom:28px;">
+          To predict flower motion before physical deployment, we model the plant as a
+          <strong>network of one-dimensional elastic rods</strong> using the
+          <strong>Discrete Elastic Rod (DER)</strong> framework via PyDiSMech.
+          Each rod segment captures stretching and bending deformations
+          (twisting is negligible during stem vibration and excluded for efficiency).
+          A <strong>time-varying displacement boundary condition</strong> at the grasp node
+          mimics the robot's vibration actuation, propagating through the skeleton to the flowers.
+          Material parameters (density, Young's modulus) were estimated from physical measurements
+          and cantilever deflection experiments.
+          Simulations reproduced experimental flower amplitude trends with strong correlation
+          (<strong>r &gt; 0.96</strong>) and moderate amplitude discrepancy (~45%),
+          providing <strong>useful predictive insight</strong> for optimizing pollination parameters
+          prior to real-world execution.
+        </p>
+
+        <!-- Fig.3: diagonal layout -->
+        <div class="fig-subsection">
+          <h3>3. Robotic Execution</h3>
+        </div>
+
+        <div class="fade-in delay-1" style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto; gap:24px 32px; margin:28px 0;">
+          <img src="Fig.3.png" alt="Robotic pollination execution stages" style="grid-column:1; grid-row:1; width:100%; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,0.10); display:block; align-self:start;" />
+          <p class="fig-subsection-note" style="grid-column:2; grid-row:1; margin:0; align-self:center;">
+            <strong>Perception:</strong> The manipulator scans the plant from ~30 viewpoints (≈45 s),
+            constructing a 3D skeleton and computing a 7-DoF grasp pose (≈30 s).
+            Semantic masking via Grounding DINO and SAM2 isolates plant structure from background.
+            <br /><br />
+            <strong>Reaching:</strong> Using the planned grasp pose, the arm navigates a
+            collision-free trajectory to approach the main stem.
+            The approach vector is selected as the direction of least obstruction from nearby branches,
+            ensuring a clean, unobstructed grasp.
+          </p>
+          <p class="fig-subsection-note" style="grid-column:1; grid-row:2; margin:0; align-self:start;">
+            <strong>Shaking:</strong> The soft gripper closes on the stem and applies
+            controlled vibrations at DER-optimized frequency and amplitude (≈15 s).
+            The entire end-to-end trial takes approximately <strong>90 seconds per plant</strong>.
+            After each trial, the extracted skeleton updates the DER model to refine
+            the actuation strategy for subsequent experiments.
+          </p>
+        </div>
+
+      </section>
+
+      <!-- ── EXPERIMENTS ────────────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>Experiments</h2>
+
+        <!-- Fig.4 + Fig.5 side by side -->
+        <div class="fig-grid-2 fade-in delay-1">
+          <div class="fig-block">
+            <img src="Fig.4.png" alt="3D skeletonization on diverse plants" style="height:400px; object-fit:contain; background:#fafafa;" />
+            <p class="fig-caption">Generalizability of the skeletonization pipeline, evaluated on 10 morphologically diverse plants (8 Pepper, 2 Tomato). A single parameter set successfully generates well-aligned skeletons across all specimens.</p>
+          </div>
+          <div class="fig-block">
+            <img src="Fig.5.png" alt="Real-world grasping success and failure cases" style="height:400px; object-fit:contain; background:#fafafa;" />
+            <p class="fig-caption">Qualitative results of end-to-end grasping experiments. The system achieved a <strong>92.5% main-stem grasping success rate</strong> over 40 trials. Failures (7.5%) resulted from branch/leaf grasps or 7-DoF pose errors.</p>
+          </div>
+        </div>
+
+        <p>
+          We evaluated the system on <strong>10 morphologically diverse plants</strong>
+          (8 pepper, 2 tomato) with 40 total trials, approaching each plant from four 90° viewpoints.
+          The skeletonization pipeline successfully generated well-aligned skeletons for all specimens
+          under a single parameter set.
+          End-to-end grasping achieved <strong>96.9% success on pepper</strong> and
+          <strong>75.0% on tomato</strong>, with the lower tomato rate attributed to its more complex
+          branching geometry. Vibration transfer experiments confirmed a clear positive correlation
+          between applied and flower amplitudes (r &gt; 0.96), and showed that flower amplitude
+          decreases as the grasp point moves closer to the flower — consistent with reduced effective
+          vibrating length.
+        </p>
+
+      </section>
+
+      <!-- ── CONCLUSION ─────────────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>Conclusion</h2>
+        <p>
+          We presented the <strong>first robotic system to jointly integrate vision-guided grasping
+          and physics-based vibration modeling</strong> for autonomous pollination in controlled
+          environment agriculture. Our framework leverages 3D skeletonization for precise grasp planning
+          and a Discrete Elastic Rod model to optimize vibration parameters, maximizing pollination
+          efficiency. Simulations matched experimental flower motion trends with strong correlation,
+          providing <strong>useful predictive insight</strong> for vibration-based pollination planning.
+          Physical end-to-end experiments validated the feasibility of this model-driven approach,
+          achieving a <strong>92.5% main-stem grasping success rate</strong> and demonstrating
+          that the optimal vibration amplitude can be reliably applied for successful robotic pollination.
+          Future work will focus on scaling the system for full greenhouse deployment, refining
+          vibration parameters against measured fruit-set rates, and extending adaptability to other crops.
+        </p>
+      </section>
+
+      <!-- ── ACKNOWLEDGEMENT ────────────────────────────────────── -->
+      <section class="proj-section ack-section fade-in">
+        <h2>Acknowledgement</h2>
+        <p>
+          This work was supported in part by the U.S. Department of Agriculture
+          (Grant No.&nbsp;2024-67021-42528 and 2022-67022-37021),
+          the Korea Creative Content Agency (KOCCA) under Grant RS-2024-00345025,
+          and the Institute of Information &amp; Communications Technology Planning &amp; Evaluation (IITP)
+          funded by the Korean government (MSIT) under Grant No.&nbsp;RS-2019-II190079.
+        </p>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="proj-footer">
+    <a href="../../index.html">← Back to Homepage</a>
+    <span>&copy; <span id="year"></span> Jaehwan (Jay) Jeong</span>
+  </footer>
+
+  <script src="../project.js"></script>
+</body>
+</html>
