@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FaceShield — Jaehwan (Jay) Jeong</title>
+  <link rel="icon" type="image/png" href="../../assets/img/CV_Lab.png" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+  <link rel="stylesheet" href="../project.css" />
+  <style>
+    /* --- Affiliation badges --- */
+    .proj-affiliations {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin: 10px 0 14px;
+    }
+    .aff-badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 13px;
+      border-radius: 20px;
+    }
+    .aff-badge.ku      { background: rgba(164,30,52,0.10);  color: #A41E34; }
+    .aff-badge.kaist   { background: rgba(0,91,170,0.10);   color: #005BAA; }
+    .aff-badge.samsung { background: rgba(20,40,160,0.10);  color: #1428A0; }
+    .aff-note { font-size: 12px; color: var(--ink-light); }
+
+    /* --- Figure blocks --- */
+    .fig-block {
+      margin: 28px 0;
+    }
+    .fig-block img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+      display: block;
+    }
+    .fig-caption {
+      margin-top: 10px;
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      line-height: 1.65;
+    }
+    .fig-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 28px 0;
+    }
+    .fig-grid-2 .fig-block {
+      margin: 0;
+    }
+    .fig-subsection {
+      margin-top: 36px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .proj-section .fig-subsection:first-of-type {
+      border-top: none;
+      margin-top: 16px;
+      padding-top: 0;
+    }
+    .fig-subsection h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .fig-subsection-note {
+      font-size: 13.5px;
+      color: var(--ink-light);
+      margin-bottom: 0;
+      line-height: 1.6;
+    }
+
+    /* --- Acknowledgement --- */
+    .ack-section p {
+      font-size: 13.5px;
+      color: var(--ink-light);
+      line-height: 1.76;
+    }
+    .ack-samsung {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(20,40,160,0.06);
+      border: 1px solid rgba(20,40,160,0.20);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+    }
+    .ack-samsung-badge {
+      flex-shrink: 0;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: #fff;
+      background: #1428A0;
+      padding: 5px 14px;
+      border-radius: 6px;
+    }
+    .ack-samsung-note { font-size: 13.5px; color: var(--ink-soft); line-height: 1.6; margin: 0 !important; }
+
+    /* --- Responsive --- */
+    @media (max-width: 540px) {
+      .fig-grid-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="proj-nav">
+    <a href="../../index.html" class="back-link">← Jaehwan (Jay) Jeong</a>
+    <span class="proj-nav-title">FaceShield</span>
+  </nav>
+
+  <main class="proj-main">
+    <div class="proj-container">
+
+      <!-- ── HEADER ─────────────────────────────────────────────── -->
+      <header class="proj-header fade-in">
+        <span class="proj-tag">Computer Vision · Adversarial Attack · Deepfake Defense</span>
+        <h1>FaceShield: Defending Facial Image against Deepfake Threats</h1>
+
+        <p class="proj-authors">
+          <strong>Jaehwan Jeong</strong><sup>1</sup>,&thinsp;
+          Sumin In<sup>1</sup>,&thinsp;
+          Sieun Kim<sup>1</sup>,&thinsp;
+          Hannie Shin<sup>1</sup>,&thinsp;
+          Jongheon Jeong<sup>1</sup>,<br />
+          Sang Ho Yoon<sup>2</sup>,&thinsp;
+          Jaewook Chung<sup>3</sup>,&thinsp;
+          Sangpil Kim<sup>1,∗</sup>
+          <br /><span style="font-size:12px; color:#aaa;">∗ Corresponding author</span>
+        </p>
+
+        <div class="proj-affiliations">
+          <span class="aff-badge ku"><sup>1</sup>&nbsp;Korea University</span>
+          <span class="aff-badge kaist"><sup>2</sup>&nbsp;KAIST</span>
+          <span class="aff-badge samsung"><sup>3</sup>&nbsp;Samsung Research</span>
+        </div>
+
+        <p class="proj-venue">Under review, 2025</p>
+
+        <div class="proj-links">
+          <a href="https://arxiv.org/abs/2412.09921" class="proj-btn" target="_blank" rel="noopener">arXiv</a>
+          <a href="https://github.com/kuai-lab/iccv25_faceshield" class="proj-btn" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </header>
+
+      <!-- ── TEASER ──────────────────────────────────────────────── -->
+      <div class="proj-teaser fade-in delay-1">
+        <img src="Fig.1.png" alt="FaceShield protects facial images from deepfake face swapping" />
+      </div>
+
+      <!-- ── TL;DR ──────────────────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>TL;DR</h2>
+        <p>
+          We propose <strong>FaceShield</strong>, a proactive defense that embeds <strong>invisible adversarial noise</strong>
+          into facial images to prevent deepfake face swapping.
+          Unlike prior work that attacks the noising/denoising process in diffusion models,
+          we directly disrupt the <strong>cross-attention conditioning mechanism</strong>
+          through which a source face drives the deepfake output.
+          Combined with <strong>facial feature extractor attacks</strong> on MTCNN and ArcFace
+          for broad GAN-based model coverage, and an <strong>enhanced noise update</strong>
+          using Gaussian blur and low-pass filtering for imperceptibility,
+          FaceShield achieves <strong>state-of-the-art protection across 6 deepfake models</strong>
+          while producing less visible noise than all baselines.
+        </p>
+      </section>
+
+      <!-- ── KEY CONTRIBUTIONS ──────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>Key Contributions</h2>
+        <ul class="proj-bullets">
+          <li class="fade-in">
+            <strong>First deepfake defense targeting diffusion model conditioning</strong> — we attack
+            the <u>cross-attention pathway</u> where a source face is embedded as key-value pairs,
+            a mechanism that prior image-protection methods entirely overlooked.
+          </li>
+          <li class="fade-in delay-1">
+            <strong>Broad transferability across architectures</strong> — by jointly attacking
+            <u>MTCNN face detection</u> and <u>ArcFace identity extraction</u>,
+            FaceShield disrupts both DM-based and GAN-based deepfake pipelines
+            under a single unified perturbation.
+          </li>
+          <li class="fade-in delay-2">
+            <strong>Enhanced noise imperceptibility and robustness</strong> — a novel update rule
+            combining <u>Sobel-guided Gaussian blur</u> and <u>DCT low-pass filtering</u>
+            produces noise that is less visible than baselines and remains effective under JPEG compression.
+          </li>
+        </ul>
+      </section>
+
+      <!-- ── PROJECT DESIGN ─────────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>Project Design</h2>
+
+        <!-- Fig.2: Motivation -->
+        <div class="fig-subsection">
+          <h3>Motivation: Why Prior Defenses Fail on Deepfakes</h3>
+        </div>
+
+        <div class="fig-block fade-in">
+          <img src="Fig.2.png" alt="Diffusion-based image editing vs deepfake process" />
+          <p class="fig-caption">Image editing (left) uses a single image as query Q and modifies it via a text prompt. Deepfake (right) uses two images: the target is the query Q while the source face enters as key K and value V through cross-attention. Prior defenses attack the query path (left), but deepfake models condition on the source via K-V pairs — a fundamentally different pathway that FaceShield targets directly.</p>
+        </div>
+
+        <!-- Fig.3: Overall Architecture -->
+        <div class="fig-subsection">
+          <h3>1. Overall Architecture</h3>
+        </div>
+
+        <div class="fig-block fade-in delay-1">
+          <img src="Fig.3.png" alt="FaceShield overall pipeline" />
+          <p class="fig-caption">FaceShield consists of three components: (i) <strong>Conditioned Face Attack</strong> disrupts the cross-attention conditioning used by DM-based deepfakes; (ii) <strong>Facial Feature Extractor Attack</strong> targets MTCNN and ArcFace to cover GAN-based models; (iii) <strong>Enhanced Noise Update</strong> applies Gaussian blur and low-pass filtering to improve imperceptibility and compression robustness.</p>
+        </div>
+
+        <!-- Conditioned Face Attack -->
+        <div class="fig-subsection">
+          <h3>2. Conditioned Face Attack</h3>
+        </div>
+
+        <p class="fig-subsection-note" style="margin-top:8px; margin-bottom:28px;">
+          When a source face conditions a DM-based deepfake, it is first projected through a
+          <strong>CLIP Image Projector</strong> into an embedding, then injected into the denoising UNet
+          as key K and value V in cross-attention layers.
+          FaceShield attacks this pathway via two losses:
+          (1) <strong>Face Projector Attack</strong> — maximizes L₁ divergence at the projector's top layer,
+          causing the source face to be embedded with incorrect information;
+          (2) <strong>Attention Disruption Attack</strong> — targets <strong>mid-layer cross-attention</strong>
+          by maximizing attention map variance (A<sub>var</sub>) in low-variance regions,
+          preventing the source face features from properly conditioning the generation.
+        </p>
+
+        <!-- Facial Feature Extractor Attack: MTCNN + ArcFace -->
+        <div class="fig-subsection">
+          <h3>3. Facial Feature Extractor Attack</h3>
+        </div>
+
+        <div class="fig-grid-2 fade-in delay-1">
+          <div class="fig-block">
+            <img src="Fig.7.png" alt="MTCNN cascade architecture" />
+            <p class="fig-caption">MTCNN's three-stage cascade (P-Net → R-Net → O-Net) processes multi-scale image pyramids for face detection and landmark localization, making it the most widely adopted front-end across deepfake systems.</p>
+          </div>
+          <div class="fig-block">
+            <img src="Fig.8.png" alt="MTCNN attack overview" />
+            <p class="fig-caption">The MTCNN attack selects appropriate resizing scales, applies both BILINEAR and Area-based downsampling in parallel, and targets the P-Net probability output — achieving robustness across all common interpolation modes and model versions.</p>
+          </div>
+        </div>
+
+        <p class="fig-subsection-note" style="margin-top:0; margin-bottom:28px;">
+          To cover <strong>GAN-based deepfake models</strong>, FaceShield also targets two common facial feature extractors.
+          The <strong>MTCNN attack</strong> disrupts face detection by adversarially perturbing the
+          P-Net bounding box probabilities across multiple scales, ensuring the noise remains
+          effective regardless of interpolation mode or framework (PyTorch / TensorFlow).
+          The <strong>ArcFace identity attack</strong> uses cosine similarity loss to induce
+          divergence in identity embeddings, preventing the source face from being recognized
+          and reproduced by face-swapping models.
+        </p>
+
+        <!-- Enhanced Noise Update -->
+        <div class="fig-subsection">
+          <h3>4. Enhanced Noise Update</h3>
+        </div>
+
+        <div class="fig-grid-2 fade-in delay-1">
+          <div class="fig-block">
+            <img src="Fig.9.png" alt="Low-pass filtering in frequency domain" />
+            <p class="fig-caption">The adversarial noise is transformed to the frequency domain via 8×8 DCT patches. Only low-frequency components are retained using a Luminance Quantization Table mask, then reconstructed via IDCT — concentrating the perturbation in a range that survives JPEG compression.</p>
+          </div>
+          <div class="fig-block">
+            <img src="Fig.11.png" alt="Gaussian blur reduces boundary noise visibility" />
+            <p class="fig-caption">Sobel filtering identifies pixels with large intensity differences; Gaussian blur is selectively applied to those edge regions during noise update. This eliminates high-contrast boundaries in the perturbation that would otherwise be perceptible to the human eye.</p>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ── EXPERIMENTS ────────────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>Experiments</h2>
+
+        <!-- Qualitative: ours on diverse models -->
+        <div class="fig-subsection">
+          <h3>Protection across Diverse Deepfake Models</h3>
+        </div>
+
+        <div class="fig-block fade-in delay-1">
+          <img src="Fig.4.png" alt="Qualitative results across 6 deepfake models" />
+          <p class="fig-caption">FaceShield protects against 6 deepfake models — DiffFace, DiffSwap, FaceSwap, IP-Adapter (DM-based, orange box) and SimSwap, InfoSwap (GAN-based, blue box). DM-based outputs exhibit distorted artifacts; GAN-based outputs generate unrelated identities, both preventing source face reproduction.</p>
+        </div>
+
+        <!-- Qualitative: comparison with baselines -->
+        <div class="fig-subsection">
+          <h3>Comparison with State-of-the-Art Baselines</h3>
+        </div>
+
+        <div class="fig-block fade-in">
+          <img src="Fig.5.png" alt="Qualitative comparison with AdvDM, Mist, PhotoGuard, SDST" />
+          <p class="fig-caption">Compared to AdvDM, Mist, PhotoGuard, and SDST on IP-Adapter deepfakes, prior methods fail to disrupt the deepfake output. FaceShield causes visible generation failures, confirming that directly attacking the conditioning pathway is essential for DM-based deepfake protection.</p>
+        </div>
+
+        <!-- Ablation: mid-layer -->
+        <div class="fig-subsection">
+          <h3>Ablation: Mid-Layer Cross-Attention Targeting</h3>
+        </div>
+
+        <div class="fig-block fade-in delay-1">
+          <img src="Fig.6.png" alt="Layer selection ablation for conditioned face attack" />
+          <p class="fig-caption">Targeting the mid-layers of the denoising UNet produces the strongest protection compared to using only down/up layers or all layers. Mid-layer cross-attention carries the highest sensitivity to the conditioning source face, making it the most effective attack target.</p>
+        </div>
+
+        <!-- Face detection disruption -->
+        <div class="fig-subsection">
+          <h3>Face Detection Disruption — MTCNN</h3>
+        </div>
+
+        <div class="fig-block fade-in">
+          <img src="Fig.10.png" alt="MTCNN face detection failure under FaceShield" />
+          <p class="fig-caption">Under FaceShield's perturbation, MTCNN fails to produce high-confidence bounding boxes at the P-Net stage (top row), preventing detected face crops from propagating to downstream deepfake models — compared to the unprotected case where detection succeeds cleanly (bottom row).</p>
+        </div>
+
+        <!-- Robustness: LPF across purifications -->
+        <div class="fig-subsection">
+          <h3>Robustness to Image Purification</h3>
+        </div>
+
+        <div class="fig-block fade-in delay-1">
+          <img src="Fig.12.png" alt="Robustness across JPEG, bit reduction, and resizing" />
+          <p class="fig-caption">FaceShield's low-frequency noise concentration keeps performance close to lossless (PNG) across JPEG compression (Q90/75/50), bit reduction (8-bit/3-bit), and resizing (75%/50%, BILINEAR/INTER AREA) — consistently outperforming all baselines on both ISM and PSNR metrics.</p>
+        </div>
+
+        <div class="fig-grid-2 fade-in">
+          <div class="fig-block">
+            <img src="Fig.13.png" alt="JPEG compression and bit reduction qualitative" />
+            <p class="fig-caption">Qualitative results after JPEG compression (Q90, Q75, Q50) and bit reduction (8-bit, 3-bit). Protection degrades minimally relative to the lossless PNG baseline.</p>
+          </div>
+          <div class="fig-block">
+            <img src="Fig.14.png" alt="Resizing robustness qualitative" />
+            <p class="fig-caption">Qualitative results after 75% and 50% resizing (BILINEAR and INTER AREA). The perturbation remains effective across both interpolation modes.</p>
+          </div>
+        </div>
+
+        <!-- Transferability -->
+        <div class="fig-subsection">
+          <h3>Transferability across IP-Adapter Variants</h3>
+        </div>
+
+        <div class="fig-block fade-in delay-1">
+          <img src="Fig.15.png" alt="Transferability to IP-Adapter variants" />
+          <p class="fig-caption">FaceShield generalizes across eight IP-Adapter variants (ControlNet, ImageVariation, Multi-modal prompts, Plus/PlusXL, FaceID, FaceIDPlus) — demonstrating robust transferability not only across structurally different architectures but also across models sharing the same backbone with different pre-trained weights.</p>
+        </div>
+
+      </section>
+
+      <!-- ── CONCLUSION ─────────────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>Conclusion</h2>
+        <p>
+          We propose <strong>FaceShield</strong>, a proactive invisible protection technique against
+          diverse deepfake systems. By targeting the <strong>cross-attention conditioning pathway</strong>
+          specific to DM-based deepfakes — a mechanism overlooked by prior defenses — and jointly
+          disrupting common <strong>facial feature extractors</strong> used by GAN-based models,
+          FaceShield achieves broad architectural coverage under a single perturbation.
+          An enhanced noise update combining <strong>Gaussian blur</strong> and
+          <strong>low-pass filtering</strong> further ensures that protection is both imperceptible
+          and robust to JPEG compression and resizing purification.
+          Extensive experiments confirm state-of-the-art protection with the lowest noise visibility
+          among all baselines, while requiring significantly less computation time and memory.
+        </p>
+      </section>
+
+      <!-- ── ACKNOWLEDGEMENT ────────────────────────────────────── -->
+      <section class="proj-section ack-section fade-in">
+        <h2>Acknowledgement</h2>
+        <div class="ack-samsung">
+          <span class="ack-samsung-badge">Samsung Research</span>
+          <p class="ack-samsung-note">Research collaboration with <strong>Samsung Research</strong> (Jaewook Chung), contributing to the development of proactive deepfake defense technology.</p>
+        </div>
+        <p>
+          This work was supported by the Korea Creative Content Agency (KOCCA)
+          under Grant RS-2024-00345025 and RS-2024-00348469,
+          the National Research Foundation of Korea (NRF) funded by MSIT (RS-2025-00521602),
+          and the Institute of Information &amp; Communications Technology Planning &amp; Evaluation (IITP)
+          funded by the Korean government (MSIT)
+          under Grant No.&nbsp;RS-2019-II190079 and IITP-2025-RS-2024-00436857.
+        </p>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="proj-footer">
+    <a href="../../index.html">← Back to Homepage</a>
+    <span>&copy; <span id="year"></span> Jaehwan (Jay) Jeong</span>
+  </footer>
+
+  <script src="../project.js"></script>
+</body>
+</html>
