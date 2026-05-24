@@ -135,16 +135,16 @@
       <section class="proj-section fade-in">
         <h2>TL;DR</h2>
         <p>
-          We present the <strong>first robotic system</strong> to jointly integrate
-          <strong>vision-guided grasping</strong> and <strong>physics-based vibration modeling</strong>
-          for automated precision pollination in controlled environments.
-          From RGB-D images, we reconstruct a <strong>3D plant skeleton</strong> and plan
-          <strong>obstacle-free 7-DoF grasp poses</strong> along the main stem.
+          We present the <strong>first end-to-end robotic system</strong> for automated precision pollination,
+          utilizing an <strong>eye-in-hand RGB-D sensor</strong> mounted on a robotic manipulator.
+          After reconstructing a 3D plant model from the captured data, we apply a
+          <strong>machine-learning-based 3D skeletonization</strong> technique to extract the plant's structure.
           A <strong>Discrete Elastic Rod (DER)</strong> model then simulates flower dynamics
-          to optimize vibration parameters before physical execution.
-          End-to-end experiments across <strong>40 trials on 10 morphologically diverse plants</strong>
-          demonstrate a <strong>92.5% main-stem grasping success rate</strong>,
-          validating a practical path toward scalable automated crop pollination.
+          to optimize vibration parameters prior to real-world execution,
+          guiding the robotic arm to grasp the optimal point and shake the stem.
+          Across 40 trials on 10 morphologically diverse plants, the system achieved a
+          <strong>92.5% main-stem grasping success rate</strong>,
+          demonstrating a practical and scalable approach to automated crop pollination.
         </p>
       </section>
 
@@ -181,74 +181,31 @@
 
         <div class="fig-block fade-in">
           <img src="Fig.1.png" alt="Robotic pollination system overview" />
-          <p class="fig-caption">End-to-end overview of the robotic pollination pipeline. RGB-D images and 7-DoF end-effector poses are fused via hand-eye calibration into a 3D point cloud, which is processed through skeletonization to extract the plant structure and identify the optimal grasp point. Discrete Elastic Rod simulations guide vibration parameter selection, after which the robot executes the full grasp-and-shake sequence.</p>
+          <p class="fig-caption">This is an end-to-end overview of the robotic pollination pipeline. RGB-D images and 7-DoF end-effector poses are fused via <strong>hand-eye calibration</strong> into a 3D point cloud, which is processed through <strong>skeletonization</strong> to extract the plant structure and identify the optimal grasp point. <strong>Discrete Elastic Rod</strong> simulations guide vibration parameter selection, after which the robot executes the full grasp-and-shake sequence.</p>
         </div>
 
-        <p class="fig-subsection-note" style="margin-top:0; margin-bottom:28px;">
-          The pipeline operates in two sequential stages.
-          In the <strong>vision-based stage</strong>, the manipulator captures approximately 30 RGB-D images from
-          pre-defined viewpoints. Each frame is semantically masked using <strong>Grounding DINO</strong> and
-          <strong>SAM2</strong> to isolate plant pixels, back-projected into a partial point cloud,
-          and fused into a globally consistent 3D model via ICP alignment.
-          A topological <strong>3D thinning algorithm</strong> then extracts a one-voxel-thick skeleton,
-          from which the main stem is identified and an optimal grasp point is selected
-          using a collision-aware approach vector.
-          In the <strong>simulation stage</strong>, the extracted skeleton feeds into a
-          Discrete Elastic Rod model to predict how flower amplitude varies with grasp location
-          and vibration parameters, enabling offline optimization before physical execution.
-          (See <a href="https://arxiv.org/pdf/2510.06146" target="_blank" rel="noopener" style="color:var(--crimson);">arXiv</a>.)
-        </p>
-
-        <!-- Fig.2 -->
+        <!-- Fig.2 + Fig.3: diagonal layout -->
         <div class="fig-subsection">
-          <h3>2. Elastic Rod Simulation</h3>
-        </div>
-
-        <div class="fig-block fade-in delay-1">
-          <img src="Fig.2.png" alt="PyDiSMech simulation workflow" />
-          <p class="fig-caption">Simulation workflow using PyDiSMech. The plant is modeled as a network of elastic rods discretized from the extracted skeleton. A moving boundary condition at the grasp point mimics vibration actuation, and the Discrete Elastic Rod method computes the resulting flower dynamics.</p>
-        </div>
-
-        <p class="fig-subsection-note" style="margin-top:0; margin-bottom:28px;">
-          To predict flower motion before physical deployment, we model the plant as a
-          <strong>network of one-dimensional elastic rods</strong> using the
-          <strong>Discrete Elastic Rod (DER)</strong> framework via PyDiSMech.
-          Each rod segment captures stretching and bending deformations
-          (twisting is negligible during stem vibration and excluded for efficiency).
-          A <strong>time-varying displacement boundary condition</strong> at the grasp node
-          mimics the robot's vibration actuation, propagating through the skeleton to the flowers.
-          Material parameters (density, Young's modulus) were estimated from physical measurements
-          and cantilever deflection experiments.
-          Simulations reproduced experimental flower amplitude trends with strong correlation
-          (<strong>r &gt; 0.96</strong>) and moderate amplitude discrepancy (~45%),
-          providing <strong>useful predictive insight</strong> for optimizing pollination parameters
-          prior to real-world execution.
-        </p>
-
-        <!-- Fig.3: diagonal layout -->
-        <div class="fig-subsection">
-          <h3>3. Robotic Execution</h3>
+          <h3>2. Simulation &amp; Robotic Execution</h3>
         </div>
 
         <div class="fade-in delay-1" style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto; gap:24px 32px; margin:28px 0;">
-          <img src="Fig.3.png" alt="Robotic pollination execution stages" style="grid-column:1; grid-row:1; width:100%; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,0.10); display:block; align-self:start;" />
+          <img src="Fig.2.png" alt="PyDiSMech simulation workflow" style="grid-column:1; grid-row:1; width:100%; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,0.10); display:block; align-self:start;" />
           <p class="fig-subsection-note" style="grid-column:2; grid-row:1; margin:0; align-self:center;">
-            <strong>Perception:</strong> The manipulator scans the plant from ~30 viewpoints (≈45 s),
-            constructing a 3D skeleton and computing a 7-DoF grasp pose (≈30 s).
-            Semantic masking via Grounding DINO and SAM2 isolates plant structure from background.
-            <br /><br />
-            <strong>Reaching:</strong> Using the planned grasp pose, the arm navigates a
-            collision-free trajectory to approach the main stem.
-            The approach vector is selected as the direction of least obstruction from nearby branches,
-            ensuring a clean, unobstructed grasp.
+            Using <strong>PyDiSMech</strong>, the plant is modeled as a
+            <strong>network of elastic rods</strong> discretized from the extracted skeleton.
+            A time-varying displacement at the grasp node mimics vibration actuation,
+            propagating through the skeleton to the flowers.
+            Simulations reproduced experimental flower amplitude trends with strong correlation
+            (<strong>r &gt; 0.96</strong>), providing useful predictive insight
+            for optimizing pollination parameters prior to real-world execution.
           </p>
-          <p class="fig-subsection-note" style="grid-column:1; grid-row:2; margin:0; align-self:start;">
-            <strong>Shaking:</strong> The soft gripper closes on the stem and applies
-            controlled vibrations at DER-optimized frequency and amplitude (≈15 s).
-            The entire end-to-end trial takes approximately <strong>90 seconds per plant</strong>.
-            After each trial, the extracted skeleton updates the DER model to refine
-            the actuation strategy for subsequent experiments.
+          <p class="fig-subsection-note" style="grid-column:1; grid-row:2; margin:0; align-self:center;">
+            The manipulator scans the plant to construct a <strong>3D skeleton</strong> and compute
+            an <strong>obstacle-free grasp pose</strong>, then navigates a collision-free trajectory to the main stem.
+            The soft gripper closes on the stem and applies <strong>DER-optimized vibrations</strong> for pollination.
           </p>
+          <img src="Fig.3.png" alt="Robotic pollination execution stages" style="grid-column:2; grid-row:2; width:100%; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,0.10); display:block; align-self:start;" />
         </div>
 
       </section>
@@ -261,26 +218,13 @@
         <div class="fig-grid-2 fade-in delay-1">
           <div class="fig-block">
             <img src="Fig.4.png" alt="3D skeletonization on diverse plants" style="height:400px; object-fit:contain; background:#fafafa;" />
-            <p class="fig-caption">Generalizability of the skeletonization pipeline, evaluated on 10 morphologically diverse plants (8 Pepper, 2 Tomato). A single parameter set successfully generates well-aligned skeletons across all specimens.</p>
+            <p class="fig-caption">The generalizability of the skeletonization pipeline, evaluated on <strong>10 morphologically diverse plants</strong> (8 peppers, 2 tomatoes). A single parameter set successfully generated well-aligned skeletons across all specimens.</p>
           </div>
           <div class="fig-block">
             <img src="Fig.5.png" alt="Real-world grasping success and failure cases" style="height:400px; object-fit:contain; background:#fafafa;" />
-            <p class="fig-caption">Qualitative results of end-to-end grasping experiments. The system achieved a <strong>92.5% main-stem grasping success rate</strong> over 40 trials. Failures (7.5%) resulted from branch/leaf grasps or 7-DoF pose errors.</p>
+            <p class="fig-caption">Qualitative results of the end-to-end grasping experiments show that the system achieved a <strong>92.5% main-stem grasping success rate</strong> over 40 trials. Failures (7.5%) resulted from branch/leaf grasps or 7-DoF pose errors.</p>
           </div>
         </div>
-
-        <p>
-          We evaluated the system on <strong>10 morphologically diverse plants</strong>
-          (8 pepper, 2 tomato) with 40 total trials, approaching each plant from four 90° viewpoints.
-          The skeletonization pipeline successfully generated well-aligned skeletons for all specimens
-          under a single parameter set.
-          End-to-end grasping achieved <strong>96.9% success on pepper</strong> and
-          <strong>75.0% on tomato</strong>, with the lower tomato rate attributed to its more complex
-          branching geometry. Vibration transfer experiments confirmed a clear positive correlation
-          between applied and flower amplitudes (r &gt; 0.96), and showed that flower amplitude
-          decreases as the grasp point moves closer to the flower — consistent with reduced effective
-          vibrating length.
-        </p>
 
       </section>
 
@@ -290,8 +234,8 @@
         <p>
           We presented the <strong>first robotic system to jointly integrate vision-guided grasping
           and physics-based vibration modeling</strong> for autonomous pollination in controlled
-          environment agriculture. Our framework leverages 3D skeletonization for precise grasp planning
-          and a Discrete Elastic Rod model to optimize vibration parameters, maximizing pollination
+          environment agriculture. Our framework leverages <strong>3D skeletonization</strong> for precise grasp planning
+          and a <strong>Discrete Elastic Rod</strong> model to optimize vibration parameters, maximizing pollination
           efficiency. Simulations matched experimental flower motion trends with strong correlation,
           providing <strong>useful predictive insight</strong> for vibration-based pollination planning.
           Physical end-to-end experiments validated the feasibility of this model-driven approach,
