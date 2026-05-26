@@ -104,6 +104,40 @@
     }
     .ack-samsung-note { font-size: 13.5px; color: var(--ink-soft); line-height: 1.6; margin: 0 !important; }
 
+    /* --- Result tables --- */
+    .result-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin: 12px 0 4px;
+    }
+    .result-table th {
+      background: var(--crimson-pale);
+      color: var(--ink);
+      font-weight: 600;
+      padding: 9px 14px;
+      text-align: left;
+      border-bottom: 2px solid var(--border);
+      font-size: 13.5px;
+    }
+    .result-table td {
+      padding: 8px 14px;
+      border-bottom: 1px solid #f0f0f0;
+      color: var(--ink-soft);
+    }
+    .result-table tr:last-child td { border-bottom: none; }
+    .result-table .row-ours td {
+      background: rgba(164,30,52,0.04);
+      color: var(--ink-soft);
+    }
+    .result-table .best { font-weight: 700; color: var(--ink); }
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 8px 0 20px; }
+    .result-table.compact { font-size: 12px; }
+    .result-table.compact th { padding: 6px 8px; font-size: 11.5px; white-space: nowrap; }
+    .result-table.compact td { padding: 5px 8px; }
+    .result-table td.u { text-decoration: underline; text-underline-offset: 3px; }
+    .row-section td { font-weight: 600; background: rgba(164,30,52,0.06); color: var(--ink); text-align: center; border-top: 2px solid var(--border); }
+
     /* --- Responsive --- */
     @media (max-width: 540px) {
       .fig-grid-2 { grid-template-columns: 1fr; }
@@ -168,11 +202,12 @@
           By computing gradients at this exact pathway, the method achieves maximized disruption
           with only minimal perturbation.
           Defense coverage is further extended to GAN-based architectures by jointly attacking
-          common <strong>facial feature extractors</strong> (MTCNN and ArcFace).
-          To prevent protective noise from being erased by image compression or purification,
-          an <strong>enhanced noise update</strong> combining low-pass filtering and Gaussian blur
-          is introduced, keeping perturbations both robust and imperceptible.
-          FaceShield achieves <strong>state-of-the-art protection across 6 deepfake models</strong>
+          common <strong>facial feature extractors</strong>.
+          To prevent the protective noise from being erased by image compression or purification,
+          we apply <strong>Low-Pass Filtering (LPF)</strong>, and to eliminate visually noticeable
+          noise boundaries, we incorporate a <strong>Gaussian blur</strong>.
+          As a result, FaceShield achieves <strong>state-of-the-art protection against the latest DM-based deepfake models</strong>,
+          while also exhibiting strong <strong>transferability to GAN-based architectures</strong>,
           with lower noise visibility than all baselines.
         </p>
       </section>
@@ -182,20 +217,21 @@
         <h2>Key Contributions</h2>
         <ul class="proj-bullets">
           <li class="fade-in">
-            <strong>First deepfake defense targeting diffusion model conditioning</strong> — we attack
-            the <u>cross-attention pathway</u> where a source face is embedded as key-value pairs,
-            a mechanism that prior image-protection methods entirely overlooked.
+            <strong>First defense directly targeting the diffusion deepfake core pathway</strong> — we disrupt the
+            <u>Key-Value pairs in cross-attention</u> where the source face is synthesized,
+            a mechanism entirely overlooked by prior defenses.
+            Defense coverage is further extended to GAN-based models by targeting
+            <u>facial feature extractors</u> under a single unified perturbation.
           </li>
           <li class="fade-in delay-1">
-            <strong>Broad transferability across architectures</strong> — by jointly attacking
-            <u>MTCNN face detection</u> and <u>ArcFace identity extraction</u>,
-            FaceShield disrupts both DM-based and GAN-based deepfake pipelines
-            under a single unified perturbation.
+            <strong>Enhanced imperceptibility via Gaussian blur</strong> — by <u>smoothing out</u> harsh differences
+            between adjacent noise pixels, visual artifacts are reduced,
+            making the protective noise <u>far less noticeable to the human eye</u>.
           </li>
           <li class="fade-in delay-2">
-            <strong>Enhanced noise imperceptibility and robustness</strong> — a novel update rule
-            combining <u>Sobel-guided Gaussian blur</u> and <u>DCT low-pass filtering</u>
-            produces noise that is less visible than baselines and remains effective under JPEG compression.
+            <strong>Robustness against purification via Low-Pass Filtering</strong> — by concentrating noise
+            in <u>low-frequency components</u>, the defense remains highly effective even after
+            <u>JPEG compression, bit reduction, and resizing</u>.
           </li>
         </ul>
       </section>
@@ -211,76 +247,96 @@
 
         <div class="fig-block fade-in">
           <img src="Fig.2.png" alt="Diffusion-based image editing vs deepfake process" />
-          <p class="fig-caption">Image editing (left) uses a single image as query Q and modifies it via a text prompt. Deepfake (right) uses two images: the target is the query Q while the source face enters as key K and value V through cross-attention. Prior defenses attack the query path (left), but deepfake models condition on the source via K-V pairs — a fundamentally different pathway that FaceShield targets directly.</p>
+        </div>
+        <div class="fade-in" style="display:flex; flex-direction:column; gap:14px; margin:20px 0;">
+          <div>
+            <p style="font-size:14px; font-weight:700; color:var(--ink); margin:0 0 4px;">(a) Image Editing</p>
+            <p style="font-size:13.5px; line-height:1.75; color:var(--ink-soft); margin:0;">
+              Uses a single image as query <strong>Q</strong> and modifies it via a text prompt.
+              Prior defenses are designed around this pathway.
+            </p>
+          </div>
+          <div>
+            <p style="font-size:14px; font-weight:700; color:var(--ink); margin:0 0 4px;">(b) Deepfake</p>
+            <p style="font-size:13.5px; line-height:1.75; color:var(--ink-soft); margin:0;">
+              Uses two images where the target serves as query <strong>Q</strong>,
+              while the source face enters as Key <strong>K</strong> and Value <strong>V</strong> through cross-attention.
+              This is a <strong>fundamentally different conditioning pathway</strong> that prior defenses entirely overlook.
+            </p>
+            <p style="font-size:13.5px; line-height:1.75; color:var(--ink-soft); margin:14px 0 0;">
+              <strong>FaceShield</strong> directly disrupts this <strong><u>K-V mechanism</u></strong>,
+              targeting the bottleneck where the source identity is injected into the output.
+            </p>
+          </div>
         </div>
 
         <!-- Fig.3: Overall Architecture -->
         <div class="fig-subsection">
-          <h3>1. Overall Architecture</h3>
+          <h3>Overall Architecture</h3>
         </div>
 
         <div class="fig-block fade-in delay-1">
           <img src="Fig.3.png" alt="FaceShield overall pipeline" />
-          <p class="fig-caption">FaceShield consists of three components: (i) <strong>Conditioned Face Attack</strong> disrupts the cross-attention conditioning used by DM-based deepfakes; (ii) <strong>Facial Feature Extractor Attack</strong> targets MTCNN and ArcFace to cover GAN-based models; (iii) <strong>Enhanced Noise Update</strong> applies Gaussian blur and low-pass filtering to improve imperceptibility and compression robustness.</p>
         </div>
 
-        <!-- Conditioned Face Attack -->
-        <div class="fig-subsection">
-          <h3>2. Conditioned Face Attack</h3>
+        <!-- (i) Conditioned Face Attack -->
+        <div style="margin-top:24px;">
+          <p style="font-size:14px; font-weight:700; color:var(--ink); margin:0 0 8px;">
+            (i) <strong>Conditioned Face Attack</strong>
+          </p>
+          <p class="fig-subsection-note">
+            When a source face conditions a DM-based deepfake, it is projected through a
+            <strong>CLIP Image Projector</strong> and injected into the denoising UNet as key K and value V.
+            FaceShield attacks this pathway via two modules:
+            (1) <strong>Face Projector Attack</strong> — corrupts the source face embedding at the projector output.
+            (2) <strong>Attention Disruption Attack</strong> — disrupts <strong>mid-layer cross-attention</strong>
+            to prevent source face features from conditioning the generation.
+          </p>
         </div>
 
-        <p class="fig-subsection-note" style="margin-top:8px; margin-bottom:28px;">
-          When a source face conditions a DM-based deepfake, it is first projected through a
-          <strong>CLIP Image Projector</strong> into an embedding, then injected into the denoising UNet
-          as key K and value V in cross-attention layers.
-          FaceShield attacks this pathway via two losses:
-          (1) <strong>Face Projector Attack</strong> — maximizes L₁ divergence at the projector's top layer,
-          causing the source face to be embedded with incorrect information;
-          (2) <strong>Attention Disruption Attack</strong> — targets <strong>mid-layer cross-attention</strong>
-          by maximizing attention map variance (A<sub>var</sub>) in low-variance regions,
-          preventing the source face features from properly conditioning the generation.
-        </p>
-
-        <!-- Facial Feature Extractor Attack: MTCNN + ArcFace -->
-        <div class="fig-subsection">
-          <h3>3. Facial Feature Extractor Attack</h3>
-        </div>
-
-        <div class="fig-grid-2 fade-in delay-1">
-          <div class="fig-block">
-            <img src="Fig.7.png" alt="MTCNN cascade architecture" />
-            <p class="fig-caption">MTCNN's three-stage cascade (P-Net → R-Net → O-Net) processes multi-scale image pyramids for face detection and landmark localization, making it the most widely adopted front-end across deepfake systems.</p>
-          </div>
-          <div class="fig-block">
-            <img src="Fig.8.png" alt="MTCNN attack overview" />
-            <p class="fig-caption">The MTCNN attack selects appropriate resizing scales, applies both BILINEAR and Area-based downsampling in parallel, and targets the P-Net probability output — achieving robustness across all common interpolation modes and model versions.</p>
+        <!-- (ii) Facial Feature Extractor Attack -->
+        <div style="margin-top:24px;">
+          <p style="font-size:14px; font-weight:700; color:var(--ink); margin:0 0 8px;">
+            (ii) <strong>Facial Feature Extractor Attack</strong>
+          </p>
+          <div class="fade-in delay-1" style="margin-top:12px;">
+            <div class="fig-block">
+              <img src="Fig.7.png" alt="MTCNN cascade architecture" />
+              <p class="fig-caption"><strong>MTCNN</strong>'s three-stage cascade (P-Net → R-Net → O-Net) for <strong>face detection</strong> and landmark localization.</p>
+            </div>
+            <div class="fig-block">
+              <img src="Fig.8.png" alt="MTCNN attack overview" />
+              <p class="fig-caption">The <strong>MTCNN attack</strong> adversarially perturbs the P-Net bounding box probabilities across multiple scales, ensuring the noise disrupts face detection regardless of interpolation mode or framework (PyTorch / TensorFlow). By combining this with an <strong>ArcFace identity attack</strong>, FaceShield performs a joint <strong>ensemble attack</strong> that broadly covers GAN-based deepfake models under a single perturbation.</p>
+            </div>
           </div>
         </div>
 
-        <p class="fig-subsection-note" style="margin-top:0; margin-bottom:28px;">
-          To cover <strong>GAN-based deepfake models</strong>, FaceShield also targets two common facial feature extractors.
-          The <strong>MTCNN attack</strong> disrupts face detection by adversarially perturbing the
-          P-Net bounding box probabilities across multiple scales, ensuring the noise remains
-          effective regardless of interpolation mode or framework (PyTorch / TensorFlow).
-          The <strong>ArcFace identity attack</strong> uses cosine similarity loss to induce
-          divergence in identity embeddings, preventing the source face from being recognized
-          and reproduced by face-swapping models.
-        </p>
-
-        <!-- Enhanced Noise Update -->
-        <div class="fig-subsection">
-          <h3>4. Enhanced Noise Update</h3>
-        </div>
-
-        <div class="fig-grid-2 fade-in delay-1">
-          <div class="fig-block">
-            <img src="Fig.9.png" alt="Low-pass filtering in frequency domain" />
-            <p class="fig-caption">The adversarial noise is transformed to the frequency domain via 8×8 DCT patches. Only low-frequency components are retained using a Luminance Quantization Table mask, then reconstructed via IDCT — concentrating the perturbation in a range that survives JPEG compression.</p>
+        <!-- (iii) Enhanced Noise Update -->
+        <div style="margin-top:24px;">
+          <p style="font-size:14px; font-weight:700; color:var(--ink); margin:0 0 8px;">
+            (iii) <strong>Enhanced Noise Update</strong>
+          </p>
+          <div class="fade-in delay-1" style="display:grid; grid-template-columns:1fr 1fr; gap:24px 32px; margin:12px 0;">
+            <img src="Fig.9.png" alt="Low-pass filtering in frequency domain" style="width:100%; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,0.10); display:block; align-self:start;" />
+            <p class="fig-subsection-note" style="margin:0; align-self:center;">
+              The adversarial noise is transformed to the frequency domain via <strong>8×8 DCT patches</strong>.
+              Using the <strong>Luminance Quantization Table</strong> — the same mask applied during actual JPEG compression —
+              only <strong>low-frequency components</strong> are retained, then reconstructed via IDCT.
+              This concentrates the perturbation in a band that survives JPEG compression without being discarded.
+            </p>
           </div>
-          <div class="fig-block">
-            <img src="Fig.11.png" alt="Gaussian blur reduces boundary noise visibility" />
-            <p class="fig-caption">Sobel filtering identifies pixels with large intensity differences; Gaussian blur is selectively applied to those edge regions during noise update. This eliminates high-contrast boundaries in the perturbation that would otherwise be perceptible to the human eye.</p>
+          <div class="fade-in delay-1" style="display:grid; grid-template-columns:1fr 1fr; gap:24px 32px; margin:12px 0;">
+            <p class="fig-subsection-note" style="margin:0; align-self:center;">
+              Even under a bounded noise budget (e.g., δ = 12/255), adjacent pixels can receive opposite extremes
+              (e.g., +12 and −12), creating a local contrast gap of up to 24 that becomes visually conspicuous.
+            </p>
+            <img src="Fig.11.png" alt="Gaussian blur reduces boundary noise visibility" style="width:100%; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,0.10); display:block; align-self:start;" />
           </div>
+          <p class="fig-subsection-note fade-in" style="margin-top:16px;">
+            <strong>Sobel filtering</strong> identifies these boundary regions where neighboring noise values diverge sharply,
+            and <strong>Gaussian blur</strong> is selectively applied to smooth them out,
+            maximizing imperceptibility without affecting the overall perturbation strength.
+          </p>
         </div>
 
       </section>
@@ -296,27 +352,142 @@
 
         <div class="fig-block fade-in delay-1">
           <img src="Fig.4.png" alt="Qualitative results across 6 deepfake models" />
-          <p class="fig-caption">FaceShield protects against 6 deepfake models — DiffFace, DiffSwap, FaceSwap, IP-Adapter (DM-based, orange box) and SimSwap, InfoSwap (GAN-based, blue box). DM-based outputs exhibit distorted artifacts; GAN-based outputs generate unrelated identities, both preventing source face reproduction.</p>
+          <p class="fig-caption">FaceShield protects against <strong>6 deepfake models</strong> — DiffFace, DiffSwap, FaceSwap, IP-Adapter (<strong>DM-based</strong>, orange box) and SimSwap, InfoSwap (<strong>GAN-based</strong>, blue box). DM-based outputs exhibit <strong>distorted artifacts</strong> and GAN-based outputs generate <strong>unrelated identities</strong>, both preventing source face reproduction.</p>
         </div>
 
-        <!-- Qualitative: comparison with baselines -->
+        <!-- Table 1: Quantitative comparison -->
+        <div class="table-scroll fade-in" style="margin-top:28px;">
+          <table class="result-table compact">
+            <thead>
+              <tr>
+                <th rowspan="2" style="min-width:110px;">Method</th>
+                <th colspan="4" style="text-align:center; border-bottom:1px solid #e0e0e0;">DiffFace</th>
+                <th colspan="4" style="text-align:center; border-bottom:1px solid #e0e0e0;">DiffSwap</th>
+                <th colspan="4" style="text-align:center; border-bottom:1px solid #e0e0e0;">FaceSwap</th>
+                <th colspan="4" style="text-align:center; border-bottom:1px solid #e0e0e0;">IP-Adapter</th>
+              </tr>
+              <tr>
+                <th>L₂ ↑</th><th>ISM ↓</th><th>PSNR ↓</th><th>HE ↑</th>
+                <th>L₂ ↑</th><th>ISM ↓</th><th>PSNR ↓</th><th>HE ↑</th>
+                <th>L₂ ↑</th><th>ISM ↓</th><th>PSNR ↓</th><th>HE ↑</th>
+                <th>L₂ ↑</th><th>ISM ↓</th><th>PSNR ↓</th><th>HE ↑</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-section"><td colspan="17">CelebA-HQ</td></tr>
+              <tr>
+                <td>AdvDM</td>
+                <td>0.021</td><td>0.471</td><td>39.368</td><td class="u">4.22</td>
+                <td>0.068</td><td>0.199</td><td>28.362</td><td>4.68</td>
+                <td>0.303</td><td>0.245</td><td>21.615</td><td>4.52</td>
+                <td>0.207</td><td>0.235</td><td>25.332</td><td>2.76</td>
+              </tr>
+              <tr>
+                <td>Mist</td>
+                <td>0.021</td><td>0.468</td><td>39.443</td><td>3.94</td>
+                <td>0.067</td><td>0.201</td><td>28.384</td><td>4.18</td>
+                <td>0.287</td><td>0.230</td><td>22.263</td><td class="u">4.78</td>
+                <td>0.152</td><td>0.265</td><td>28.213</td><td>4.26</td>
+              </tr>
+              <tr>
+                <td>PhotoGuard</td>
+                <td>0.022</td><td>0.469</td><td>39.194</td><td>3.82</td>
+                <td>0.068</td><td>0.201</td><td>28.292</td><td>4.58</td>
+                <td>0.282</td><td>0.238</td><td>22.316</td><td>4.44</td>
+                <td>0.153</td><td>0.268</td><td>28.101</td><td class="u">4.44</td>
+              </tr>
+              <tr>
+                <td>SDST</td>
+                <td>0.021</td><td>0.470</td><td>39.512</td><td>4.08</td>
+                <td>0.067</td><td>0.207</td><td>28.383</td><td class="u">5.04</td>
+                <td>0.274</td><td>0.261</td><td>22.582</td><td>4.68</td>
+                <td>0.147</td><td>0.273</td><td>28.440</td><td>4.32</td>
+              </tr>
+              <tr class="row-ours">
+                <td><strong>Ours</strong></td>
+                <td class="best">0.044</td><td class="best">0.243</td><td class="best">32.052</td><td class="best">5.76</td>
+                <td class="best">0.072</td><td class="best">0.163</td><td class="best">27.833</td><td class="best">6.20</td>
+                <td class="best">0.336</td><td class="best">0.194</td><td class="best">20.759</td><td class="best">6.16</td>
+                <td class="best">0.350</td><td class="best">0.072</td><td class="best">20.266</td><td class="best">6.60</td>
+              </tr>
+              <tr class="row-ours">
+                <td><strong>Ours</strong> (Q=75)</td>
+                <td class="u">0.043</td><td class="u">0.259</td><td class="u">32.259</td><td>—</td>
+                <td class="u">0.070</td><td class="u">0.169</td><td class="u">28.034</td><td>—</td>
+                <td class="u">0.317</td><td class="u">0.209</td><td class="u">21.286</td><td>—</td>
+                <td class="u">0.326</td><td class="u">0.112</td><td class="u">20.867</td><td>—</td>
+              </tr>
+              <tr class="row-section"><td colspan="17">VGGFace2-HQ</td></tr>
+              <tr>
+                <td>AdvDM</td>
+                <td>0.042</td><td>0.479</td><td>33.064</td><td>3.68</td>
+                <td>0.105</td><td>0.215</td><td>24.769</td><td class="u">4.78</td>
+                <td>0.419</td><td>0.361</td><td>18.596</td><td>4.38</td>
+                <td>0.251</td><td>0.271</td><td>23.250</td><td>2.36</td>
+              </tr>
+              <tr>
+                <td>Mist</td>
+                <td>0.041</td><td>0.478</td><td>33.215</td><td>4.26</td>
+                <td>0.102</td><td>0.227</td><td>24.964</td><td>3.94</td>
+                <td>0.379</td><td>0.259</td><td>19.626</td><td class="u">4.50</td>
+                <td>0.181</td><td>0.291</td><td>26.070</td><td class="u">4.10</td>
+              </tr>
+              <tr>
+                <td>PhotoGuard</td>
+                <td>0.043</td><td>0.479</td><td>32.938</td><td>3.96</td>
+                <td>0.110</td><td>0.215</td><td>24.272</td><td>4.18</td>
+                <td>0.373</td><td>0.266</td><td>19.655</td><td>4.14</td>
+                <td>0.180</td><td>0.294</td><td>26.157</td><td>3.82</td>
+              </tr>
+              <tr>
+                <td>SDST</td>
+                <td>0.041</td><td>0.483</td><td>33.242</td><td class="u">5.30</td>
+                <td>0.107</td><td>0.225</td><td>24.506</td><td>4.58</td>
+                <td>0.359</td><td>0.258</td><td>19.996</td><td>4.14</td>
+                <td>0.166</td><td>0.292</td><td>26.784</td><td>4.06</td>
+              </tr>
+              <tr class="row-ours">
+                <td><strong>Ours</strong></td>
+                <td class="best">0.062</td><td class="best">0.278</td><td class="best">29.204</td><td class="best">6.10</td>
+                <td class="best">0.113</td><td class="best">0.177</td><td class="best">24.054</td><td class="best">6.12</td>
+                <td class="best">0.453</td><td class="best">0.237</td><td class="best">17.919</td><td class="best">6.16</td>
+                <td class="best">0.382</td><td class="best">0.112</td><td class="best">19.478</td><td class="best">6.42</td>
+              </tr>
+              <tr class="row-ours">
+                <td><strong>Ours</strong> (Q=75)</td>
+                <td class="u">0.060</td><td class="u">0.308</td><td class="u">29.435</td><td>—</td>
+                <td class="u">0.112</td><td class="u">0.185</td><td class="u">24.201</td><td>—</td>
+                <td class="u">0.421</td><td class="u">0.237</td><td class="u">18.573</td><td>—</td>
+                <td class="u">0.377</td><td class="u">0.167</td><td class="u">19.618</td><td>—</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="fig-caption">Comparison of perturbation effectiveness among baseline methods on four deepfake models using the <strong>CelebA-HQ</strong> and <strong>VGGFace2-HQ</strong> datasets. <strong>Bold</strong> = best, <u>underline</u> = second best per column.</p>
+        </div>
+
+        <!-- Qualitative: comparison with baselines + Ablation: mid-layer -->
         <div class="fig-subsection">
           <h3>Comparison with State-of-the-Art Baselines</h3>
         </div>
 
-        <div class="fig-block fade-in">
-          <img src="Fig.5.png" alt="Qualitative comparison with AdvDM, Mist, PhotoGuard, SDST" />
-          <p class="fig-caption">Compared to AdvDM, Mist, PhotoGuard, and SDST on IP-Adapter deepfakes, prior methods fail to disrupt the deepfake output. FaceShield causes visible generation failures, confirming that directly attacking the conditioning pathway is essential for DM-based deepfake protection.</p>
-        </div>
-
-        <!-- Ablation: mid-layer -->
-        <div class="fig-subsection">
-          <h3>Ablation: Mid-Layer Cross-Attention Targeting</h3>
-        </div>
-
-        <div class="fig-block fade-in delay-1">
-          <img src="Fig.6.png" alt="Layer selection ablation for conditioned face attack" />
-          <p class="fig-caption">Targeting the mid-layers of the denoising UNet produces the strongest protection compared to using only down/up layers or all layers. Mid-layer cross-attention carries the highest sensitivity to the conditioning source face, making it the most effective attack target.</p>
+        <div class="fade-in" style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto; gap:24px 32px; margin:28px 0;">
+          <img src="Fig.5.png" alt="Qualitative comparison with AdvDM, Mist, PhotoGuard, SDST" style="grid-column:1; grid-row:1; width:100%; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,0.10); display:block; align-self:start;" />
+          <p class="fig-subsection-note" style="grid-column:2; grid-row:1; margin:0; align-self:center;">
+            Compared to <strong>AdvDM, Mist, PhotoGuard, and SDST</strong> on IP-Adapter deepfakes,
+            prior methods fail to disrupt the output.
+            FaceShield causes visible generation failures, confirming that
+            <strong>attacking the conditioning pathway</strong> is essential for DM-based deepfake protection.
+          </p>
+          <p class="fig-subsection-note" style="grid-column:1; grid-row:2; margin:0; align-self:center;">
+            Targeting the <strong>mid-layers</strong> of the denoising UNet produces the strongest protection
+            compared to using only down/up layers or all layers,
+            as confirmed by our ablation study.
+            Mid-layer cross-attention carries the <strong>highest sensitivity to the conditioning source face</strong>,
+            as this is where source identity is most strongly encoded
+            and the <strong>face-swap signal is concentrated</strong>,
+            making it the most effective and precise attack target.
+          </p>
+          <img src="Fig.6.png" alt="Layer selection ablation for conditioned face attack" style="grid-column:2; grid-row:2; width:100%; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,0.10); display:block; align-self:start;" />
         </div>
 
         <!-- Face detection disruption -->
@@ -326,7 +497,7 @@
 
         <div class="fig-block fade-in">
           <img src="Fig.10.png" alt="MTCNN face detection failure under FaceShield" />
-          <p class="fig-caption">Under FaceShield's perturbation, MTCNN fails to produce high-confidence bounding boxes at the P-Net stage (top row), preventing detected face crops from propagating to downstream deepfake models — compared to the unprotected case where detection succeeds cleanly (bottom row).</p>
+          <p class="fig-caption">Under FaceShield's perturbation, <strong>MTCNN fails to produce high-confidence bounding boxes</strong> at the <strong>P-Net stage</strong> (bottom row), preventing detected face crops from propagating to downstream deepfake models — compared to the unprotected case where detection succeeds cleanly (top row).</p>
         </div>
 
         <!-- Robustness: LPF across purifications -->
@@ -336,18 +507,100 @@
 
         <div class="fig-block fade-in delay-1">
           <img src="Fig.12.png" alt="Robustness across JPEG, bit reduction, and resizing" />
-          <p class="fig-caption">FaceShield's low-frequency noise concentration keeps performance close to lossless (PNG) across JPEG compression (Q90/75/50), bit reduction (8-bit/3-bit), and resizing (75%/50%, BILINEAR/INTER AREA) — consistently outperforming all baselines on both ISM and PSNR metrics.</p>
+          <p class="fig-caption">FaceShield's <strong>low-frequency noise concentration</strong> keeps performance close to lossless (PNG) across <strong>JPEG compression</strong> (Q90/75/50), <strong>bit reduction</strong> (8-bit/3-bit), and <strong>resizing</strong> (75%/50%, BILINEAR/INTER AREA) — consistently <strong>outperforming all baselines</strong> on both ISM and PSNR metrics.</p>
         </div>
 
-        <div class="fig-grid-2 fade-in">
+        <div class="fig-grid-2 fade-in" style="align-items: end;">
           <div class="fig-block">
             <img src="Fig.13.png" alt="JPEG compression and bit reduction qualitative" />
-            <p class="fig-caption">Qualitative results after JPEG compression (Q90, Q75, Q50) and bit reduction (8-bit, 3-bit). Protection degrades minimally relative to the lossless PNG baseline.</p>
+            <p class="fig-caption">Qualitative results after <strong>JPEG compression</strong> (Q90, Q75, Q50) and <strong>bit reduction</strong> (8-bit, 3-bit). Protection degrades minimally relative to the lossless PNG baseline.</p>
           </div>
           <div class="fig-block">
             <img src="Fig.14.png" alt="Resizing robustness qualitative" />
-            <p class="fig-caption">Qualitative results after 75% and 50% resizing (BILINEAR and INTER AREA). The perturbation remains effective across both interpolation modes.</p>
+            <p class="fig-caption">Qualitative results after <strong>75% and 50% resizing</strong> (BILINEAR and INTER AREA). The perturbation remains effective across both interpolation modes.</p>
           </div>
+        </div>
+
+        <!-- Table 2: Noise quality -->
+        <div class="table-scroll fade-in" style="margin-top:28px;">
+          <table class="result-table compact">
+            <thead>
+              <tr>
+                <th rowspan="2" style="min-width:110px;">Method</th>
+                <th colspan="5" style="text-align:center; border-bottom:1px solid #e0e0e0;">CelebA-HQ</th>
+                <th colspan="5" style="text-align:center; border-bottom:1px solid #e0e0e0;">VGGFace2-HQ</th>
+              </tr>
+              <tr>
+                <th>LPIPS ↓</th><th>PSNR ↑</th><th>SSIM ↑</th><th>FR ↑</th><th>HE ↑</th>
+                <th>LPIPS ↓</th><th>PSNR ↑</th><th>SSIM ↑</th><th>FR ↑</th><th>HE ↑</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>AdvDM</td>
+                <td class="u">0.4214</td><td>30.4476</td><td>0.8438</td><td class="u">2.1077</td><td>3.86</td>
+                <td class="u">0.4108</td><td>30.2523</td><td>0.8436</td><td class="u">2.0667</td><td>3.66</td>
+              </tr>
+              <tr>
+                <td>Mist</td>
+                <td>0.5492</td><td>29.9935</td><td>0.8684</td><td>1.6583</td><td>4.70</td>
+                <td>0.5208</td><td>29.9068</td><td>0.8721</td><td>1.6872</td><td>4.34</td>
+              </tr>
+              <tr>
+                <td>PhotoGuard</td>
+                <td>0.5515</td><td>29.9127</td><td>0.8669</td><td>1.6538</td><td>4.82</td>
+                <td>0.5221</td><td>29.8204</td><td>0.8712</td><td>1.6824</td><td class="u">4.62</td>
+              </tr>
+              <tr>
+                <td>SDST</td>
+                <td>0.5409</td><td class="u">31.4762</td><td class="u">0.9033</td><td>1.6767</td><td class="u">5.12</td>
+                <td>0.5060</td><td class="u">31.3545</td><td class="u">0.9092</td><td>1.6892</td><td>4.48</td>
+              </tr>
+              <tr class="row-ours">
+                <td><strong>Ours</strong></td>
+                <td class="best">0.2017</td><td class="best">32.6289</td><td class="best">0.9394</td><td class="best">18.4651</td><td class="best">5.64</td>
+                <td class="best">0.1941</td><td class="best">31.5799</td><td class="best">0.9341</td><td class="best">18.0400</td><td class="best">5.28</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="fig-caption">Noise quality comparison under identical settings. Our method shows the lowest distortion (LPIPS, SSIM, PSNR) and highest low-frequency energy (FR). <strong>Bold</strong> = best, <u>underline</u> = second best per column.</p>
+        </div>
+
+        <!-- Table 3: Resource cost -->
+        <div class="fig-subsection">
+          <h3>Resource Cost Comparison</h3>
+        </div>
+
+        <div class="table-scroll fade-in" style="margin-top:16px;">
+          <table class="result-table compact">
+            <thead>
+              <tr>
+                <th style="min-width:110px;">Method</th>
+                <th>ISM ↓</th>
+                <th>LPIPS ↓</th>
+                <th>VRAM</th>
+                <th>Sec. ↓</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>AdvDM</td><td>0.288</td><td>0.4214</td><td>20 GB</td><td>39</td>
+              </tr>
+              <tr>
+                <td>Mist</td><td>0.291</td><td>0.5492</td><td>22 GB</td><td>80</td>
+              </tr>
+              <tr>
+                <td>PhotoGuard</td><td>0.294</td><td>0.5515</td><td>28 GB</td><td>234</td>
+              </tr>
+              <tr>
+                <td>SDST</td><td>0.303</td><td>0.5409</td><td class="best">11 GB</td><td>34</td>
+              </tr>
+              <tr class="row-ours">
+                <td><strong>Ours</strong></td><td class="best">0.168</td><td class="best">0.2017</td><td class="u">15 GB</td><td class="best">24</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="fig-caption">Resource cost comparison with baseline methods. <strong>Bold</strong> = best, <u>underline</u> = second best per column.</p>
         </div>
 
         <!-- Transferability -->
@@ -357,7 +610,7 @@
 
         <div class="fig-block fade-in delay-1">
           <img src="Fig.15.png" alt="Transferability to IP-Adapter variants" />
-          <p class="fig-caption">FaceShield generalizes across eight IP-Adapter variants (ControlNet, ImageVariation, Multi-modal prompts, Plus/PlusXL, FaceID, FaceIDPlus) — demonstrating robust transferability not only across structurally different architectures but also across models sharing the same backbone with different pre-trained weights.</p>
+          <p class="fig-caption">FaceShield generalizes across <strong>eight IP-Adapter variants</strong> (ControlNet, ImageVariation, Multi-modal prompts, Plus/PlusXL, FaceID, FaceIDPlus) — demonstrating <strong>robust transferability</strong> not only across <strong>structurally different architectures</strong> but also across models sharing the same backbone with <strong>different pre-trained weights</strong>.</p>
         </div>
 
       </section>
