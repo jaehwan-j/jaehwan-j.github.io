@@ -121,7 +121,7 @@
 
       <!-- ── HEADER ─────────────────────────────────────────────── -->
       <header class="proj-header fade-in">
-        <span class="proj-tag">Computer Vision · Adversarial Attack · Deepfake Defense</span>
+        <span class="proj-tag">AI Safety · Deepfake</span>
         <h1>FaceShield: Defending Facial Image against Deepfake Threats</h1>
 
         <p class="proj-authors">
@@ -142,11 +142,12 @@
           <span class="aff-badge samsung"><sup>3</sup>&nbsp;Samsung Research</span>
         </div>
 
-        <p class="proj-venue">Under review, 2025</p>
+        <p class="proj-venue">IEEE/CVF International Conference on Computer Vision (ICCV) 2025</p>
 
         <div class="proj-links">
           <a href="https://arxiv.org/abs/2412.09921" class="proj-btn" target="_blank" rel="noopener">arXiv</a>
-          <a href="https://github.com/kuai-lab/iccv25_faceshield" class="proj-btn" target="_blank" rel="noopener">GitHub</a>
+          <a href="Poster.pdf" class="proj-btn proj-btn-outline" target="_blank" rel="noopener">Poster</a>
+          <a href="https://github.com/kuai-lab/iccv25_faceshield" class="proj-btn proj-btn-outline" target="_blank" rel="noopener">GitHub</a>
         </div>
       </header>
 
@@ -160,15 +161,19 @@
         <h2>TL;DR</h2>
         <p>
           We propose <strong>FaceShield</strong>, a proactive defense that embeds <strong>invisible adversarial noise</strong>
-          into facial images to prevent deepfake face swapping.
-          Unlike prior work that attacks the noising/denoising process in diffusion models,
-          we directly disrupt the <strong>cross-attention conditioning mechanism</strong>
-          through which a source face drives the deepfake output.
-          Combined with <strong>facial feature extractor attacks</strong> on MTCNN and ArcFace
-          for broad GAN-based model coverage, and an <strong>enhanced noise update</strong>
-          using Gaussian blur and low-pass filtering for imperceptibility,
+          into facial images to neutralize deepfake face swapping.
+          Prior defenses target only the general noise addition and removal process of diffusion models,
+          whereas FaceShield directly disrupts the <strong>cross-attention conditioning mechanism</strong>,
+          the core bottleneck through which the original face is projected into the deepfake output.
+          By computing gradients at this exact pathway, the method achieves maximized disruption
+          with only minimal perturbation.
+          Defense coverage is further extended to GAN-based architectures by jointly attacking
+          common <strong>facial feature extractors</strong> (MTCNN and ArcFace).
+          To prevent protective noise from being erased by image compression or purification,
+          an <strong>enhanced noise update</strong> combining low-pass filtering and Gaussian blur
+          is introduced, keeping perturbations both robust and imperceptible.
           FaceShield achieves <strong>state-of-the-art protection across 6 deepfake models</strong>
-          while producing less visible noise than all baselines.
+          with lower noise visibility than all baselines.
         </p>
       </section>
 
