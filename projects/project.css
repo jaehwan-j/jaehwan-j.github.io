@@ -357,7 +357,4 @@ img { display: block; max-width: 100%; }
     grid-row: auto !important;
     align-self: auto !important;
   }
-  /* diagonal 4-element layout: img1,text1,text2,img2 → img1,text1,img2,text2 */
-  .grid-halves > *:nth-child(3) { order: 4; }
-  .grid-halves > *:nth-child(4) { order: 3; }
 }
