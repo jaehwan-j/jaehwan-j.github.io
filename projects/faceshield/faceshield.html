@@ -316,7 +316,7 @@
           <p style="font-size:14px; font-weight:700; color:var(--ink); margin:0 0 8px;">
             (iii) <strong>Enhanced Noise Update</strong>
           </p>
-          <div class="fade-in delay-1" style="display:grid; grid-template-columns:1fr 1fr; gap:24px 32px; margin:12px 0;">
+          <div class="fade-in delay-1 grid-halves" style="display:grid; grid-template-columns:1fr 1fr; gap:24px 32px; margin:12px 0;">
             <img src="Fig.9.png" alt="Low-pass filtering in frequency domain" style="width:100%; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,0.10); display:block; align-self:start;" />
             <p class="fig-subsection-note" style="margin:0; align-self:center;">
               The adversarial noise is transformed to the frequency domain via <strong>8×8 DCT patches</strong>.
@@ -325,7 +325,7 @@
               This concentrates the perturbation in a band that survives JPEG compression without being discarded.
             </p>
           </div>
-          <div class="fade-in delay-1" style="display:grid; grid-template-columns:1fr 1fr; gap:24px 32px; margin:12px 0;">
+          <div class="fade-in delay-1 grid-halves" style="display:grid; grid-template-columns:1fr 1fr; gap:24px 32px; margin:12px 0;">
             <p class="fig-subsection-note" style="margin:0; align-self:center;">
               Even under a bounded noise budget (e.g., δ = 12/255), adjacent pixels can receive opposite extremes
               (e.g., +12 and −12), creating a local contrast gap of up to 24 that becomes visually conspicuous.
@@ -470,7 +470,7 @@
           <h3>Comparison with State-of-the-Art Baselines</h3>
         </div>
 
-        <div class="fade-in" style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto; gap:24px 32px; margin:28px 0;">
+        <div class="fade-in grid-halves" style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto; gap:24px 32px; margin:28px 0;">
           <img src="Fig.5.png" alt="Qualitative comparison with AdvDM, Mist, PhotoGuard, SDST" style="grid-column:1; grid-row:1; width:100%; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,0.10); display:block; align-self:start;" />
           <p class="fig-subsection-note" style="grid-column:2; grid-row:1; margin:0; align-self:center;">
             Compared to <strong>AdvDM, Mist, PhotoGuard, and SDST</strong> on IP-Adapter deepfakes,

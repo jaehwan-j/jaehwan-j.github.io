@@ -209,3 +209,26 @@ img { display: block; max-width: 100%; }
 }
 .proj-footer a { color: var(--crimson); }
 .proj-footer a:hover { text-decoration: none; color: var(--crimson-dark); }
+
+/* 2-col halves → single col on mobile */
+.grid-halves {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 24px 32px;
+  margin: 28px 0;
+}
+@media (max-width: 640px) {
+  .fig-grid-2 {
+    grid-template-columns: 1fr !important;
+  }
+  .grid-halves {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+  }
+  .grid-halves > * {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    align-self: auto !important;
+  }
+}
