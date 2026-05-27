@@ -8,176 +8,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
   <link rel="stylesheet" href="../project.css" />
   <style>
-    /* --- Affiliation badges --- */
-    .proj-affiliations {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-      margin: 10px 0 14px;
-    }
-    .aff-badge {
-      display: inline-block;
-      font-size: 12px;
-      font-weight: 600;
-      padding: 3px 13px;
-      border-radius: 20px;
-    }
-    .aff-badge.ku    { background: rgba(164,30,52,0.10); color: #A41E34; }
-    .aff-badge.ucla  { background: rgba(39,116,174,0.10); color: #2774AE; }
-    .aff-badge.nvidia{ background: rgba(118,185,0,0.12);  color: #4a7700; }
-    .aff-note { font-size: 12px; color: var(--ink-light); }
-
-    /* --- Demo video --- */
-    .proj-video-wrap {
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 44px;
-      box-shadow: 0 8px 32px rgba(164,30,52,0.12);
-      background: #111;
-    }
-    .proj-video-wrap video {
-      width: 100%;
-      display: block;
-      max-height: 480px;
-    }
-    .proj-video-caption {
-      padding: 9px 14px;
-      font-size: 13px;
-      color: var(--ink-light);
-      text-align: center;
-      background: var(--crimson-pale);
-    }
-
-    /* --- Figure blocks --- */
-    .fig-block {
-      margin: 28px 0;
-    }
-    .fig-block img {
-      width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.10);
-      display: block;
-    }
-    .fig-caption {
-      margin-top: 10px;
-      font-size: 13.5px;
-      color: var(--ink-soft);
-      line-height: 1.65;
-    }
-    .fig-num {
-      font-weight: 700;
-      color: var(--ink);
-    }
-    .fig-grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin: 28px 0;
-    }
-    .fig-grid-2 .fig-block {
-      margin: 0;
-    }
-    .fig-subsection {
-      margin-top: 36px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border);
-    }
-    .proj-section .fig-subsection:first-of-type {
-      border-top: none;
-      margin-top: 16px;
-      padding-top: 0;
-    }
-    .fig-subsection h3 {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 4px;
-    }
-    .fig-subsection-note {
-      font-size: 13.5px;
-      color: var(--ink-light);
-      margin-bottom: 0;
-      line-height: 1.6;
-    }
-
-    /* --- Result tables --- */
-    .result-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
-      margin: 12px 0 4px;
-    }
-    .result-table th {
-      background: var(--crimson-pale);
-      color: var(--ink);
-      font-weight: 600;
-      padding: 9px 14px;
-      text-align: left;
-      border-bottom: 2px solid var(--border);
-      font-size: 13.5px;
-    }
-    .result-table td {
-      padding: 8px 14px;
-      border-bottom: 1px solid #f0f0f0;
-      color: var(--ink-soft);
-    }
-    .result-table tr:last-child td { border-bottom: none; }
-    .result-table .row-ours td {
-      background: rgba(164,30,52,0.04);
-      color: var(--ink-soft);
-    }
-    .result-table .best { font-weight: 700; color: var(--ink); }
-    .sub-heading {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--ink);
-      margin: 20px 0 8px;
-    }
-    .sub-note {
-      font-size: 13.5px;
-      color: var(--ink-light);
-      margin-bottom: 10px;
-    }
-
-    /* --- Hardware grid --- */
-    .hw-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin: 12px 0;
-    }
-    .hw-item {
-      background: #fafafa;
-      border-radius: 8px;
-      padding: 12px 14px;
-      font-size: 13.5px;
-      color: var(--ink-soft);
-    }
-    .hw-item strong {
-      display: block;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      color: var(--ink-light);
-      margin-bottom: 2px;
-    }
-
-    /* --- Table utilities --- */
-    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 8px 0 20px; }
-    .result-table.compact { font-size: 12px; }
-    .result-table.compact th { padding: 6px 8px; font-size: 11.5px; }
-    .result-table.compact td { padding: 5px 8px; }
-    .result-table td.u { text-decoration: underline; text-underline-offset: 3px; }
-    .row-gray td { color: #bbb !important; font-weight: 400; }
-    .row-diff td { font-weight: 700; background: rgba(164,30,52,0.04); }
-
     /* --- Acknowledgement --- */
-    .ack-section p {
-      font-size: 13.5px;
-      color: var(--ink-light);
-      line-height: 1.76;
-    }
     .ack-nvidia {
       display: flex;
       align-items: center;
@@ -205,9 +36,30 @@
       margin: 0 !important;
     }
 
-    /* --- Responsive --- */
+    /* --- Hardware grid --- */
+    .hw-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin: 12px 0;
+    }
+    .hw-item {
+      background: #fafafa;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 13.5px;
+      color: var(--ink-soft);
+    }
+    .hw-item strong {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--ink-light);
+      margin-bottom: 2px;
+    }
+
     @media (max-width: 540px) {
-      .fig-grid-2 { grid-template-columns: 1fr; }
       .hw-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -761,41 +613,47 @@
         <!-- RL subsection -->
         <div class="fig-subsection">
           <h3>1. RL — Local Obstacle Avoidance</h3>
-          <p class="fig-subsection-note">The low-level RL policy running standalone: dynamic obstacles (left) and static obstacles in an orchard-like environment (right).</p>
         </div>
 
-        <div class="fig-block fade-in">
-          <video controls preload="metadata" style="width:100%;border-radius:10px;display:block;">
-            <source src="Demo_rl_standalone_dynamic.mp4#t=0.001" type="video/mp4" />
-          </video>
-          <p class="fig-caption">Dynamic obstacle avoidance — the RL policy reactively steers around moving obstacles in real time.</p>
-        </div>
-
-        <div class="fig-block fade-in">
-          <video controls preload="metadata" style="width:100%;border-radius:10px;display:block;">
+        <div class="proj-video-wrap fade-in">
+          <video controls preload="metadata">
             <source src="Demo_rl_standalone_orchard.mp4#t=0.001" type="video/mp4" />
           </video>
-          <p class="fig-caption">Static obstacle avoidance — navigating through a densely cluttered orchard-like environment.</p>
+          <div class="proj-video-caption">
+            Orchard navigation — collision-free traversal through densely packed rows, including swaying trees.
+          </div>
+        </div>
+
+        <div class="proj-video-wrap fade-in">
+          <video controls preload="metadata">
+            <source src="Demo_rl_standalone_dynamic.mp4#t=0.001" type="video/mp4" />
+          </video>
+          <div class="proj-video-caption">
+            Dynamic obstacle avoidance — the RL policy reactively avoids both static and moving obstacles in real time.
+          </div>
         </div>
 
         <!-- VLA+RL subsection -->
         <div class="fig-subsection">
           <h3>2. VLA + RL — Full Pipeline</h3>
-          <p class="fig-subsection-note">End-to-end HiVLA: VLA-guided navigation with RL obstacle avoidance and autonomous path recovery.</p>
         </div>
 
-        <div class="fig-block fade-in">
-          <video controls preload="metadata" style="width:100%;border-radius:10px;display:block;">
+        <div class="proj-video-wrap fade-in">
+          <video controls preload="metadata">
             <source src="Demo_vla_rl_2.mp4#t=0.001" type="video/mp4" />
           </video>
-          <p class="fig-caption">VLA-guided navigation with continuous RL obstacle avoidance in a real-world corridor.</p>
+          <div class="proj-video-caption">
+            Full HiVLA pipeline — VLA-guided navigation with continuous RL obstacle avoidance deployed in a real-world corridor.
+          </div>
         </div>
 
-        <div class="fig-block fade-in">
-          <video controls preload="metadata" style="width:100%;border-radius:10px;display:block;">
+        <div class="proj-video-wrap fade-in">
+          <video controls preload="metadata">
             <source src="Demo_vla_rl_rollback_2.mp4#t=0.001" type="video/mp4" />
           </video>
-          <p class="fig-caption">Path deviation detected via Navigation Heads — the RL policy autonomously recovers to the last safe waypoint.</p>
+          <div class="proj-video-caption">
+            Path deviation detected via Navigation Heads — the RL policy autonomously executes a safe recovery to the last logged waypoint.
+          </div>
         </div>
 
       </section>

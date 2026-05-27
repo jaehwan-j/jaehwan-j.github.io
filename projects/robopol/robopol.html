@@ -8,84 +8,52 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
   <link rel="stylesheet" href="../project.css" />
   <style>
-    /* --- Affiliation badges --- */
-    .proj-affiliations {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-      margin: 10px 0 14px;
-    }
-    .aff-badge {
-      display: inline-block;
-      font-size: 12px;
-      font-weight: 600;
-      padding: 3px 13px;
-      border-radius: 20px;
-    }
-    .aff-badge.ku   { background: rgba(164,30,52,0.10); color: #A41E34; }
-    .aff-badge.ucla { background: rgba(39,116,174,0.10); color: #2774AE; }
-    .aff-note { font-size: 12px; color: var(--ink-light); }
-
-    /* --- Figure blocks --- */
-    .fig-block {
-      margin: 28px 0;
-    }
-    .fig-block img {
-      width: 100%;
-      border-radius: 10px;
+    /* --- Skeleton carousel --- */
+    .photo-carousel { position: relative; margin: 28px 0 36px; }
+    .carousel-track {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+      background: #f5f5f5;
+    }
+    .carousel-slide { display: none; }
+    .carousel-slide.active { display: block; }
+    .carousel-slide img {
+      width: 100%;
+      height: 360px;
+      object-fit: contain;
+      background: #f5f5f5;
       display: block;
+      border-radius: 12px;
     }
-    .fig-caption {
-      margin-top: 10px;
-      font-size: 13.5px;
-      color: var(--ink-soft);
-      line-height: 1.65;
-    }
-    .fig-grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin: 28px 0;
-    }
-    .fig-grid-2 .fig-block {
-      margin: 0;
-    }
-    .fig-subsection {
-      margin-top: 36px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border);
-    }
-    .proj-section .fig-subsection:first-of-type {
-      border-top: none;
-      margin-top: 16px;
-      padding-top: 0;
-    }
-    .fig-subsection h3 {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 4px;
-    }
-    .fig-subsection-note {
-      font-size: 13.5px;
+    .carousel-caption { text-align: center; color: #aaa; font-size: 13px; margin-top: 10px; line-height: 1.5; }
+    .carousel-controls { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 10px; }
+    .carousel-btn {
+      background: none;
+      border: 1px solid #ddd;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      font-size: 14px;
+      cursor: pointer;
       color: var(--ink-light);
-      margin-bottom: 0;
-      line-height: 1.6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s, color 0.2s;
     }
-
-    /* --- Acknowledgement --- */
-    .ack-section p {
-      font-size: 13.5px;
-      color: var(--ink-light);
-      line-height: 1.76;
+    .carousel-btn:hover { border-color: var(--ink); color: var(--ink); }
+    .carousel-dots { display: flex; gap: 5px; align-items: center; flex-wrap: wrap; max-width: 200px; justify-content: center; }
+    .carousel-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ddd;
+      cursor: pointer;
+      transition: background 0.2s;
     }
-
-    /* --- Responsive --- */
-    @media (max-width: 540px) {
-      .fig-grid-2 { grid-template-columns: 1fr; }
-    }
+    .carousel-dot.active { background: var(--ink-light); }
   </style>
 </head>
 <body>
@@ -110,12 +78,12 @@
           Vivek Alumootil<sup>2</sup>,<br />
           Sangpil Kim<sup>1,†</sup>,&thinsp;
           M. Khalid Jawed<sup>2,†</sup>
-          <br /><span style="font-size:12px; color:#aaa;">∗ Equal contribution &nbsp;·&nbsp; † Co-corresponding authors</span>
         </p>
 
         <div class="proj-affiliations">
           <span class="aff-badge ku"><sup>1</sup>&nbsp;Korea University</span>
           <span class="aff-badge ucla"><sup>2</sup>&nbsp;UCLA</span>
+          <span class="aff-note">∗ Equal contribution &nbsp;·&nbsp; † Co-corresponding authors</span>
         </div>
 
         <p class="proj-venue">Under review, 2026</p>
@@ -125,9 +93,14 @@
         </div>
       </header>
 
-      <!-- ── TEASER ──────────────────────────────────────────────── -->
-      <div class="proj-teaser fade-in delay-1">
-        <img src="../../assets/img/Tomato.gif" alt="Robotic pollination demo" />
+      <!-- ── DEMO VIDEO ─────────────────────────────────────────── -->
+      <div class="proj-video-wrap fade-in delay-1">
+        <video controls preload="metadata">
+          <source src="Demo.mp4#t=0.001" type="video/mp4" />
+        </video>
+        <div class="proj-video-caption">
+          Demo — Full end-to-end robotic pollination sequence on a pepper plant.
+        </div>
       </div>
 
       <!-- ── TL;DR ──────────────────────────────────────────────── -->
@@ -184,6 +157,43 @@
           <p class="fig-caption">This is an end-to-end overview of the robotic pollination pipeline. RGB-D images and 7-DoF end-effector poses are fused via <strong>hand-eye calibration</strong> into a 3D point cloud, which is processed through <strong>skeletonization</strong> to extract the plant structure and identify the optimal grasp point. <strong>Discrete Elastic Rod</strong> simulations guide vibration parameter selection, after which the robot executes the full grasp-and-shake sequence.</p>
         </div>
 
+        <!-- Skeleton GIF carousel -->
+        <div class="photo-carousel fade-in" id="skel-carousel">
+          <div class="carousel-track">
+            <div class="carousel-slide active"><img src="skeleton/pepper0.gif" alt="Pepper plant 1 skeletonization" /></div>
+            <div class="carousel-slide"><img src="skeleton/pepper1.gif" alt="Pepper plant 2 skeletonization" /></div>
+            <div class="carousel-slide"><img src="skeleton/pepper2.gif" alt="Pepper plant 3 skeletonization" /></div>
+            <div class="carousel-slide"><img src="skeleton/pepper3.gif" alt="Pepper plant 4 skeletonization" /></div>
+            <div class="carousel-slide"><img src="skeleton/pepper4.gif" alt="Pepper plant 5 skeletonization" /></div>
+            <div class="carousel-slide"><img src="skeleton/pepper5.gif" alt="Pepper plant 6 skeletonization" /></div>
+            <div class="carousel-slide"><img src="skeleton/pepper6.gif" alt="Pepper plant 7 skeletonization" /></div>
+            <div class="carousel-slide"><img src="skeleton/pepper7.gif" alt="Pepper plant 8 skeletonization" /></div>
+            <div class="carousel-slide"><img src="skeleton/pepper8.gif" alt="Pepper plant 9 skeletonization" /></div>
+            <div class="carousel-slide"><img src="skeleton/tomato1.gif" alt="Tomato plant 1 skeletonization" /></div>
+            <div class="carousel-slide"><img src="skeleton/tomato2.gif" alt="Tomato plant 2 skeletonization" /></div>
+            <div class="carousel-slide"><img src="skeleton/tomato3.gif" alt="Tomato plant 3 skeletonization" /></div>
+          </div>
+          <div class="carousel-controls">
+            <button class="carousel-btn" id="skel-prev">&#8592;</button>
+            <div class="carousel-dots">
+              <div class="carousel-dot active"></div>
+              <div class="carousel-dot"></div>
+              <div class="carousel-dot"></div>
+              <div class="carousel-dot"></div>
+              <div class="carousel-dot"></div>
+              <div class="carousel-dot"></div>
+              <div class="carousel-dot"></div>
+              <div class="carousel-dot"></div>
+              <div class="carousel-dot"></div>
+              <div class="carousel-dot"></div>
+              <div class="carousel-dot"></div>
+              <div class="carousel-dot"></div>
+            </div>
+            <button class="carousel-btn" id="skel-next">&#8594;</button>
+          </div>
+          <p class="carousel-caption" id="skel-caption">Pepper plant 1 of 9 — a single parameter set, no tuning per plant</p>
+        </div>
+
         <!-- Fig.2 + Fig.3: diagonal layout -->
         <div class="fig-subsection">
           <h3>2. Simulation &amp; Robotic Execution</h3>
@@ -223,6 +233,38 @@
           <div class="fig-block">
             <img src="Fig.5.png" alt="Real-world grasping success and failure cases" style="height:400px; object-fit:contain; background:#fafafa;" />
             <p class="fig-caption">Qualitative results of the end-to-end grasping experiments show that the system achieved a <strong>92.5% main-stem grasping success rate</strong> over 40 trials across 10 plants from multiple viewpoints. Failures (7.5%) resulted from branch/leaf grasps or 7-DoF pose errors.</p>
+          </div>
+        </div>
+
+        <!-- Demo videos -->
+        <div class="fig-subsection">
+          <h3>Demo Videos</h3>
+        </div>
+
+        <div class="proj-video-wrap fade-in">
+          <video controls preload="metadata">
+            <source src="1.mp4#t=0.001" type="video/mp4" />
+          </video>
+          <div class="proj-video-caption">
+            Demo 1 — Full end-to-end sequence on a pepper plant: 3D scan, skeleton extraction, grasp planning, and DER-optimized vibration for pollination.
+          </div>
+        </div>
+
+        <div class="proj-video-wrap fade-in">
+          <video controls preload="metadata">
+            <source src="2.mp4#t=0.001" type="video/mp4" />
+          </video>
+          <div class="proj-video-caption">
+            Demo 2 — End-to-end robotic pollination trial on a pepper plant from an alternative viewpoint.
+          </div>
+        </div>
+
+        <div class="proj-video-wrap fade-in">
+          <video controls preload="metadata">
+            <source src="3.mp4#t=0.001" type="video/mp4" />
+          </video>
+          <div class="proj-video-caption">
+            Demo 3 — End-to-end robotic pollination trial on a tomato plant, demonstrating cross-crop generalization.
           </div>
         </div>
 
@@ -267,5 +309,40 @@
   </footer>
 
   <script src="../project.js"></script>
+  <script>
+    (function () {
+      const captions = [
+        "Pepper plant 1 of 9 — a single parameter set, no tuning per plant",
+        "Pepper plant 2 of 9 — a single parameter set, no tuning per plant",
+        "Pepper plant 3 of 9 — a single parameter set, no tuning per plant",
+        "Pepper plant 4 of 9 — a single parameter set, no tuning per plant",
+        "Pepper plant 5 of 9 — a single parameter set, no tuning per plant",
+        "Pepper plant 6 of 9 — a single parameter set, no tuning per plant",
+        "Pepper plant 7 of 9 — a single parameter set, no tuning per plant",
+        "Pepper plant 8 of 9 — a single parameter set, no tuning per plant",
+        "Pepper plant 9 of 9 — a single parameter set, no tuning per plant",
+        "Tomato plant 1 of 3 — a single parameter set, no tuning per plant",
+        "Tomato plant 2 of 3 — a single parameter set, no tuning per plant",
+        "Tomato plant 3 of 3 — a single parameter set, no tuning per plant"
+      ];
+      const slides  = document.querySelectorAll('#skel-carousel .carousel-slide');
+      const dots    = document.querySelectorAll('#skel-carousel .carousel-dot');
+      const caption = document.getElementById('skel-caption');
+      let current = 0;
+
+      function goTo(idx) {
+        slides[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        current = (idx + slides.length) % slides.length;
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
+        caption.textContent = captions[current];
+      }
+
+      document.getElementById('skel-prev').addEventListener('click', () => goTo(current - 1));
+      document.getElementById('skel-next').addEventListener('click', () => goTo(current + 1));
+      dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+    })();
+  </script>
 </body>
 </html>
