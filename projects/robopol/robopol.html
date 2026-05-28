@@ -165,8 +165,8 @@
 
         <div class="fade-in grid-halves" style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto; gap:24px 32px; margin:28px 0;">
           <!-- Top-left: calibration image -->
-          <div style="grid-column:1; grid-row:1; align-self:start;">
-            <img src="calibration.png" alt="Hand-eye calibration setup" style="width:100%; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,0.10); display:block;" />
+          <div style="grid-column:1; grid-row:1; align-self:start; border-radius:10px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.10); background:#f5f5f5;">
+            <img src="calibration.png" alt="Hand-eye calibration setup" style="width:100%; display:block;" />
           </div>
           <!-- Top-right: calibration description -->
           <p class="fig-subsection-note" style="grid-column:2; grid-row:1; margin:0; align-self:center; font-size:15px; color:var(--ink-soft); line-height:1.78;">
@@ -182,8 +182,8 @@
             The robot captures ≈30 RGB-D frames; each masked partial cloud is transformed into the world frame and fused globally via <strong>ICP</strong>.
           </p>
           <!-- Bottom-right: perception image -->
-          <div style="grid-column:2; grid-row:2; align-self:start;">
-            <img src="perception.png" alt="Semantic depth masking and multi-view point cloud fusion" style="width:100%; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,0.10); display:block;" />
+          <div style="grid-column:2; grid-row:2; align-self:start; border-radius:10px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.10); background:#f5f5f5;">
+            <img src="perception.png" alt="Semantic depth masking and multi-view point cloud fusion" style="width:100%; display:block;" />
           </div>
         </div>
         <p class="fade-in" style="font-size:15px; color:var(--ink-soft); line-height:1.78; margin-bottom:16px;">
