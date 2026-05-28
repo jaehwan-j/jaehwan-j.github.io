@@ -94,16 +94,6 @@
         </div>
       </header>
 
-      <!-- ── DEMO VIDEO ─────────────────────────────────────────── -->
-      <div class="proj-video-wrap fade-in delay-1">
-        <video controls preload="metadata">
-          <source src="Demo.mp4#t=0.001" type="video/mp4" />
-        </video>
-        <div class="proj-video-caption">
-          Demo — Full end-to-end robotic pollination sequence on a pepper plant.
-        </div>
-      </div>
-
       <!-- ── TL;DR ──────────────────────────────────────────────── -->
       <section class="proj-section fade-in">
         <h2>TL;DR</h2>
@@ -120,6 +110,16 @@
           demonstrating a practical and scalable approach to automated crop pollination.
         </p>
       </section>
+
+      <!-- ── DEMO VIDEO ─────────────────────────────────────────── -->
+      <div class="proj-video-wrap fade-in delay-1">
+        <video controls preload="metadata">
+          <source src="Demo.mp4#t=0.001" type="video/mp4" />
+        </video>
+        <div class="proj-video-caption">
+          Demo — Full end-to-end robotic pollination sequence on a pepper plant.
+        </div>
+      </div>
 
       <!-- ── KEY CONTRIBUTIONS ──────────────────────────────────── -->
       <section class="proj-section fade-in">
@@ -157,6 +157,38 @@
           <img src="Fig.1.png" alt="Robotic pollination system overview" />
           <p class="fig-caption">This is an end-to-end overview of the robotic pollination pipeline. RGB-D images and 7-DoF end-effector poses are fused via <strong>hand-eye calibration</strong> into a 3D point cloud, which is processed through <strong>skeletonization</strong> to extract the plant structure and identify the optimal grasp point. <strong>Discrete Elastic Rod</strong> simulations guide vibration parameter selection, after which the robot executes the full grasp-and-shake sequence.</p>
         </div>
+
+        <!-- Hand-Eye Calibration, Perception & Skeletonization -->
+        <div class="fig-subsection">
+          <h3>2. Hand-Eye Calibration, Perception &amp; Skeletonization</h3>
+        </div>
+
+        <div class="fade-in grid-halves" style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto; gap:24px 32px; margin:28px 0;">
+          <!-- Top-left: calibration image -->
+          <div style="grid-column:1; grid-row:1; align-self:start;">
+            <img src="calibration.png" alt="Hand-eye calibration setup" style="width:100%; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,0.10); display:block;" />
+          </div>
+          <!-- Top-right: calibration description -->
+          <p class="fig-subsection-note" style="grid-column:2; grid-row:1; margin:0; align-self:center; font-size:15px; color:var(--ink-soft); line-height:1.78;">
+            The robot's kinematic chain yields the flange-to-base transform T<sub>B→F</sub>.
+            Through hand-eye calibration, the fixed extrinsic transform T<sub>F→C</sub> between the flange and the RGB-D camera is resolved,
+            so the camera's world pose T<sub>B→C</sub>&thinsp;=&thinsp;T<sub>B→F</sub>&thinsp;·&thinsp;T<sub>F→C</sub>
+            is known for any manipulator configuration — enabling accurate 3D back-projection of each depth frame into the robot frame.
+          </p>
+          <!-- Bottom-left: perception description -->
+          <p class="fig-subsection-note" style="grid-column:1; grid-row:2; margin:0; align-self:center; font-size:15px; color:var(--ink-soft); line-height:1.78;">
+            <strong>Grounding DINO</strong> localizes the plant zero-shot via the text prompt "leaves," producing bounding boxes that <strong>SAM2</strong> refines into a precise binary mask per frame.
+            Applying this mask to each depth image removes pots, soil, and background clutter, leaving only plant points for 3D back-projection.
+            The robot captures ≈30 RGB-D frames; each masked partial cloud is transformed into the world frame and fused globally via <strong>ICP</strong>.
+          </p>
+          <!-- Bottom-right: perception image -->
+          <div style="grid-column:2; grid-row:2; align-self:start;">
+            <img src="perception.png" alt="Semantic depth masking and multi-view point cloud fusion" style="width:100%; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,0.10); display:block;" />
+          </div>
+        </div>
+        <p class="fade-in" style="font-size:15px; color:var(--ink-soft); line-height:1.78; margin-bottom:16px;">
+          The fused point cloud goes through multiple processing steps to extract a 3D skeleton of the plant — serving as the direct input to the elastic rod simulation. Simultaneously, a machine learning-based approach identifies the <strong>optimal collision-free grasping point</strong> on the main stem, producing a 7-DoF grasp pose ready for robotic execution.
+        </p>
 
         <!-- Skeleton GIF carousel -->
         <div class="photo-carousel fade-in" id="skel-carousel">
@@ -197,7 +229,7 @@
 
         <!-- Fig.2 + Fig.3: diagonal layout -->
         <div class="fig-subsection">
-          <h3>2. Simulation &amp; Robotic Execution</h3>
+          <h3>3. Simulation &amp; Robotic Execution</h3>
         </div>
 
         <div class="fade-in delay-1 grid-halves" style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto; gap:24px 32px; margin:28px 0;">
