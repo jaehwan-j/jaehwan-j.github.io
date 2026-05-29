@@ -7,6 +7,175 @@
   <link rel="icon" type="image/png" href="../../assets/img/CV_Lab.png" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
   <link rel="stylesheet" href="../project.css" />
+  <style>
+    /* ── Carousel ── */
+    .vc-carousel { position: relative; margin: 20px 0 36px; }
+    .vc-slide { display: none; }
+    .vc-slide.active { display: block; }
+
+    .vc-card {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(164,30,52,0.12);
+    }
+
+    /* Prompts area (top of card) */
+    .vc-prompts {
+      background: var(--crimson-pale);
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .vc-pi {
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      font-size: 14px;
+      color: var(--ink-soft);
+      line-height: 1.72;
+      font-family: var(--font);
+    }
+    .vc-pa {
+      color: var(--crimson);
+      font-weight: 700;
+      flex-shrink: 0;
+      line-height: 1.72;
+    }
+
+    /* Scenario label for LLM */
+    .vc-scenario-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--crimson);
+      margin-bottom: 2px;
+    }
+    .vc-scenario-text {
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      font-style: italic;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      line-height: 1.65;
+    }
+    .vc-prompts-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--crimson);
+      margin-bottom: 2px;
+    }
+
+    /* Video area (bottom of card) */
+    .vc-video {
+      background: #111;
+    }
+    .vc-video video {
+      width: 100%;
+      display: block;
+      max-height: 420px;
+      object-fit: contain;
+      background: #111;
+    }
+
+    /* I2V: image + video side by side */
+    .vc-i2v {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      background: #111;
+    }
+    .vc-i2v-img {
+      background: #1e1e1e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      gap: 8px;
+    }
+    .vc-i2v-img img {
+      width: 100%;
+      border-radius: 8px;
+      display: block;
+    }
+    .vc-i2v-img p {
+      color: #888;
+      font-size: 11px;
+      margin: 0;
+      text-align: center;
+    }
+    .vc-i2v video {
+      width: 100%;
+      display: block;
+      max-height: 320px;
+      object-fit: contain;
+      background: #111;
+    }
+
+    /* Controls */
+    .vc-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 10px;
+    }
+    .vc-btn {
+      background: none;
+      border: 1px solid #ddd;
+      border-radius: 50%;
+      width: 30px; height: 30px;
+      font-size: 14px; cursor: pointer;
+      color: var(--ink-light);
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .vc-btn:hover { border-color: var(--ink); color: var(--ink); }
+    .vc-dots { display: flex; gap: 6px; align-items: center; }
+    .vc-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #ddd; cursor: pointer; transition: background 0.2s;
+    }
+    .vc-dot.active { background: var(--ink-light); }
+
+    /* --- Acknowledgement --- */
+    .ack-nvidia {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(118,185,0,0.08);
+      border: 1px solid rgba(118,185,0,0.25);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+    }
+    .ack-nvidia-badge {
+      flex-shrink: 0;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: #fff;
+      background: #76b900;
+      padding: 5px 14px;
+      border-radius: 6px;
+    }
+    .ack-nvidia-note {
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      line-height: 1.6;
+      margin: 0 !important;
+    }
+
+    @media (max-width: 480px) {
+      .vc-i2v { grid-template-columns: 1fr; }
+      .vc-i2v-img { flex-direction: row; padding: 10px; }
+      .vc-i2v-img img { width: 80px; }
+    }
+  </style>
 </head>
 <body>
   <nav class="proj-nav">
@@ -17,46 +186,376 @@
   <main class="proj-main">
     <div class="proj-container">
 
+      <!-- ── HEADER ─────────────────────────────────────────────── -->
       <header class="proj-header fade-in">
-        <span class="proj-tag">Text-to-Video · Long Video Generation</span>
-        <h1>MEVG: Multi-Event Video Generation with Text-to-Video Models</h1>
+        <span class="proj-tag">Video Generation · ECCV 2024</span>
+        <h1>MEVG: Multi-event Video Generation with Text-to-Video Models</h1>
+
         <p class="proj-authors">
-          Gyeongrok Oh, <strong>Jaehwan Jeong</strong>, Sieun Kim, Wonmin Byeon,
-          Jinkyu Kim, Sungwoong Kim, Sangpil Kim
+          Gyeongrok Oh<sup>1</sup>,&thinsp;
+          <strong>Jaehwan Jeong</strong><sup>1</sup>,&thinsp;
+          Sieun Kim<sup>1</sup>,&thinsp;
+          Wonmin Byeon<sup>2</sup>,&thinsp;
+          Jinkyu Kim<sup>1</sup>,&thinsp;
+          Sungwoong Kim<sup>1</sup>,&thinsp;
+          Sangpil Kim<sup>1</sup>
         </p>
-        <p class="proj-venue">European Conference on Computer Vision <strong>(ECCV)</strong>, 2024</p>
+
+        <div class="proj-affiliations">
+          <span class="aff-badge ku"><sup>1</sup>&nbsp;Korea University</span>
+          <span class="aff-badge nvidia"><sup>2</sup>&nbsp;NVIDIA</span>
+        </div>
+
+        <p class="proj-venue">European Conference on Computer Vision (ECCV), 2024</p>
+
         <div class="proj-links">
-          <a href="../../assets/paper/MEVG.pdf" class="proj-btn" target="_blank" rel="noopener">ECCV Paper</a>
-          <a href="Poster.png" class="proj-btn proj-btn-outline" target="_blank" rel="noopener">Poster</a>
-          <a href="https://arxiv.org/pdf/2312.04086" class="proj-btn proj-btn-outline" target="_blank" rel="noopener">arXiv</a>
+          <a href="https://arxiv.org/abs/2312.04086" class="proj-btn" target="_blank" rel="noopener">arXiv</a>
           <a href="https://github.com/kuai-lab/eccv24_MEVG" class="proj-btn proj-btn-outline" target="_blank" rel="noopener">GitHub</a>
         </div>
       </header>
 
-      <div class="proj-teaser fade-in delay-1">
-        <img src="../../assets/img/ECCV24.png" alt="MEVG teaser" />
-      </div>
-
+      <!-- ── TL;DR ──────────────────────────────────────────────── -->
       <section class="proj-section fade-in">
-        <h2>Abstract</h2>
+        <h2>TL;DR</h2>
         <p>
-          Text-to-video generation models typically condition on a single text prompt, limiting their ability to
-          synthesize videos that involve multiple distinct events unfolding over time. MEVG addresses this by
-          enabling multi-event video generation: given a sequence of text descriptions, the model produces a
-          temporally coherent video in which each segment faithfully reflects its corresponding event. We propose
-          a framework that coordinates multiple text-conditioned generation stages while maintaining visual
-          continuity across event boundaries, resulting in smooth, semantically rich video narratives.
+          We introduce <strong>MEVG</strong>, a training-free diffusion-based method that generates a single coherent video
+          depicting <strong>multiple sequential events</strong> given individual text sentences —
+          with <strong>no fine-tuning or additional video data required</strong>.
+          A <strong>Last Frame-aware Latent Initialization (LFLI)</strong> strategy seeds each clip's latent
+          from the previous clip's final frame, while <strong>Dynamic Noise</strong> enforces diversity
+          and <strong>Structure-guided Sampling</strong> maintains visual consistency within each event.
+          A novel <strong>prompt generator</strong> automatically converts coarse user scenarios into
+          optimized per-event prompts, and MEVG outperforms zero-shot baselines in multi-event video generation.
         </p>
       </section>
 
-      <section class="proj-section fade-in delay-1">
+      <!-- ── DEMO VIDEO ─────────────────────────────────────────── -->
+      <div class="proj-video-wrap fade-in delay-1">
+        <video controls preload="metadata">
+          <source src="video1.mp4#t=0.001" type="video/mp4" />
+        </video>
+        <div class="proj-video-caption">
+          "Santa Claus goes snowboarding on a snowy mountain."
+          → "...rides his sleigh through the snow."
+          → "...walks through the forest to a frozen lake."
+          → "...has fun skating on the ice."
+        </div>
+      </div>
+
+      <!-- ── KEY CONTRIBUTIONS ──────────────────────────────────── -->
+      <section class="proj-section fade-in">
         <h2>Key Contributions</h2>
         <ul class="proj-bullets">
-          <li class="fade-in">Multi-event video generation framework conditioned on a sequence of text prompts.</li>
-          <li class="fade-in delay-1">Temporal coordination across generation stages to ensure visual continuity between events.</li>
-          <li class="fade-in delay-2">Semantically faithful synthesis for each event segment without cross-contamination.</li>
-          <li class="fade-in delay-3">Evaluation on multi-event benchmarks showing improved temporal coherence and semantic alignment.</li>
+          <li class="fade-in">
+            <strong>Training-free multi-event generation</strong> — generates a video consisting of multiple events
+            without requiring any training or additional video data.
+          </li>
+          <li class="fade-in delay-1">
+            <strong>Last-frame-aware initialization &amp; dynamic noise adjustment</strong> — a novel latent vector strategy
+            enhancing <u>temporal and semantic consistency</u> between consecutive event clips.
+          </li>
+          <li class="fade-in delay-2">
+            <strong>Novel prompt generator</strong> — transforms coarse text inputs into optimal per-event instructions,
+            ensuring <u>coherent semantic transitions</u> throughout the generated video.
+          </li>
+          <li class="fade-in delay-3">
+            <strong>State-of-the-art zero-shot performance</strong> — outperforms other zero-shot video generation methods
+            in multi-event reflection while maintaining <u>visually coherent content</u>.
+          </li>
         </ul>
+      </section>
+
+      <!-- ── PROJECT DESIGN ────────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>Project Design</h2>
+
+        <div class="fig-block fade-in">
+          <img src="Overview.png" alt="MEVG overall pipeline" />
+          <p class="fig-caption">Given multiple prompts (<strong>P</strong>) each describing a different event, MEVG chains video clips into a single, <strong>temporally coherent video</strong>. Each clip's latent is initialized from the final frame of the preceding clip via <strong>Last Frame-aware Latent Initialization (LFLI)</strong>, and <strong>Structure-guided Sampling</strong> ensures <strong>visual consistency</strong> throughout each event.</p>
+        </div>
+
+        <div class="fade-in grid-halves" style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto; gap:24px 32px; margin:28px 0;">
+          <!-- top-left: LFLI image -->
+          <img src="LFLI.png" alt="Last Frame-aware Latent Initialization" style="grid-column:1; grid-row:1; width:100%; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,0.10); display:block; align-self:start;" />
+          <!-- top-right: (i) Structure-guided Sampling -->
+          <div style="grid-column:2; grid-row:1; align-self:center;">
+            <p style="font-size:14.5px; font-weight:700; color:var(--ink); margin-bottom:6px;">(i) Structure-guided Sampling</p>
+            <ul class="proj-bullets">
+              <li>Maintain visual consistency <strong>within an event</strong>, which act as a regularization term.</li>
+              <li>Differential update strategy prevent the <strong>identical latent codes</strong> across the video.</li>
+            </ul>
+          </div>
+          <!-- bottom-left: (ii) Dynamic Noise -->
+          <div style="grid-column:1; grid-row:2; align-self:center;">
+            <p style="font-size:14.5px; font-weight:700; color:var(--ink); margin-bottom:6px;">(ii) Dynamic Noise</p>
+            <ul class="proj-bullets">
+              <li>Enforce the <strong>diversity</strong> of the generated video with noise scheduling function.</li>
+              <li>Noise scheduling function is <strong>monotonically decrease</strong> function.</li>
+            </ul>
+          </div>
+          <!-- bottom-right: (iii) Last Frame Aware Inversion -->
+          <div style="grid-column:2; grid-row:2; align-self:center;">
+            <p style="font-size:14.5px; font-weight:700; color:var(--ink); margin-bottom:6px;">(iii) Last Frame Aware Inversion</p>
+            <ul class="proj-bullets">
+              <li>Maintain a visual correlation between <strong>two different events.</strong></li>
+              <li>Denoised observation x̂ contains a <strong>sketcy spatial layout and context</strong>.</li>
+            </ul>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ── RESULTS ────────────────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>Results</h2>
+
+        <!-- LVDM carousel (video 1–5) -->
+        <div class="fig-subsection">
+          <h3>Video Results Based on <a href="https://github.com/YingqingHe/LVDM" target="_blank" rel="noopener" style="color:var(--crimson); font-weight:600;">LVDM</a></h3>
+        </div>
+
+        <div class="vc-carousel fade-in" id="lvdm">
+          <!-- slide 1 -->
+          <div class="vc-slide active">
+            <div class="vc-card">
+              <div class="vc-prompts">
+                <div class="vc-pi">"Santa Claus <span style="color:rgb(10,91,205);">goes snowboarding</span> on a snowy mountain."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"Santa Claus <span style="color:rgb(10,91,205);">rides his sleigh</span> through the snow in the mountain."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"Santa Claus <span style="color:rgb(10,91,205);">walks through the forest to a frozen lake</span>."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"Santa Claus <span style="color:rgb(10,91,205);">has fun skating on the ice</span>."</div>
+              </div>
+              <div class="vc-video"><video controls preload="metadata"><source src="video1.mp4#t=0.001" type="video/mp4" /></video></div>
+            </div>
+          </div>
+          <!-- slide 2 -->
+          <div class="vc-slide">
+            <div class="vc-card">
+              <div class="vc-prompts">
+                <div class="vc-pi">"A golden retriever <span style="color:rgb(197,93,229);">is having a picnic</span> on a beautiful tropical beach at sunset."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"A golden retriever <span style="color:rgb(197,93,229);">is running</span> towards a beautiful tropical beach at sunset."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"A golden retriever <span style="color:rgb(197,93,229);">is sitting next to a bonfire</span> on a beautiful tropical beach at sunset."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"A golden retriever <span style="color:rgb(197,93,229);">is looking at the starry sky</span> on a beautiful tropical beach."</div>
+              </div>
+              <div class="vc-video"><video controls preload="metadata"><source src="video2.mp4#t=0.001" type="video/mp4" /></video></div>
+            </div>
+          </div>
+          <!-- slide 3 -->
+          <div class="vc-slide">
+            <div class="vc-card">
+              <div class="vc-prompts">
+                <div class="vc-pi">"A waterfall flows in the <span style="color:rgb(184,95,6);">mountains</span> under a clear sky."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"A waterfall flows in the <span style="color:rgb(184,95,6);">fall mountains</span> under a clear sky."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"A waterfall flows in the <span style="color:rgb(184,95,6);">winter mountains</span> under a clear sky."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"A waterfall <span style="color:rgb(184,95,6);">frozen on a mountain during a snowstorm</span>."</div>
+              </div>
+              <div class="vc-video"><video controls preload="metadata"><source src="video3.mp4#t=0.001" type="video/mp4" /></video></div>
+            </div>
+          </div>
+          <!-- slide 4 -->
+          <div class="vc-slide">
+            <div class="vc-card">
+              <div class="vc-prompts">
+                <div class="vc-pi">"<span style="color:rgb(204,0,0);">The volcano erupts</span> in the clear weather."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"<span style="color:rgb(204,0,0);">Smoke comes from the crater of the volcano,</span> which has ended its eruption in the clear weather."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"The weather around the volcano <span style="color:rgb(204,0,0);">turns cloudy</span>."</div>
+              </div>
+              <div class="vc-video"><video controls preload="metadata"><source src="video4.mp4#t=0.001" type="video/mp4" /></video></div>
+            </div>
+          </div>
+          <!-- slide 5 -->
+          <div class="vc-slide">
+            <div class="vc-card">
+              <div class="vc-prompts">
+                <div class="vc-pi">"There is a beach <span style="color:rgb(49,138,4);">where there is no one</span>."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"<span style="color:rgb(49,138,4);">The waves hit</span> the deserted beach."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"There is a beach <span style="color:rgb(49,138,4);">that has been swept away by waves</span>."</div>
+              </div>
+              <div class="vc-video"><video controls preload="metadata"><source src="video5.mp4#t=0.001" type="video/mp4" /></video></div>
+            </div>
+          </div>
+          <div class="vc-controls">
+            <button class="vc-btn" id="lvdm-prev">&#8592;</button>
+            <div class="vc-dots">
+              <div class="vc-dot active"></div><div class="vc-dot"></div>
+              <div class="vc-dot"></div><div class="vc-dot"></div><div class="vc-dot"></div>
+            </div>
+            <button class="vc-btn" id="lvdm-next">&#8594;</button>
+          </div>
+        </div>
+
+        <!-- VideoCrafter carousel (video 6–7) -->
+        <div class="fig-subsection">
+          <h3>Video Results Based on <a href="https://github.com/AILab-CVC/VideoCrafter" target="_blank" rel="noopener" style="color:var(--crimson); font-weight:600;">VideoCrafter1</a></h3>
+        </div>
+
+        <div class="vc-carousel fade-in" id="vc">
+          <!-- slide 6 -->
+          <div class="vc-slide active">
+            <div class="vc-card">
+              <div class="vc-prompts">
+                <div class="vc-pi">"An astronaut in a white uniform is <span style="color:rgb(0,137,123);">snowboarding in the snowy hill</span>."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"An astronaut in a white uniform is <span style="color:rgb(0,137,123);">surfing in the sea</span>."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"An astronaut in a white uniform is <span style="color:rgb(0,137,123);">surfing in the desert</span>."</div>
+              </div>
+              <div class="vc-video"><video controls preload="metadata"><source src="video6.mp4#t=0.001" type="video/mp4" /></video></div>
+            </div>
+          </div>
+          <!-- slide 7 -->
+          <div class="vc-slide">
+            <div class="vc-card">
+              <div class="vc-prompts">
+                <div class="vc-pi">"A white dog is <span style="color:rgb(230,74,25);">running</span> in the beautiful meadow."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"A white dog is <span style="color:rgb(230,74,25);">standing</span> in the beautiful meadow."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"A white dog is <span style="color:rgb(230,74,25);">yawning loudly</span> in the beautiful meadow."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"A white dog <span style="color:rgb(230,74,25);">lies on the ground</span> in the beautiful meadow."</div>
+              </div>
+              <div class="vc-video"><video controls preload="metadata"><source src="video7.mp4#t=0.001" type="video/mp4" /></video></div>
+            </div>
+          </div>
+          <div class="vc-controls">
+            <button class="vc-btn" id="vc-prev">&#8592;</button>
+            <div class="vc-dots">
+              <div class="vc-dot active"></div><div class="vc-dot"></div>
+            </div>
+            <button class="vc-btn" id="vc-next">&#8594;</button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ── APPLICATIONS ───────────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>Applications</h2>
+
+        <!-- I2V carousel (video 8–9) -->
+        <div class="fig-subsection">
+          <h3>Image &amp; Multi-text Video Generation</h3>
+          <p class="fig-subsection-note">MEVG accepts an input image alongside multiple text prompts to generate a video grounded in the given visual context.</p>
+        </div>
+
+        <div class="vc-carousel fade-in" id="i2v">
+          <!-- slide 8 -->
+          <div class="vc-slide active">
+            <div class="vc-card">
+              <div class="vc-prompts">
+                <div class="vc-pi">"A single white flower <span style="color:rgb(156,39,176);">gradually blooms from a single green flower bud</span>."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"The single white flower <span style="color:rgb(156,39,176);">is blooming</span>."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"A lovely <span style="color:rgb(156,39,176);">fully blossomed</span> single white flower."</div>
+              </div>
+              <div class="vc-i2v">
+                <div class="vc-i2v-img">
+                  <img src="video8.jpg" alt="Input image" />
+                  <p>Input image</p>
+                </div>
+                <video controls preload="metadata"><source src="image8.mp4#t=0.001" type="video/mp4" /></video>
+              </div>
+            </div>
+          </div>
+          <!-- slide 9 -->
+          <div class="vc-slide">
+            <div class="vc-card">
+              <div class="vc-prompts">
+                <div class="vc-pi">"People <span style="color:rgb(21,101,192);">walks</span> on the beach at night."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"There are <span style="color:rgb(21,101,192);">sand castles</span> on the beach under the <span style="color:rgb(21,101,192);">fireworks</span> at night."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"<span style="color:rgb(21,101,192);">Very few people remain</span> on the beach at night and they <span style="color:rgb(21,101,192);">gradually fade away</span>."</div>
+              </div>
+              <div class="vc-i2v">
+                <div class="vc-i2v-img">
+                  <img src="image9.jpg" alt="Input image" />
+                  <p>Input image</p>
+                </div>
+                <video controls preload="metadata"><source src="video9.mp4#t=0.001" type="video/mp4" /></video>
+              </div>
+            </div>
+          </div>
+          <div class="vc-controls">
+            <button class="vc-btn" id="i2v-prev">&#8592;</button>
+            <div class="vc-dots">
+              <div class="vc-dot active"></div><div class="vc-dot"></div>
+            </div>
+            <button class="vc-btn" id="i2v-next">&#8594;</button>
+          </div>
+        </div>
+
+        <!-- LLM carousel (video 10–11) -->
+        <div class="fig-subsection">
+          <h3>Video Generation with Large Language Model (LLM)</h3>
+          <p class="fig-subsection-note">An LLM decomposes a coarse scenario into optimized per-event prompts, enabling flexible and dynamic text input.</p>
+        </div>
+
+        <div class="vc-carousel fade-in" id="llm">
+          <!-- slide 10 -->
+          <div class="vc-slide active">
+            <div class="vc-card">
+              <div class="vc-prompts">
+                <div class="vc-scenario-label">Original Scenario</div>
+                <div class="vc-scenario-text">"In the morning, Albert Einstein was walking in the forest, later he read a book under a tree, and as night fell, he walked towards the lake, eventually sitting near it in the forest at night."</div>
+                <div class="vc-prompts-label">Prompts (LLM)</div>
+                <div class="vc-pi">"Albert Einstein is <span style="color:rgb(46,125,50);">walking in the forest in the morning</span>."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"Albert Einstein <span style="color:rgb(46,125,50);">reads a book under a tree</span>."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"Albert Einstein <span style="color:rgb(46,125,50);">walks from the forest towards the lake as night falls</span>."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"Albert Einstein <span style="color:rgb(46,125,50);">sits near the lake in the forest at night</span>."</div>
+              </div>
+              <div class="vc-video"><video controls preload="metadata"><source src="video10.mp4#t=0.001" type="video/mp4" /></video></div>
+            </div>
+          </div>
+          <!-- slide 11 -->
+          <div class="vc-slide">
+            <div class="vc-card">
+              <div class="vc-prompts">
+                <div class="vc-scenario-label">Original Scenario</div>
+                <div class="vc-scenario-text">"A man embarks on a motorcycle journey, runs through a traffic jam on a busy road, rides a motorcycle in the desert, walks in the desert at night, and looks at the sky with aurora in the desert."</div>
+                <div class="vc-prompts-label">Prompts (LLM)</div>
+                <div class="vc-pi">"A man <span style="color:rgb(136,14,79);">embarks on a motorcycle journey</span>."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"A man <span style="color:rgb(136,14,79);">runs through a traffic jam on a busy road</span>."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"A man <span style="color:rgb(136,14,79);">rides a motorcycle in the desert</span>."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"A man <span style="color:rgb(136,14,79);">walks in the desert at night</span>."</div>
+                <div class="vc-pi"><span class="vc-pa">→</span>"A man <span style="color:rgb(136,14,79);">looks at the sky with aurora in the desert</span>."</div>
+              </div>
+              <div class="vc-video"><video controls preload="metadata"><source src="video11.mp4#t=0.001" type="video/mp4" /></video></div>
+            </div>
+          </div>
+          <div class="vc-controls">
+            <button class="vc-btn" id="llm-prev">&#8592;</button>
+            <div class="vc-dots">
+              <div class="vc-dot active"></div><div class="vc-dot"></div>
+            </div>
+            <button class="vc-btn" id="llm-next">&#8594;</button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ── CONCLUSION ─────────────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>Conclusion</h2>
+        <p>
+          We presented <strong>MEVG</strong>, a training-free diffusion-based framework for generating
+          temporally coherent videos from multiple sequential text prompts — requiring no fine-tuning
+          or additional video data. By combining <strong>Last Frame-aware Latent Initialization</strong>,
+          <strong>Dynamic Noise</strong> scheduling, and <strong>Structure-guided Sampling</strong>,
+          MEVG effectively bridges consecutive event clips while maintaining visual and semantic consistency.
+          A novel <strong>prompt generator</strong> further enables flexible coarse-to-optimal text input.
+          Extensive experiments and user studies demonstrate that MEVG outperforms zero-shot baselines
+          in temporal coherency of content and semantics, offering a practical and scalable approach
+          to multi-event video synthesis.
+        </p>
+      </section>
+
+      <!-- ── ACKNOWLEDGEMENT ────────────────────────────────────── -->
+      <section class="proj-section ack-section fade-in">
+        <h2>Acknowledgement</h2>
+        <div class="ack-nvidia">
+          <span class="ack-nvidia-badge">NVIDIA</span>
+          <p class="ack-nvidia-note">Research collaboration with <strong>NVIDIA</strong> (Wonmin Byeon), contributing to the development of multi-event video generation.</p>
+        </div>
+        <p>
+          This work was supported by the Institute of Information &amp; Communications Technology
+          Planning &amp; Evaluation (IITP) funded by the Korean government (MSIT) under the
+          Artificial Intelligence Graduate School Program (Korea University),
+          and by the Culture, Sports and Tourism R&amp;D Program through the Korea Creative Content Agency (KOCCA)
+          funded by the Ministry of Culture, Sports and Tourism.
+        </p>
       </section>
 
     </div>
@@ -68,5 +567,29 @@
   </footer>
 
   <script src="../project.js"></script>
+  <script>
+    (function () {
+      function initVC(id) {
+        const slides = document.querySelectorAll('#' + id + ' .vc-slide');
+        const dots   = document.querySelectorAll('#' + id + ' .vc-dot');
+        let cur = 0;
+        function goTo(idx) {
+          slides[cur].querySelectorAll('video').forEach(function(v){ v.pause(); });
+          slides[cur].classList.remove('active');
+          dots[cur].classList.remove('active');
+          cur = (idx + slides.length) % slides.length;
+          slides[cur].classList.add('active');
+          dots[cur].classList.add('active');
+        }
+        document.getElementById(id + '-prev').addEventListener('click', function(){ goTo(cur - 1); });
+        document.getElementById(id + '-next').addEventListener('click', function(){ goTo(cur + 1); });
+        dots.forEach(function(d, i){ d.addEventListener('click', function(){ goTo(i); }); });
+      }
+      initVC('lvdm');
+      initVC('vc');
+      initVC('i2v');
+      initVC('llm');
+    })();
+  </script>
 </body>
 </html>
