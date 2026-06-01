@@ -114,6 +114,11 @@ ul { list-style: none; padding: 0; }
 /* First section needs top padding for navbar */
 #about { padding-top: calc(var(--nav-h) + 30px); }
 
+/* Scroll offset for sticky nav */
+#news, #projects, #publications, #services {
+  scroll-margin-top: var(--nav-h);
+}
+
 
 /* ── SECTION HEADINGS ────────────────────────────── */
 .sec-heading {
