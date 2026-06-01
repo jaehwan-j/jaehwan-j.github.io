@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maestro (Complex A2V) — Jaehwan (Jay) Jeong</title>
+  <link rel="icon" type="image/png" href="../../assets/img/CV_Lab.png" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+  <link rel="stylesheet" href="../project.css" />
+  <style>
+    .ack-kocca {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(30,136,229,0.08);
+      border: 1px solid rgba(30,136,229,0.25);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+    }
+    .ack-kocca-badge {
+      flex-shrink: 0;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: #fff;
+      background: #1e88e5;
+      padding: 5px 14px;
+      border-radius: 6px;
+    }
+    .ack-kocca-note {
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      line-height: 1.6;
+      margin: 0 !important;
+    }
+  </style>
+</head>
+<body>
+  <nav class="proj-nav">
+    <a href="../../index.html" class="back-link">← Jaehwan (Jay) Jeong</a>
+    <span class="proj-nav-title">Maestro</span>
+  </nav>
+
+  <main class="proj-main">
+    <div class="proj-container">
+
+      <!-- ── HEADER ─────────────────────────────────────────────── -->
+      <header class="proj-header fade-in">
+        <span class="proj-tag">Generative AI · Audio-to-Video · Diffusion Models</span>
+        <h1>Semantically Complex Audio to Video Generation with Audio Source Separation</h1>
+
+        <p class="proj-authors">
+          Sieun Kim<sup>1</sup>,&thinsp;
+          <strong>Jaehwan Jeong</strong><sup>1</sup>,&thinsp;
+          Sumin In<sup>1</sup>,&thinsp;
+          Seung Hyun Lee<sup>1</sup>,&thinsp;
+          Seungryong Kim<sup>2</sup>,<br />
+          Saerom Kim<sup>1</sup>,&thinsp;
+          Wooyeol Baek<sup>1</sup>,&thinsp;
+          Sang Ho Yoon<sup>2</sup>,&thinsp;
+          Eugenio Culurciello<sup>3</sup>,&thinsp;
+          Sangpil Kim<sup>1,†</sup>
+        </p>
+
+        <div class="proj-affiliations">
+          <span class="aff-badge ku"><sup>1</sup>&nbsp;Korea University</span>
+          <span class="aff-badge kaist"><sup>2</sup>&nbsp;KAIST</span>
+          <span class="aff-badge purdue"><sup>3</sup>&nbsp;Purdue University</span>
+          <span class="aff-note">&thinsp;†&nbsp;Corresponding author</span>
+        </div>
+
+        <p class="proj-venue">Engineering Applications of Artificial Intelligence <strong>(EAAI, JCR IF Top 10%)</strong>, 2025</p>
+
+        <div class="proj-links">
+          <a href="../../assets/paper/Semantically complex audio to video generation with audio source separation.pdf" class="proj-btn" target="_blank" rel="noopener">EAAI</a>
+          <a href="https://github.com/kuai-lab/eaai25_complex_A2V" class="proj-btn proj-btn-outline" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </header>
+
+      <!-- ── TEASER ─────────────────────────────────────────────── -->
+      <div class="fig-block fade-in" style="margin: 0 0 32px;">
+        <img src="Fig.2.png" alt="Examples of Maestro multi-source audio-to-video generation" style="border-radius: 12px;" />
+        <p class="fig-caption" style="text-align:center;">
+          Maestro generates videos that fully reflect semantically complex, multi-source audio, naturally expressing multiple distinct objects at designated spatial regions.
+        </p>
+      </div>
+
+      <!-- ── TL;DR ──────────────────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>TL;DR</h2>
+        <p>
+          We present <strong>Maestro</strong>, a novel multi-source audio-to-video generation framework that incorporates
+          decomposed audio sources into video generative models.
+          Real-world audio consists of mixed sources, causing existing models to struggle with capturing all semantics.
+          Our proposed <strong>Attention Mosaic</strong> directly maps each decomposed audio feature to its corresponding
+          spatial attention region, ensuring accurate object placement and rendering.
+          A <strong>Condition Injection Module (CIM)</strong> further produces natural contexts involving non-audible objects
+          by leveraging the spatial prior knowledge of Stable Diffusion.
+          Extensive experiments demonstrate state-of-the-art performance in both multi- and single-source
+          audio-to-video generation tasks.
+        </p>
+      </section>
+
+      <!-- ── KEY CONTRIBUTIONS ──────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>Key Contributions</h2>
+        <ul class="proj-bullets">
+          <li class="fade-in">
+            <strong>Audio Source Decomposition</strong> — Addresses the limitation of existing audio-to-video methods
+            by decomposing mixed audio sources via <strong>AudioSep</strong> to accurately capture multiple semantics,
+            enabling faithful multi-object video generation.
+          </li>
+          <li class="fade-in delay-1">
+            <strong>Attention Mosaic for Spatial Control</strong> — <u>Object Locating</u> (2D Gaussian weighting)
+            and <u>Mosaic Denoising</u> (masked spatial attention) directly map each audio source to its designated
+            region, vastly enhancing instance-level audio-visual alignment.
+          </li>
+          <li class="fade-in delay-2">
+            <strong>Pixel-Level Context Optimization</strong> — The CIM is pre-trained using Stable Diffusion's
+            denoising loss alongside MSE, achieving superior contextual expression of non-audible background objects
+            beyond contrastive learning alone.
+          </li>
+        </ul>
+      </section>
+
+      <!-- ── PROJECT DESIGN ─────────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>Project Design</h2>
+
+        <div class="fig-block fade-in">
+          <img src="Fig.3.png" alt="Maestro system overview" />
+          <p class="fig-caption"><strong>Overview of Maestro.</strong> The model consists of two main components: (i) Multi-source audio feature extraction, producing time-dependent audio tokens via the Condition Injection Module, and (ii) Attention Mosaic, directly mapping each audio feature to its designated spatial location in the video diffusion model.</p>
+        </div>
+
+        <div class="fig-subsection">
+          <h3>1. Condition Injection Module (CIM)</h3>
+        </div>
+
+        <div class="fig-block fade-in delay-1">
+          <img src="Fig.4.png" alt="Condition Injection Module training" />
+          <p class="fig-caption">Audio input is divided into segments and processed through an audio encoder and CIM. By employing a Stable Diffusion denoising loss (λ₁ = 0.9) along with MSE, CIM learns video frame information corresponding to each audio segment, enabling natural expression of background and non-audible contexts.</p>
+        </div>
+
+        <div class="fig-subsection">
+          <h3>2. Attention Mosaic</h3>
+        </div>
+
+        <div class="fig-block fade-in delay-1">
+          <img src="Fig.5.png" alt="Attention Mosaic architecture" />
+          <p class="fig-caption">At timestep <em>t</em>, noise is predicted via either <strong>Object Locating</strong> — using a 2D Gaussian weight function to place each object within its bounding box — or <strong>Mosaic Denoising</strong> — masking query maps so each audio condition exclusively attends to its designated region, ensuring fine-grained object separation and quality.</p>
+        </div>
+
+      </section>
+
+      <!-- ── EXPERIMENTS ────────────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>Experiments</h2>
+
+        <p class="sub-heading">Comparison with Audio-to-Video Baselines</p>
+        <div class="fig-block fade-in">
+          <img src="Fig.9.png" alt="Qualitative comparison against AADiff, TPoS, TempoToken" />
+          <p class="fig-caption">Compared to AADiff, TPoS, and TempoToken, Maestro excels in representing semantically complex audio — maintaining object action fidelity and temporal consistency even with overlapping sound sources.</p>
+        </div>
+
+        <div class="table-scroll fade-in">
+          <table class="result-table">
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>FVD ↓</th>
+                <th>IA ↑</th>
+                <th>AV-Align ↑</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>AADiff</td><td>2151.8</td><td>0.30</td><td>0.30</td></tr>
+              <tr><td>TPoS</td><td>2314.1</td><td>0.23</td><td>0.43</td></tr>
+              <tr><td>TempoToken</td><td>1912.8</td><td>0.38</td><td>0.52</td></tr>
+              <tr class="row-ours">
+                <td><strong>Maestro (Ours)</strong></td>
+                <td class="best">585.9</td>
+                <td class="best">0.48</td>
+                <td class="best">0.58</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="sub-note">Evaluated on VGGSound. User study (100 participants) confirmed Maestro rated highest in realism, semantic alignment, temporal consistency, and overall quality.</p>
+
+        <p class="sub-heading" style="margin-top:24px;">Comparison with Text-to-Video Baselines</p>
+        <div class="fig-block fade-in delay-1">
+          <img src="Fig.11.png" alt="Qualitative comparison against Peekaboo and TrailBlazer" />
+          <p class="fig-caption">Against multi-object text-to-video models (Peekaboo and TrailBlazer), Maestro achieves superior visual separation, accurate bounding-box placement, and natural object interactions.</p>
+        </div>
+
+        <p class="sub-heading">Ablation: Attention Mosaic</p>
+        <div class="fig-block fade-in delay-1">
+          <img src="Fig.14.png" alt="Ablation study of Attention Mosaic" />
+          <p class="fig-caption">Without Object Locating (OL) or Mosaic Denoising (MD), the model merges multiple audio conditions or fails to separate objects. Combining both produces perfectly separated, stable outputs.</p>
+        </div>
+
+        <p class="sub-heading">Dynamic Sound Responsiveness</p>
+        <div class="fig-block fade-in">
+          <img src="Fig.10.png" alt="Sound transitions and volume control" />
+          <p class="fig-caption">(a) Sound transitions visually shift from a crackling fire to extinguishing wind. (b) Volume changes alter the visual intensity and size of the generated fire — demonstrating dynamic audio responsiveness.</p>
+        </div>
+
+        <p class="sub-heading">Hyperparameter Tuning</p>
+        <div class="fig-grid-2 fade-in delay-1">
+          <div class="fig-block">
+            <img src="Fig.7.png" alt="N_D ablation" />
+            <p class="fig-caption">Ablation of timestep divider <em>N<sub>D</sub></em> (λ₃). A value of 6 balances clear object positioning (OL) and generation quality (MD).</p>
+          </div>
+          <div class="fig-block">
+            <img src="Fig.8.png" alt="lambda_1 ablation" />
+            <p class="fig-caption">Optimizing loss weight λ₁. Setting λ₁ = 0.9 (90% denoising loss) significantly improves contextual rendering over pure MSE.</p>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ── CONCLUSION ─────────────────────────────────────────── -->
+      <section class="proj-section fade-in">
+        <h2>Conclusion</h2>
+        <p>
+          We proposed <strong>Maestro</strong>, a novel multi-source audio-to-video generation pipeline that accurately
+          produces multiple distinct objects by decomposing mixed audio via AudioSep.
+          The <strong>Attention Mosaic</strong> technique ensures objects are precisely placed and rendered with fine detail,
+          while the <strong>Condition Injection Module</strong> enables natural expression of non-audible background objects.
+          Extensive experiments demonstrate state-of-the-art performance on both multi-source and single-source
+          audio-to-video generation. Future work will focus on handling more complex soundscapes,
+          extending to longer video sequences, and broadening the range of generable object categories.
+        </p>
+      </section>
+
+      <!-- ── ACKNOWLEDGEMENT ────────────────────────────────────── -->
+      <section class="proj-section ack-section fade-in">
+        <h2>Acknowledgement</h2>
+        <div class="ack-kocca">
+          <span class="ack-kocca-badge">KOCCA &amp; IITP</span>
+          <p class="ack-kocca-note">This research was supported by the <strong>Culture, Sports and Tourism R&amp;D Program</strong> through the Korea Creative Content Agency (KOCCA), and the Institute of Information &amp; Communications Technology Planning &amp; Evaluation (IITP) funded by the Korean government (MSIT).</p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="proj-footer">
+    <a href="../../index.html">← Back to Homepage</a>
+    <span>&copy; <span id="year"></span> Jaehwan (Jay) Jeong</span>
+  </footer>
+
+  <script src="../project.js"></script>
+</body>
+</html>
