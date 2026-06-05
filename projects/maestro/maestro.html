@@ -3,38 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Maestro (Complex A2V) — Jaehwan (Jay) Jeong</title>
+  <title>Maestro — Jaehwan (Jay) Jeong</title>
   <link rel="icon" type="image/png" href="../../assets/img/CV_Lab.png" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
   <link rel="stylesheet" href="../project.css" />
-  <style>
-    .ack-kocca {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      background: rgba(30,136,229,0.08);
-      border: 1px solid rgba(30,136,229,0.25);
-      border-radius: 10px;
-      padding: 14px 18px;
-      margin-bottom: 16px;
-    }
-    .ack-kocca-badge {
-      flex-shrink: 0;
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      color: #fff;
-      background: #1e88e5;
-      padding: 5px 14px;
-      border-radius: 6px;
-    }
-    .ack-kocca-note {
-      font-size: 13.5px;
-      color: var(--ink-soft);
-      line-height: 1.6;
-      margin: 0 !important;
-    }
-  </style>
 </head>
 <body>
   <nav class="proj-nav">
@@ -107,19 +79,19 @@
         <h2>Key Contributions</h2>
         <ul class="proj-bullets">
           <li class="fade-in">
-            <strong>Audio Source Decomposition</strong> — Addresses the limitation of existing audio-to-video methods
-            by decomposing mixed audio sources via <strong>AudioSep</strong> to accurately capture multiple semantics,
-            enabling faithful multi-object video generation.
+            <strong>Audio Source Decomposition</strong> — Addresses existing limitations by decomposing mixed audio
+            sources via <u>AudioSep</u> to accurately capture <u>multiple semantics</u>, enabling
+            <u>faithful multi-object video generation</u>.
           </li>
           <li class="fade-in delay-1">
-            <strong>Attention Mosaic for Spatial Control</strong> — <u>Object Locating</u> (2D Gaussian weighting)
-            and <u>Mosaic Denoising</u> (masked spatial attention) directly map each audio source to its designated
-            region, vastly enhancing instance-level audio-visual alignment.
+            <strong>Attention Mosaic for Spatial Control</strong> — Employs <u>Object Locating</u> (2D Gaussian
+            weighting) and <u>Mosaic Denoising</u> (masked spatial attention) to directly map each audio source
+            to its designated region, vastly enhancing <u>instance-level audio-visual alignment</u>.
           </li>
           <li class="fade-in delay-2">
-            <strong>Pixel-Level Context Optimization</strong> — The CIM is pre-trained using Stable Diffusion's
-            denoising loss alongside MSE, achieving superior contextual expression of non-audible background objects
-            beyond contrastive learning alone.
+            <strong>Diffusion-Based Context Optimization</strong> — The <u>Condition Injection Module (CIM)</u>
+            is pre-trained using <u>Stable Diffusion's denoising loss</u> alongside MSE, achieving superior
+            contextual expression of <u>non-audible background objects</u> beyond contrastive learning.
           </li>
         </ul>
       </section>
@@ -224,23 +196,26 @@
       <section class="proj-section fade-in">
         <h2>Conclusion</h2>
         <p>
-          We proposed <strong>Maestro</strong>, a novel multi-source audio-to-video generation pipeline that accurately
-          produces multiple distinct objects by decomposing mixed audio via AudioSep.
-          The <strong>Attention Mosaic</strong> technique ensures objects are precisely placed and rendered with fine detail,
-          while the <strong>Condition Injection Module</strong> enables natural expression of non-audible background objects.
-          Extensive experiments demonstrate state-of-the-art performance on both multi-source and single-source
-          audio-to-video generation. Future work will focus on handling more complex soundscapes,
-          extending to longer video sequences, and broadening the range of generable object categories.
+          We propose <strong>Maestro</strong>, a novel pipeline for multi-source audio-to-video generation that
+          accurately produces multiple objects within frames by decomposing audio sources.
+          Our <strong>Attention Mosaic</strong> technique ensures that generated objects are placed precisely
+          where desired, enhancing fine details. Additionally, by applying an effective optimization strategy
+          to the <strong>Condition Injection Module</strong>, we achieve the generation of better contextual
+          expressions involving non-audible objects. Results from the user study indicate that Maestro
+          significantly produces high-quality video from both multi-source and single-source audio,
+          improving audio-visual alignment. We also observe that our method effectively captures basic
+          characteristics such as volume changes and transitions.
         </p>
       </section>
 
       <!-- ── ACKNOWLEDGEMENT ────────────────────────────────────── -->
       <section class="proj-section ack-section fade-in">
         <h2>Acknowledgement</h2>
-        <div class="ack-kocca">
-          <span class="ack-kocca-badge">KOCCA &amp; IITP</span>
-          <p class="ack-kocca-note">This research was supported by the <strong>Culture, Sports and Tourism R&amp;D Program</strong> through the Korea Creative Content Agency (KOCCA), and the Institute of Information &amp; Communications Technology Planning &amp; Evaluation (IITP) funded by the Korean government (MSIT).</p>
-        </div>
+        <p>
+          This research was supported by the Culture, Sports and Tourism R&amp;D Program through the
+          Korea Creative Content Agency (KOCCA), and the Institute of Information &amp; Communications
+          Technology Planning &amp; Evaluation (IITP) funded by the Korean government (MSIT).
+        </p>
       </section>
 
     </div>
