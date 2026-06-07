@@ -120,7 +120,7 @@
           During normal operation, the RL policy constantly ensures <strong>reactive, collision-free obstacle avoidance</strong>,
           while highly accurate <strong>LiDAR-RGB-IMU sensor fusion (LiVO)</strong> continuously logs safe waypoints.
           Simultaneously, by monitoring specialized <strong>internal attention heads</strong>,
-          the system detects <strong>VLA hallucinations and path deviations</strong> in real-time with <strong>zero computational overhead</strong>.
+          the system detects <strong>VLA hallucinations and path deviations</strong> in real-time with <strong>near-zero computational overhead</strong>.
           When a deviation occurs, the system seamlessly leverages the active RL policy to execute a <strong>direct safe recovery</strong>,
           autonomously navigating back to the last correct path for highly reliable real-world deployment.
           The entire pipeline is built on <strong>ROS 2</strong>, enabling modular integration and real-time operation on physical hardware.
@@ -149,9 +149,9 @@
           </li>
           <li class="fade-in delay-1">
             <strong>Training-Free Anomaly Detection</strong> — We propose a real-time detection framework that
-            monitors H<sub>nav</sub> dynamics with <u>zero computational overhead</u> and no trainable parameters,
+            monitors H<sub>nav</sub> dynamics with <u>near-zero computational overhead</u> and no trainable parameters,
             achieving a <u>65.1% path deviation detection rate (recall)</u> and a <u>76.4% F1 score</u>
-            in R2R unseen environments, thereby effectively mitigating the model hallucination issue.
+            in R2R unseen environments, thereby effectively monitoring the model hallucination issue.
           </li>
           <li class="fade-in delay-2">
             <strong>VLA–RL Integrated Pipeline</strong> — We couple the high-level anomaly signal with a continuous
@@ -172,7 +172,7 @@
         <!-- Overview Architecture -->
         <div class="fig-block fade-in">
           <img src="Fig.2.png" alt="HiVLA system overview" />
-          <p class="fig-caption">HiVLA runs two parallel loops: the high-level NaVILA model (~0.3 Hz) interprets egocentric observations and language instructions to plan navigation waypoints, while the low-level RL policy (~10 Hz) handles reactive obstacle avoidance in real time. Localization is provided by Fast-LIVO2, which tightly fuses LiDAR, RGB, and IMU data, and the full pipeline is orchestrated over ROS 2.</p>
+          <p class="fig-caption"><strong>HiVLA</strong> runs two parallel loops: the high-level VLA model (~0.3 Hz) interprets egocentric observations and language instructions to plan navigation waypoints, while the low-level RL policy (~10 Hz) handles reactive obstacle avoidance in real time. Localization is provided by multi-sensor fusion, which tightly fuses LiDAR, RGB, and IMU data, and the full pipeline is orchestrated over ROS 2.</p>
         </div>
 
         <!-- High-Level -->
@@ -188,7 +188,7 @@
 
         <div class="fig-block fade-in">
           <img src="Fig.4.png" alt="Navigation head spatiotemporal alignment" />
-          <p class="fig-caption">The selected Navigation Heads faithfully track the robot's navigation phase while on the correct path. The moment a deviation begins — often before the trajectory is visibly off-course — they produce a sharp, detectable divergence pattern, enabling immediate anomaly detection.</p>
+          <p class="fig-caption">Navigation Heads (<em>H</em><sub>nav</sub>) are identified as the top-performing heads that distinctly exhibit the four predefined spatiotemporal alignment properties (<em>S</em><sub>uniform</sub>, <em>S</em><sub>diag</sub>, <em>S</em><sub>peak</sub>, <em>S</em><sub>shift</sub>) while demonstrating high sensitivity to shifts in the navigation state. Furthermore, to maximize the robustness of anomaly detection using these selected heads, we perform a grid search, as illustrated in the figures below, to derive the optimal combination of detection hyperparameters. Consequently, during online inference, the moment a path deviation begins these heads produce a sharp, detectable divergence pattern, thereby enabling immediate anomaly detection.</p>
         </div>
 
         <div class="fig-block fade-in delay-1">
@@ -204,7 +204,7 @@
         <!-- Low-Level -->
         <div class="fig-subsection">
           <h3>2. Low-Level &mdash; Local Obstacle Avoidance</h3>
-          <p class="fig-subsection-note">A lightweight actor-critic RL policy trained in Isaac Lab and deployed zero-shot on physical hardware at ~10 Hz.</p>
+          <p class="fig-subsection-note">A lightweight actor-critic RL policy trained in Isaac Lab and deployed zero-shot on physical hardware at ~10 Hz, complementing the slow VLA inference (~0.3 Hz) to ensure stable and continuous navigation at all times.</p>
         </div>
 
         <div class="fig-block fade-in">
@@ -251,7 +251,7 @@
 
         <div class="fig-block fade-in delay-1">
           <img src="Fig.12.png" alt="Real-world obstacle avoidance and trajectory recovery" />
-          <p class="fig-caption">End-to-end real-world validation. On the left, the RL policy avoids both static and dynamic obstacles in a cluttered corridor. On the right, after the Navigation Heads flag a path deviation, HiVLA executes an autonomous recovery back to the last logged safe waypoint — completing the task without any human intervention.</p>
+          <p class="fig-caption">Qualitative results of our path deviation detection and recovery pipeline, evaluated in both simulation and the real world. <strong>(a) In VLN-CE simulation</strong> (VLA), once a deviation is detected, the agent is teleported back to the last logged safe waypoint for clean recovery. <strong>(b) In the real world</strong> (VLA+RL), teleportation is not possible — instead, the RL policy drives the robot directly back to the saved waypoint. Since obstacles may lie along this recovery path, the RL policy's collision-free navigation capability becomes essential to complete the recovery safely.</p>
         </div>
 
       </section>
@@ -643,7 +643,7 @@
             <source src="Demo_vla_rl_2.mp4#t=0.001" type="video/mp4" />
           </video>
           <div class="proj-video-caption">
-            Full HiVLA pipeline — VLA-guided navigation with continuous RL obstacle avoidance deployed in a real-world corridor.
+            VLA-guided navigation with continuous RL obstacle avoidance deployed in a real-world corridor.
           </div>
         </div>
 
