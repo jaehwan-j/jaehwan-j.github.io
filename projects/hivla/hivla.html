@@ -178,28 +178,27 @@
         <!-- High-Level -->
         <div class="fig-subsection">
           <h3>1. High-Level &mdash; Path State Monitoring &amp; Anomaly Detection</h3>
-          <p class="fig-subsection-note">Training-free anomaly detection via Navigation Heads, running at ~0.3 Hz with zero computational overhead.</p>
+          <p class="fig-subsection-note">Training-free anomaly detection via Navigation Heads (H<sub>nav</sub>), running at ~0.3 Hz with near-zero computational overhead.</p>
         </div>
 
         <div class="fig-block fade-in delay-1">
           <img src="Fig.3.png" alt="Four-stage anomaly detection pipeline" />
-          <p class="fig-caption">The anomaly detection pipeline operates in four stages. Expert demonstrations are first segmented into navigation phases (<em>Phase Labeling</em>), then each attention head is scored by how well its activations correlate with those phase transitions (<em>Head Selection</em>). At inference, the top-K heads are monitored for residual spikes (<em>Anomaly Detection</em>), and any flagged deviation immediately hands control to the RL recovery policy (<em>Action Policy</em>).</p>
+          <p class="fig-caption">The anomaly detection pipeline is divided into <strong>Offline</strong> preparation and <strong>Online</strong> real-time inference, operating across four stages. <strong>(i) Phase Labeling:</strong> Prior data is segmented into distinct navigation phases. <strong>(ii) Head Selection:</strong> Each attention head is scored by how well its activations correlate with those phase transitions, determining the optimal head combination and hyperparameters. <strong>(iii) Anomaly Detection:</strong> At inference, residual spikes in the selected heads are monitored in real time to flag path deviations. <strong>(iv) Action Policy:</strong> Any flagged deviation immediately hands control to the RL recovery policy.</p>
         </div>
 
         <div class="fig-block fade-in">
           <img src="Fig.4.png" alt="Navigation head spatiotemporal alignment" />
-          <p class="fig-caption">The three discovered Navigation Heads track the robot's navigation phase faithfully while on the correct path, then produce a sharp, detectable divergence the moment a deviation begins, often before the trajectory is visibly off-course.</p>
+          <p class="fig-caption">The selected Navigation Heads faithfully track the robot's navigation phase while on the correct path. The moment a deviation begins — often before the trajectory is visibly off-course — they produce a sharp, detectable divergence pattern, enabling immediate anomaly detection.</p>
         </div>
 
-        <div class="fig-grid-2 fade-in delay-1">
-          <div class="fig-block">
-            <img src="Fig.4_1.png" alt="Head selection grid search" />
-            <p class="fig-caption">Layer–head diagnostic score grid across NaVILA's 32 × 32 attention space, used to identify which heads carry the strongest navigation-state signal.</p>
-          </div>
-          <div class="fig-block">
-            <img src="Fig.4_2.png" alt="K ablation results" />
-            <p class="fig-caption">Ablation over K (number of selected heads). K = 3 yields the best balance between precision and recall; see the paper for the full sweep.</p>
-          </div>
+        <div class="fig-block fade-in delay-1">
+          <img src="Fig.4_1.png" alt="Navigation heads analysis" />
+          <p class="fig-caption"><strong>(a) Discriminability of attention heads:</strong> measuring which heads are most sensitive to anomalous behaviors (path deviations). <strong>(b) Episode-level detection performance across different ensemble sizes (K):</strong> showing how precision and recall vary as we increase the number of monitored heads. <strong>(c) Step-level classification performance on actual navigation failure episodes:</strong> demonstrating real-time detection capability at fine temporal granularity. Notably, an ensemble of K = 3 heads achieves the best balance between detection rate and false alarm rate.</p>
+        </div>
+
+        <div class="fig-block fade-in delay-1">
+          <img src="Fig.4_2.png" alt="Hyperparameter optimization" />
+          <p class="fig-caption"><strong>(a) Effect of window size W on detection performance:</strong> showing how the temporal window for anomaly scoring impacts sensitivity. <strong>(b) Effect of point count P on false episode rate:</strong> demonstrating the trade-off between suppressing false alarms and detection latency. <strong>(c) Sensitivity to decision threshold τ:</strong> revealing sharp transitions in detection behavior near the optimal threshold. Ultimately, the detector is configured with (W = 10, P = 9, τ = 0.95) to maintain robust anomaly detection while minimizing unnecessary interruptions during normal navigation.</p>
         </div>
 
         <!-- Low-Level -->
