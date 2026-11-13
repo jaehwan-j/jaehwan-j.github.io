@@ -95,7 +95,7 @@
       <!-- ── HEADER ─────────────────────────────────────────────── -->
       <header class="proj-header fade-in">
         <span class="proj-tag">Robotics · Dataset · 3D Benchmark</span>
-        <h1>AgriChrono: A Multi-modal Dataset Capturing Crop Growth and Lighting Variability with a Field Robot</h1>
+        <h1>AgriChrono: A Longitudinal Dataset and Benchmark for Novel-View Synthesis of Field-Grown Crops</h1>
 
         <p class="proj-authors">
           <strong>Jaehwan Jeong</strong><sup>1,2</sup>,&thinsp;
@@ -103,7 +103,7 @@
           Mohammad Jony<sup>3</sup>,&thinsp;
           Shahab Ahmad<sup>3</sup>,<br />
           Md. Mukhlesur Rahman<sup>3</sup>,&thinsp;
-          Sangpil Kim<sup>1†</sup>,&thinsp;
+          Sangpil Kim<sup>1</sup>,&thinsp;
           M. Khalid Jawed<sup>2†</sup>
         </p>
 
@@ -111,7 +111,7 @@
           <span class="aff-badge ku"><sup>1</sup>&nbsp;Korea University</span>
           <span class="aff-badge ucla"><sup>2</sup>&nbsp;UCLA</span>
           <span class="aff-badge ndsu"><sup>3</sup>&nbsp;NDSU</span>
-          <span class="aff-note">&thinsp;†&nbsp;Co-corresponding authors</span>
+          <span class="aff-note">&thinsp;†&nbsp;Corresponding author</span>
         </div>
 
         <p class="proj-venue">Under review, 2026</p>
@@ -168,19 +168,16 @@
       <section class="proj-section fade-in">
         <h2>TL;DR</h2>
         <p>
-          we propose <strong>AgriChrono</strong>, a comprehensive framework purpose-built for <strong>"in-the-wild" scene-level 3D reconstruction</strong>,
-          featuring <strong>three core contributions</strong>: a custom robotic platform, an <strong>18 TB multi-modal dataset</strong>, and a <strong>stress-test benchmark</strong>.
-          First, we deploy a modular robotic platform equipped with a highly accurate, time-synchronized sensor suite
-          (<strong>LiDAR-RGB-Depth-IMU</strong>) to continuously log the high-fidelity <strong>6-DoF poses</strong> and structural data required for reliable 3D reconstruction.
-          Second, utilizing this platform, we release a massive dataset that rigorously captures
-          <strong>continuous morphological crop growth</strong> and <strong>severe daily illumination shifts</strong> over a month.
-          Finally, we establish a <strong>7-scenario 3D reconstruction benchmark</strong> to evaluate
-          <strong>16 state-of-the-art NeRF and 3DGS methods</strong>.
-          While validating our platform's data-gathering efficacy, this benchmark explicitly exposes critical robustness issues in existing baselines,
-          demonstrating their failure to maintain consistent performance under
-          <strong>wind-induced crop motion</strong> and <strong>lighting variations</strong>.
-          Ultimately, AgriChrono provides a crucial stress-test to catalyze the development of
-          <strong>robust, next-generation in-the-wild 3D reconstruction models</strong>.
+          We present <strong>AgriChrono</strong>, an integrated framework connecting robotic acquisition, dataset construction,
+          novel-view synthesis (NVS) benchmarking, and agricultural scene reconstruction for field-grown crops.
+          Our <strong>AgriChrobot</strong> platform supports web-based teleoperation and repeated multi-view acquisition along crop rows, yielding a
+          longitudinal canola dataset of 160 recording sessions over approximately one month.
+          We establish <strong>seven NVS scenarios</strong> (four times of day, three acquisition dates) and evaluate <strong>15 NeRF- and Gaussian Splatting-based methods</strong>,
+          including fine-detail metrics within manually annotated canola regions. The benchmark reveals that
+          competitive whole-image performance does not necessarily translate into faithful reproduction of fine crop details.
+          Motivated by this, we propose <strong>AgriSplat</strong>, combining Contribution-guided Anchor Reallocation (CAR) and Asymmetric Directional Supervision (ADS),
+          which improves the crop-region gradient-energy ratio from <u>0.506 to 0.847</u> and edge F-score from <u>0.712 to 0.797</u> over Octree-GS, averaged across seven scenarios,
+          while also improving whole-image PSNR, SSIM, and LPIPS.
         </p>
       </section>
 
@@ -199,29 +196,20 @@
         <h2>Key Contributions</h2>
         <ul class="proj-bullets">
           <li class="fade-in">
-            <strong>Modular Robotic Acquisition Platform</strong> — we develop a custom, remote-operable field robot
-            equipped with a precise, time-synchronized multi-modal sensor suite
-            (<u>RGB, Depth, LiDAR, IMU, and Pose</u>).
-            This platform serves as a foundational tool, validating that
-            <u>high-fidelity 3D reconstruction is achievable</u> in challenging,
-            "in-the-wild" agricultural environments.
+            <strong>AgriChrobot</strong> — a custom-designed <u>multi-sensor robotic platform</u> supporting
+            <u>web-based remote operation</u> and <u>repeated multi-view field data acquisition</u>.
           </li>
           <li class="fade-in delay-1">
-            <strong>Large-Scale In-the-Wild Dataset</strong> — we release the comprehensive
-            <u>18 TB AgriChrono dataset</u>, uniquely capturing
-            <u>continuous morphological crop growth</u> and
-            <u>systematic daily illumination changes</u>.
-            Collected daily over a one-month period, this dataset documents complex,
-            scene-level structural changes to significantly accelerate
-            real-world precision agriculture research.
+            <strong>AgriChrono</strong> — a <u>longitudinal canola dataset</u> comprising <u>160 sessions</u> capturing
+            <u>crop-development and illumination variations</u>, providing RGB images, stereo-derived depth maps, and camera-pose estimates.
           </li>
           <li class="fade-in delay-2">
-            <strong>3D Reconstruction Stress-Test Benchmark</strong> — we introduce a rigorous benchmark
-            featuring <u>7 distinct scenarios</u> to evaluate
-            <u>16 state-of-the-art NeRF and 3DGS methods</u>.
-            This benchmark illustrates the significant challenges of non-rigid, dynamic scenes,
-            explicitly exposing the fundamental robustness limitations of existing baselines
-            against <u>wind-induced motion</u> and <u>lighting shifts</u>.
+            <strong>NVS Benchmark</strong> — a standardized <u>seven-scenario evaluation of 15 NeRF- and 3DGS-based methods</u>,
+            incorporating whole-image rendering quality, fine-detail reproduction within manually annotated canola regions, and computational cost.
+          </li>
+          <li class="fade-in delay-3">
+            <strong>AgriSplat</strong> — a <u>3DGS-based reconstruction method</u> combining CAR and ADS to improve
+            <u>rendering quality</u> and <u>fine-detail reproduction within canola regions</u>.
           </li>
         </ul>
       </section>
@@ -240,16 +228,11 @@
         </div>
 
         <p class="fig-subsection-note" style="margin-top:0; margin-bottom:28px;">
-          This project was conducted across three distinct crop sites (Canola, Canola Genotypes, and Flax) at the
-          <strong>North Dakota State University (NDSU)</strong> experimental farm.
-          To enable agricultural researchers to operate the robot effortlessly without terminal commands, we developed a
-          custom <strong>WebRTC-based low-latency Web UI</strong> using Flask and Janus.
-          Initially, we intended to use a single ZED X camera for both data acquisition and monitoring. However, this approach
-          presented several constraints: the ZED SDK's lack of simultaneous processing support, high latency in ROS implementation,
-          storage capacity issues due to ROSBAG's low compression rate, and a fixed camera field-of-view (FoV).
-          To resolve this, ZED data saving was restricted exclusively to its highly compressed <strong>.svo2 format</strong>,
-          and an independent <strong>Obsbot PTZ camera</strong> was installed specifically for monitoring, thereby reducing
-          system load and enhancing teleoperation convenience.
+          <strong>Site 1</strong> is the main canola field (InVigor L340PC, a plot of about 15.2&times;0.91 m) used for repeated observations of crop development and natural illumination;
+          <strong>Site 2</strong> is a canola genotype trial and <strong>Site 3</strong> is a flax trial with different cultivation treatments, all at the North Dakota State University (NDSU) experimental field.
+          The robot traversed Site 1 in clockwise and counterclockwise directions at a target speed of about 0.2 m/s, recording at about 15 frames/s, and was operated through a
+          <strong>WebRTC-based web interface</strong> offering system monitoring, recording directory and session management, robot and PTZ camera control, and low-latency video streaming.
+          Site 1 provides the primary observations analyzed in the paper; Sites 2 and 3 are documented in the Supplementary Material.
           (For an overview, see <a href="https://github.com/StructuresComp/agri-chrono" target="_blank" rel="noopener" style="color:var(--crimson);">GitHub</a>.)
         </p>
 
@@ -261,23 +244,20 @@
         <div class="fade-in delay-1 grid-halves" style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto; gap:24px 32px; margin:28px 0;">
           <img src="Fig.2.png" alt="AgriChrono robot hardware configuration" style="grid-column:1; grid-row:1; width:100%; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,0.10); display:block; align-self:start;" />
           <p class="fig-subsection-note" style="grid-column:2; grid-row:1; margin:0; align-self:center;">
-            Built on a <strong>Scout UGV</strong> base, the platform integrates an <strong>NVIDIA Jetson AGX Orin</strong>,
-            dual ZED X cameras, and Livox LiDAR. To meet varying sensor voltage needs from the robot's 24–27V output,
-            we used <strong>DC-DC converters</strong> to supply 12V (LiDAR) and 18V (Jetson). This enabled over
-            <strong>4 hours of continuous operation</strong> per charge, supporting our rigorous daily schedule.
-            Due to severe GPS interference from the nearby Hector International Airport, we omitted our planned
-            RTK-GNSS module, pivoting to purely <strong>vision and IMU-based localization</strong>
-            (AprilTags planned for future work).
-            <br />(See <a href="https://github.com/StructuresComp/agri-chrono/tree/main/hardware" target="_blank" rel="noopener" style="color:var(--crimson);">Hardware GitHub</a>.)
-          </p>
+          <strong>AgriChrobot</strong> is built on an <strong>AgileX Scout 2.0 UGV</strong> with a custom three-tier sensor frame and protective chassis. The lower tier holds power conversion modules and an auxiliary
+          <strong>Livox Mid-360 LiDAR</strong>; the middle tier houses two <strong>ZED X stereo cameras</strong> (4-mm lenses, adjustable three-axis supports with passive vibration isolation), an
+          <strong>NVIDIA Jetson AGX Orin (64 GB)</strong>, and a 5G communication module; the upper tier supports an <strong>OBSBOT PTZ camera</strong> and an omnidirectional antenna for remote observation.
+          Aluminum&ndash;acrylic panels and a sun shield protect the assembly outdoors, and DC-DC converters supply the 12 V (LiDAR) and 19 V (Jetson) rails from the 24 V battery.
+          The two stereo units face different forward-oblique directions, providing four RGB streams in total.
+          <br />(See <a href="https://github.com/StructuresComp/agri-chrono/tree/main/hardware" target="_blank" rel="noopener" style="color:var(--crimson);">Hardware GitHub</a>.)
+        </p>
           <p class="fig-subsection-note" style="grid-column:1; grid-row:2; margin:0; align-self:center;">
-            To manage the robot remotely nationwide, we used <strong>Tailscale VPN</strong> for static IP assignment,
-            ensuring consistent connectivity. We also implemented a <strong>fail-safe mechanism</strong> that instantly
-            halts the robot upon communication loss, prioritizing safe unattended operation. These optimizations enabled
-            stable, long-range teleoperation from UCLA — <strong>1,500 miles away</strong> — yielding a massive
-            <strong>18 TB dataset</strong>.
-            <br />(See <a href="https://github.com/StructuresComp/agri-chrono/tree/main/software" target="_blank" rel="noopener" style="color:var(--crimson);">Software GitHub</a>.)
-          </p>
+          The onboard software integrates <strong>ROS 2 Humble</strong> for vehicle control, a CAN-bus interface to the Scout platform, and a browser-based interface for remote operation.
+          A <strong>Flask and Socket.IO</strong> backend manages operator commands, recording control, and system status, while video feedback is streamed through a <strong>WebRTC pipeline</strong> (GStreamer and Janus Gateway).
+          A <strong>zero-velocity stop command</strong> is issued when the browser connection is lost or the control interface loses focus. The two ZED X units record <code>.svo2</code> streams with a shared session-start time reference,
+          and RGB images, depth maps, and VIO poses are extracted offline to build the dataset.
+          <br />(See <a href="https://github.com/StructuresComp/agri-chrono/tree/main/software" target="_blank" rel="noopener" style="color:var(--crimson);">Software GitHub</a>.)
+        </p>
           <img src="remote.JPEG" alt="Remote operation setup" style="grid-column:2; grid-row:2; width:100%; border-radius:10px; box-shadow:0 4px 20px rgba(0,0,0,0.10); display:block; align-self:center;" />
         </div>
 
@@ -300,15 +280,12 @@
         </div>
 
         <p class="fig-subsection-note" style="margin-top:0; margin-bottom:28px;">
-          To document continuous morphological crop growth and natural illumination variations, data were
-          systematically collected <strong>four times daily</strong> over a <strong>three-week period</strong>.
-          To counteract extreme field temperatures exceeding <strong>100°F</strong>, we installed a sun-shielded top panel
-          for thermal protection. However, this passive cooling was not completely sufficient during prolonged operations,
-          occasionally resulting in FPS degradation due to thermal throttling
-          (as future work, we plan to upgrade the thermal management system, including improved active ventilation).
-          Collection was suspended during severe weather to prevent hardware failure.
-          When post-rain muddy soil rendered the paths impassable, we manually placed <strong>wooden planks</strong>
-          along the traversal routes to secure necessary traction, allowing us to maintain a consistent data collection frequency.
+          AgriChrono was collected at the NDSU experimental field in Fargo from <strong>July 2 to August 1, 2025</strong>. From July 2 to 21, acquisitions were scheduled at approximately
+          <strong>06:00, 11:00, 16:00, and 21:00</strong> to observe the field under different natural illumination; afterwards the frequency was reduced as crop growth slowed and as rain and muddy ground affected the schedule.
+          The Site 1 dataset comprises <strong>160 recording sessions</strong> (80 rounds of one CW and one CCW traversal; 559,575 time-indexed samples over 37,932 s at 14.7 FPS; about 13.7 TB).
+          Each session provides <strong>four 1920&times;1080 RGB streams</strong> from two ZED X stereo cameras, <strong>two depth maps</strong> (ZED SDK neural depth) aligned with the left cameras, and
+          <strong>6-DoF VIO camera poses</strong>, organized per session with raw <code>.svo2</code> streams, rectified <code>.png</code> pairs, <code>.npz</code> depth, and <code>.csv</code> metadata (IMU, poses); LiDAR recordings are included in the full archive.
+          The repository is released in four configurations: the <strong>full 18 TB</strong> multi-modal repository, a 1.2 TB sample subset, a <strong>162 GB benchmark subset</strong> for the seven NVS scenarios, and a 5.4 TB stereo-only RGB variant.
           (See <a href="https://github.com/StructuresComp/agri-chrono/tree/main/datasets" target="_blank" rel="noopener" style="color:var(--crimson);">Dataset GitHub</a>.)
         </p>
 
@@ -331,20 +308,32 @@
         </div>
 
         <p class="fig-subsection-note" style="margin-top:0; margin-bottom:28px;">
-          To provide a highly reliable benchmark, we established initial geometries via point clouds and utilized
-          <strong>Visual-Inertial Odometry (VIO)</strong> fusing RGB and IMU data, validated to yield the highest pose
-          accuracy through rigorous comparative experiments. Combining these poses with the RGB images, we constructed and
-          publicly released a <strong>3D reconstruction benchmark in COLMAP format</strong>, featuring
-          <strong>seven distinct scenarios</strong>.
-          Our analysis revealed that under favorable conditions — stable lighting and dense canopy structures —
-          state-of-the-art models achieved high accuracy, effectively validating our sensor pipeline.
-          Conversely, under harsher scenarios (e.g., intense illumination, sparse crops, wind-induced motion),
-          baseline performance fluctuated significantly, demonstrating that existing AI models remain highly vulnerable
-          to unconstrained, <strong>"in-the-wild" environments</strong>.
+          We establish seven NVS scenarios from the counterclockwise (CCW) traversals at Site 1: four <strong>Lighting Variance</strong> sessions at 06:00, 11:00, 16:00, and 21:00 on Day 19,
+          and three <strong>Growth Span</strong> sessions at 06:00 on Days 6, 13, and 20. For each scenario, we sample every seventh frame of the left RGB stream of ZED-L, obtaining
+          <strong>400 images at 960&times;540</strong> (350 for training, 50 uniformly distributed images held out for evaluation) with camera poses from VIO and an initial point cloud from 0.1% of the depth points of the training frames.
+          Each scenario is reconstructed independently, so the benchmark evaluates held-out-view rendering within individual traversals. We compare <strong>15 baselines</strong>
+          (11 Gaussian Splatting-based and four NeRF-based methods) using NerfBaselines v1.2.12 with default configurations, and evaluate both the whole image and manually annotated canola regions
+          (SSIM<sub>C</sub>, LPIPS<sub>C</sub>, GER<sub>C</sub>, EdgeF<sub>C</sub>).
+          Averaged across the seven scenarios, all 15 baselines exhibit crop-region gradient-energy ratios below one: competitive whole-image performance does not necessarily translate into faithful reproduction of fine details in thin and overlapping crop structures.
           <br />(Dataset download: <a href="https://github.com/StructuresComp/agri-chrono/tree/main/benchmark" target="_blank" rel="noopener" style="color:var(--crimson);">Benchmark GitHub</a>
           · Leaderboard: <a href="https://jaehwan-j.github.io/agrichrono/" target="_blank" rel="noopener" style="color:var(--crimson);">Benchmark Page</a>)
         </p>
 
+        <!-- AgriSplat -->
+        <div class="fig-subsection">
+          <h3>5. AgriSplat</h3>
+        </div>
+        <div class="fig-block fade-in">
+          <img src="AgriSplat.png" alt="Overview of AgriSplat" />
+        </div>
+        <p class="fig-subsection-note" style="margin-top:0; margin-bottom:12px;">
+          <strong>Overview of AgriSplat.</strong>
+          Given input images and an initial 3D point cloud, AgriSplat begins with visibility-relaxed anchor initialization.
+          During anchor growth, <u>Contribution-guided Anchor Reallocation (CAR)</u> prunes low-contribution anchors and reinvests the resulting credit into eligible sub-threshold candidates ranked by gradient magnitude.
+          After anchor growth and reallocation, <u>Asymmetric Directional Supervision (ADS)</u> refines rendering under a fixed anchor topology while continuing to optimize the trainable Gaussian parameters.
+          ADS penalizes insufficient rendered contrast along reference image-gradient directions to improve the reproduction of fine crop structures.
+          The lower panels illustrate the CAR and ADS mechanisms.
+        </p>
       </section>
 
       <!-- ── BENCHMARK ─────────────────────────────────────────── -->
@@ -353,201 +342,96 @@
         <div class="table-scroll">
           <table class="result-table compact">
             <thead>
-              <tr>
-                <th rowspan="3" style="min-width:130px;">Method</th>
-                <th colspan="8" style="text-align:center; border-bottom:1px solid #e0e0e0;">Lighting Variance (Day 19)</th>
-                <th colspan="6" style="text-align:center; border-bottom:1px solid #e0e0e0;">Growth Span (6 AM)</th>
-              </tr>
-              <tr>
-                <th colspan="2" style="text-align:center;">06:00 AM</th>
-                <th colspan="2" style="text-align:center;">11:00 AM</th>
-                <th colspan="2" style="text-align:center;">04:00 PM</th>
-                <th colspan="2" style="text-align:center;">09:00 PM</th>
-                <th colspan="2" style="text-align:center;">Day 6</th>
-                <th colspan="2" style="text-align:center;">Day 13</th>
-                <th colspan="2" style="text-align:center;">Day 20</th>
-              </tr>
-              <tr>
-                <th>PSNR ↑</th><th>SSIM ↑</th>
-                <th>PSNR ↑</th><th>SSIM ↑</th>
-                <th>PSNR ↑</th><th>SSIM ↑</th>
-                <th>PSNR ↑</th><th>SSIM ↑</th>
-                <th>PSNR ↑</th><th>SSIM ↑</th>
-                <th>PSNR ↑</th><th>SSIM ↑</th>
-                <th>PSNR ↑</th><th>SSIM ↑</th>
-              </tr>
+              <tr><th rowspan="2" style="min-width:130px;">Method</th><th colspan="4" style="text-align:center; border-bottom:1px solid #e0e0e0;">Canola Region (mean of 7 scenarios)</th></tr>
+              <tr><th>SSIM<sub>C</sub> ↑</th><th>LPIPS<sub>C</sub> ↓</th><th>GER<sub>C</sub> →1</th><th>EdgeF<sub>C</sub> ↑</th></tr>
             </thead>
-            <tbody>
-              <!-- Gaussian Splatting methods -->
+                        <tbody>
               <tr>
-                <td>3DGUT</td>
-                <td>26.433</td><td>0.6915</td>
-                <td>22.860</td><td>0.5488</td>
-                <td>24.147</td><td>0.5906</td>
-                <td>27.813</td><td>0.7134</td>
-                <td>23.706</td><td>0.5130</td>
-                <td>24.856</td><td>0.5597</td>
-                <td>25.858</td><td>0.6477</td>
+                <td>SeaThru-NeRF</td><td>0.336</td><td>0.850</td><td>0.024</td><td>0.021</td>
               </tr>
               <tr>
-                <td>Octree-GS</td>
-                <td class="u">28.451</td><td class="best">0.8009</td>
-                <td>24.402</td><td>0.7044</td>
-                <td class="u">25.593</td><td class="u">0.7269</td>
-                <td class="u">29.716</td><td class="best">0.8092</td>
-                <td class="best">26.211</td><td class="best">0.7098</td>
-                <td class="u">27.669</td><td class="u">0.7545</td>
-                <td class="u">27.677</td><td class="u">0.7771</td>
+                <td>Nerfacto</td><td>0.337</td><td>0.767</td><td>0.047</td><td>0.100</td>
               </tr>
               <tr>
-                <td>gsplat</td>
-                <td>27.242</td><td>0.7637</td>
-                <td>23.740</td><td>0.6630</td>
-                <td>25.012</td><td>0.6882</td>
-                <td>28.714</td><td>0.7827</td>
-                <td>25.431</td><td>0.6348</td>
-                <td>26.730</td><td>0.6977</td>
-                <td>26.922</td><td>0.7355</td>
+                <td>Tetra-NeRF</td><td>0.433</td><td>0.635</td><td>0.120</td><td>0.254</td>
               </tr>
               <tr>
-                <td>3D-MCMC</td>
-                <td>27.053</td><td>0.7194</td>
-                <td>23.385</td><td>0.5886</td>
-                <td>24.667</td><td>0.6281</td>
-                <td>28.180</td><td>0.7370</td>
-                <td>24.556</td><td>0.5566</td>
-                <td>26.134</td><td>0.6349</td>
-                <td>26.357</td><td>0.6795</td>
+                <td>Zip-NeRF</td><td class="best">0.560</td><td>0.375</td><td>0.378</td><td>0.637</td>
               </tr>
-              <tr>
-                <td>WildGaussians</td>
-                <td>7.298</td><td>0.4037</td>
-                <td>11.498</td><td>0.3847</td>
-                <td>11.022</td><td>0.4061</td>
-                <td>8.158</td><td>0.4506</td>
-                <td>23.057</td><td>0.5129</td>
-                <td>24.422</td><td>0.5812</td>
-                <td>11.655</td><td>0.5140</td>
-              </tr>
-              <tr>
-                <td>GS-W</td>
-                <td>20.338</td><td>0.6593</td>
-                <td>17.946</td><td>0.5033</td>
-                <td>20.337</td><td>0.5588</td>
-                <td>22.819</td><td>0.7015</td>
-                <td>23.474</td><td>0.5186</td>
-                <td>23.616</td><td>0.5885</td>
-                <td>19.967</td><td>0.5889</td>
-              </tr>
-              <tr>
-                <td>H3DGS</td>
-                <td>27.990</td><td>0.7939</td>
-                <td class="u">24.412</td><td class="u">0.7076</td>
-                <td>25.488</td><td>0.7204</td>
-                <td>29.330</td><td>0.8042</td>
-                <td>25.473</td><td class="u">0.6680</td>
-                <td>27.260</td><td>0.7390</td>
-                <td>27.350</td><td>0.7685</td>
-              </tr>
-              <tr>
-                <td>3DGRT</td>
-                <td>26.702</td><td>0.7653</td>
-                <td>23.599</td><td>0.6616</td>
-                <td>24.733</td><td>0.6896</td>
-                <td>28.463</td><td>0.7828</td>
-                <td>25.317</td><td>0.6351</td>
-                <td>26.424</td><td>0.6986</td>
-                <td>26.301</td><td>0.7373</td>
-              </tr>
-              <tr>
-                <td>Taming3DGS</td>
-                <td>27.908</td><td>0.7756</td>
-                <td>24.342</td><td>0.6854</td>
-                <td>25.453</td><td>0.7012</td>
-                <td>29.179</td><td>0.7896</td>
-                <td>25.780</td><td>0.6533</td>
-                <td>27.241</td><td>0.7187</td>
-                <td class="u">27.534</td><td>0.7495</td>
-              </tr>
-              <tr>
-                <td>Scaffold-GS</td>
-                <td>25.542</td><td>0.7403</td>
-                <td>21.193</td><td>0.6280</td>
-                <td>24.661</td><td>0.6739</td>
-                <td>27.770</td><td>0.7743</td>
-                <td>24.816</td><td>0.6427</td>
-                <td>25.286</td><td>0.6887</td>
-                <td>24.612</td><td>0.7032</td>
-              </tr>
-              <tr>
-                <td>PGSR</td>
-                <td>26.697</td><td>0.7429</td>
-                <td>23.673</td><td>0.6415</td>
-                <td>24.634</td><td>0.6610</td>
-                <td>28.277</td><td>0.7585</td>
-                <td>24.148</td><td>0.5459</td>
-                <td>25.236</td><td>0.6271</td>
-                <td>26.607</td><td>0.7122</td>
-              </tr>
-              <tr>
-                <td>3DGS</td>
-                <td>27.107</td><td>0.7717</td>
-                <td>23.950</td><td>0.6742</td>
-                <td>24.970</td><td>0.6932</td>
-                <td>28.788</td><td>0.7884</td>
-                <td>25.449</td><td>0.6449</td>
-                <td>26.891</td><td>0.7097</td>
-                <td>26.987</td><td>0.7420</td>
-              </tr>
-              <!-- NeRF methods -->
               <tr style="border-top:2px solid #e0e0e0;">
-                <td>Zip-NeRF</td>
-                <td class="best">29.582</td><td class="u">0.7953</td>
-                <td class="best">25.923</td><td class="best">0.7562</td>
-                <td class="best">27.466</td><td class="best">0.7663</td>
-                <td class="best">30.675</td><td class="u">0.8065</td>
-                <td class="u">25.943</td><td>0.6097</td>
-                <td class="best">28.844</td><td class="best">0.7742</td>
-                <td class="best">29.418</td><td class="best">0.8105</td>
+                <td>3DGS</td><td>0.507</td><td>0.530</td><td>0.340</td><td>0.540</td>
               </tr>
               <tr>
-                <td>Tetra-NeRF</td>
-                <td>28.225</td><td>0.7333</td>
-                <td>24.057</td><td>0.6068</td>
-                <td>25.564</td><td>0.6458</td>
-                <td>29.337</td><td>0.7558</td>
-                <td>25.324</td><td>0.5976</td>
-                <td>27.096</td><td>0.6581</td>
-                <td>27.388</td><td>0.7020</td>
+                <td>Scaffold-GS</td><td>0.467</td><td>0.530</td><td>0.394</td><td>0.586</td>
               </tr>
               <tr>
-                <td>NerfStudio</td>
-                <td>23.703</td><td>0.6389</td>
-                <td>20.275</td><td>0.4353</td>
-                <td>21.573</td><td>0.5007</td>
-                <td>24.739</td><td>0.6555</td>
-                <td>22.133</td><td>0.4449</td>
-                <td>18.809</td><td>0.4454</td>
-                <td>23.194</td><td>0.5809</td>
+                <td>Taming 3DGS</td><td>0.513</td><td>0.507</td><td>0.352</td><td>0.566</td>
               </tr>
               <tr>
-                <td>SeaThru-NeRF</td>
-                <td>25.371</td><td>0.6274</td>
-                <td>21.421</td><td>0.4415</td>
-                <td>22.885</td><td>0.4975</td>
-                <td>26.456</td><td>0.6527</td>
-                <td>22.691</td><td>0.4429</td>
-                <td>21.488</td><td>0.4601</td>
-                <td>24.084</td><td>0.5681</td>
+                <td>3DGRT</td><td>0.497</td><td>0.516</td><td>0.337</td><td>0.550</td>
+              </tr>
+              <tr>
+                <td>H3DGS</td><td>0.516</td><td class="u">0.363</td><td class="u">0.517</td><td>0.709</td>
+              </tr>
+              <tr>
+                <td>GS-W</td><td>0.375</td><td>0.791</td><td>0.087</td><td>0.173</td>
+              </tr>
+              <tr>
+                <td>3D-MCMC</td><td>0.425</td><td>0.736</td><td>0.144</td><td>0.299</td>
+              </tr>
+              <tr>
+                <td>PGSR</td><td>0.465</td><td>0.598</td><td>0.267</td><td>0.462</td>
+              </tr>
+              <tr>
+                <td>gsplat</td><td>0.495</td><td>0.548</td><td>0.316</td><td>0.514</td>
+              </tr>
+              <tr>
+                <td>3DGUT</td><td>0.383</td><td>0.699</td><td>0.122</td><td>0.261</td>
+              </tr>
+              <tr>
+                <td>Octree-GS</td><td>0.533</td><td>0.391</td><td>0.506</td><td class="u">0.712</td>
+              </tr>
+              <tr class="row-ours" style="border-top:2px solid #e0e0e0;">
+                <td><strong>AgriSplat (Ours)</strong></td><td class="best">0.560</td><td class="best">0.273</td><td class="best">0.847</td><td class="best">0.797</td>
               </tr>
             </tbody>
           </table>
-          <p class="fig-caption">Novel view synthesis benchmark on Site 1. <strong>Bold</strong> = best, <u>underline</u> = second best per column.</p>
+          <p class="fig-caption">Canola Region NVS performance on Site 1 (SSIM, LPIPS, gradient-energy ratio GER, and edge F-score), averaged over the seven scenarios for 15 baselines and AgriSplat (mean of three seeds). Higher SSIM and EdgeF and lower LPIPS are better; GER is best when closest to 1. <strong>Bold</strong> = best, <u>underline</u> = second best. Whole-image metrics and training cost are on the <a href="https://jaehwan-j.github.io/agrichrono/" target="_blank" rel="noopener" style="color:var(--crimson);">Benchmark Page</a>.</p>
         </div>
-
+        <div class="table-scroll">
+          <table class="result-table compact">
+            <thead>
+              <tr><th rowspan="2" style="min-width:110px;">Method</th><th rowspan="2">Metric</th><th colspan="4" style="text-align:center; border-bottom:1px solid #e0e0e0;">Lighting Variance (Day 19)</th><th colspan="3" style="text-align:center; border-bottom:1px solid #e0e0e0;">Growth Span (06:00 AM)</th></tr>
+              <tr><th>06:00 AM</th><th>11:00 AM</th><th>04:00 PM</th><th>09:00 PM</th><th>Day 6</th><th>Day 13</th><th>Day 20</th></tr>
+            </thead>
+            <tbody>
+              <tr><td rowspan="4" style="vertical-align:middle;">Zip-NeRF</td><td>SSIM<sub>C</sub> ↑</td><td>0.553</td><td class="best">0.448</td><td class="best">0.468</td><td>0.560</td><td class="u">0.620</td><td class="u">0.669</td><td class="best">0.602</td></tr>
+              <tr><td>LPIPS<sub>C</sub> ↓</td><td>0.482</td><td class="u">0.403</td><td>0.410</td><td>0.474</td><td class="u">0.238</td><td class="u">0.282</td><td class="u">0.336</td></tr>
+              <tr><td>GER<sub>C</sub> →1</td><td>0.253</td><td>0.367</td><td>0.362</td><td>0.244</td><td>0.555</td><td>0.454</td><td>0.412</td></tr>
+              <tr><td>EdgeF<sub>C</sub> ↑</td><td>0.369</td><td>0.763</td><td>0.712</td><td>0.391</td><td>0.890</td><td>0.712</td><td>0.618</td></tr>
+              <tr style="border-top:2px solid #e0e0e0;"><td rowspan="4" style="vertical-align:middle;">Scaffold-GS</td><td>SSIM<sub>C</sub> ↑</td><td>0.512</td><td>0.318</td><td>0.392</td><td>0.532</td><td>0.516</td><td>0.554</td><td>0.447</td></tr>
+              <tr><td>LPIPS<sub>C</sub> ↓</td><td>0.593</td><td>0.606</td><td>0.566</td><td>0.587</td><td>0.323</td><td>0.437</td><td>0.595</td></tr>
+              <tr><td>GER<sub>C</sub> →1</td><td>0.290</td><td>0.433</td><td>0.345</td><td>0.289</td><td>0.554</td><td>0.468</td><td>0.378</td></tr>
+              <tr><td>EdgeF<sub>C</sub> ↑</td><td>0.328</td><td>0.771</td><td>0.676</td><td>0.317</td><td>0.870</td><td>0.648</td><td>0.492</td></tr>
+              <tr style="border-top:2px solid #e0e0e0;"><td rowspan="4" style="vertical-align:middle;">H3DGS</td><td>SSIM<sub>C</sub> ↑</td><td>0.574</td><td>0.366</td><td>0.414</td><td>0.574</td><td>0.547</td><td>0.615</td><td>0.523</td></tr>
+              <tr><td>LPIPS<sub>C</sub> ↓</td><td class="u">0.377</td><td>0.435</td><td class="u">0.406</td><td class="u">0.393</td><td>0.253</td><td>0.300</td><td>0.376</td></tr>
+              <tr><td>GER<sub>C</sub> →1</td><td>0.440</td><td class="u">0.502</td><td class="u">0.511</td><td class="u">0.444</td><td>0.659</td><td class="u">0.562</td><td class="u">0.497</td></tr>
+              <tr><td>EdgeF<sub>C</sub> ↑</td><td>0.525</td><td class="u">0.835</td><td>0.794</td><td class="u">0.521</td><td>0.901</td><td>0.736</td><td class="u">0.650</td></tr>
+              <tr style="border-top:2px solid #e0e0e0;"><td rowspan="4" style="vertical-align:middle;">Octree-GS</td><td>SSIM<sub>C</sub> ↑</td><td class="u">0.589</td><td>0.390</td><td>0.429</td><td class="u">0.581</td><td>0.590</td><td>0.625</td><td>0.528</td></tr>
+              <tr><td>LPIPS<sub>C</sub> ↓</td><td>0.393</td><td>0.469</td><td>0.435</td><td>0.428</td><td>0.268</td><td>0.325</td><td>0.419</td></tr>
+              <tr><td>GER<sub>C</sub> →1</td><td class="u">0.467</td><td>0.449</td><td>0.502</td><td>0.419</td><td class="u">0.674</td><td>0.558</td><td>0.472</td></tr>
+              <tr><td>EdgeF<sub>C</sub> ↑</td><td class="u">0.564</td><td>0.819</td><td class="u">0.799</td><td>0.511</td><td class="u">0.905</td><td class="u">0.740</td><td>0.646</td></tr>
+              <tr class="row-ours" style="border-top:2px solid #e0e0e0;"><td rowspan="4" style="vertical-align:middle;"><strong>AgriSplat (Ours)</strong></td><td>SSIM<sub>C</sub> ↑</td><td class="best">0.609</td><td class="u">0.411</td><td class="u">0.443</td><td class="best">0.596</td><td class="best">0.634</td><td class="best">0.670</td><td class="u">0.556</td></tr>
+              <tr class="row-ours"><td>LPIPS<sub>C</sub> ↓</td><td class="best">0.277</td><td class="best">0.325</td><td class="best">0.327</td><td class="best">0.291</td><td class="best">0.186</td><td class="best">0.213</td><td class="best">0.288</td></tr>
+              <tr class="row-ours"><td>GER<sub>C</sub> →1</td><td class="best">0.785</td><td class="best">0.824</td><td class="best">0.798</td><td class="best">0.793</td><td class="best">0.977</td><td class="best">0.916</td><td class="best">0.838</td></tr>
+              <tr class="row-ours"><td>EdgeF<sub>C</sub> ↑</td><td class="best">0.686</td><td class="best">0.888</td><td class="best">0.844</td><td class="best">0.680</td><td class="best">0.924</td><td class="best">0.807</td><td class="best">0.751</td></tr>
+            </tbody>
+          </table>
+          <p class="fig-caption">Scenario-wise Canola Region performance of AgriSplat and four representative methods. <strong>Bold</strong> = best, <u>underline</u> = second best per column.</p>
+        </div>
         <div class="fig-block fade-in delay-1">
           <img src="Fig.5.png" alt="AgriChrono qualitative reconstruction results" />
-          <p class="fig-caption">Qualitative comparison of novel view synthesis results across evaluated methods.</p>
+          <p class="fig-caption">Qualitative comparison of novel view synthesis results. Rows show the Ground Truth and the renderings of Zip-NeRF, Scaffold-GS, H3DGS, Octree-GS, and AgriSplat (Ours); two test views are shown per scenario for the Lighting Variance (06:00 AM&ndash;09:00 PM, Day 19) and Growth Span (Day 6, 13, 20) scenarios.</p>
         </div>
 
 
@@ -557,13 +441,11 @@
       <section class="proj-section fade-in">
         <h2>Conclusion</h2>
         <p>
-          We present AgriChrono, a comprehensive field robotics framework whose benchmark results serve a dual purpose.
-          First, they <strong>validate our robotic platform's design</strong>, proving it successfully captures the
-          high-fidelity data required for reliable 3D reconstruction in complex agricultural fields. Second, by explicitly
-          exposing the <strong>performance degradation of current baselines</strong> under dynamic "in-the-wild" stressors,
-          our benchmark provides a vital stress-test for the AI community. This research acts as a critical stepping stone,
-          catalyzing the <strong>development of more robust models</strong> capable of unconstrained scene understanding —
-          eventually bridging the gap to extract concrete downstream phenotyping metrics.
+          We presented <strong>AgriChrono</strong>, a longitudinal dataset and benchmark for novel-view synthesis of field-grown crops, supported by the <strong>AgriChrobot</strong> acquisition platform:
+          160 canola recording sessions over approximately one month, and seven evaluation scenarios spanning natural illumination and crop-development stages.
+          Evaluating 15 NeRF- and Gaussian Splatting-based methods showed that competitive whole-image quality does not necessarily translate into faithful reproduction of fine crop details.
+          Motivated by this, we introduced <strong>AgriSplat</strong>, which combines CAR and ADS and improves whole-image quality, crop-region perceptual similarity, gradient-energy agreement, and edge correspondence over Octree-GS.
+          Future work may extend the evaluation to additional crop types, field environments, and reconstruction across acquisition dates.
         </p>
       </section>
 
@@ -580,6 +462,7 @@
           the Korea Creative Content Agency (KOCCA) under Grant RS-2024-00345025,
           and the Institute of Information &amp; Communications Technology Planning &amp; Evaluation (IITP)
           funded by the Korean government (MSIT) under Grant No.&nbsp;RS-2019-II190079.
+          This research was also supported by the AI Seoul Tech Research Support Program of the Seoul Future Foundation.
         </p>
       </section>
 
